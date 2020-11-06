@@ -112,6 +112,11 @@ span_f = f_nasa_f(5) - f_nasa_f(1);
 span_ss = f_a_ss(5) - f_a_ss(1);
 span_c = f_nasa_c(5) - f_nasa_c(1);
 
+plot(1:4, delta_f, 1:4, delta_ss, 1:4, delta_c);
+grid on
+xlabel('mode')
+ylabel('\Delta f')
+legend('free', 'simply supported', 'clamped');
 
 %% HW2-3
 
@@ -124,31 +129,112 @@ damp = a * exp(-alpha*t); % time decay of the amplitude
 f_non_lin = [f_nasa_f, f_a_ss, f_nasa_c];
 f_non_lin = (1 + 0.16.*(damp./h).^2).*f_non_lin';
 
-%plot
-subplot(5,3,1)
-plot(t, f_non_lin(1,:)) ; %1 mode free 
-grid on;
-xlabel('time [s]')
-ylabel('frequency [Hz]')
-subplot(5,3,4)
-plot(t, f_non_lin(2,:)) ; %2 mode free
-grid on;
-xlabel('time [s]')
-ylabel('frequency [Hz]')
-subplot(5,3,7)
-plot(t, f_non_lin(3,:)) ; %3 mode free 
-grid on;
-xlabel('time [s]')
-ylabel('frequency [Hz]')
-subplot(5,3,10)
-plot(t, f_non_lin(4,:)) ; %4 mode free 
-grid on;
-xlabel('time [s]')
-ylabel('frequency [Hz]')
-plot(t, f_non_lin(4,:)) ; %4 mode free 
-grid on;
-xlabel('time [s]')
-ylabel('frequency [Hz]')
+% %plot
+% subplot(5,3,1)
+% plot(t, f_non_lin(1,:)) ; %1 mode free 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('first mode free')
+% 
+% subplot(5,3,4)
+% plot(t, f_non_lin(2,:)) ; %2 mode free
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('second mode free')
+% 
+% subplot(5,3,7)
+% plot(t, f_non_lin(3,:)) ; %3 mode free 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('third mode free')
+% 
+% subplot(5,3,10)
+% plot(t, f_non_lin(4,:)) ; %4 mode free 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fourth mode free')
+% 
+% subplot(5,3,13)
+% plot(t, f_non_lin(5,:)) ; %5 mode free 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fifth mode free')
+% 
+% subplot(5,3,2)
+% plot(t, f_non_lin(6,:)) ; %1 mode ss 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('first mode supported')
+% 
+% subplot(5,3,5)
+% plot(t, f_non_lin(7,:)) ; %2 mode supported
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('second mode supported')
+% 
+% subplot(5,3,8)
+% plot(t, f_non_lin(8,:)) ; %3 mode supported 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('third mode supported')
+% 
+% subplot(5,3,11)
+% plot(t, f_non_lin(9,:)) ; %4 mode supported 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fourth mode supported')
+% 
+% subplot(5,3,14)
+% plot(t, f_non_lin(10,:)) ; %5 mode supported 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fifth mode supported')
+% 
+% subplot(5,3,3)
+% plot(t, f_non_lin(11,:)) ; %1 mode clamped  
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('first mode clamped ')
+% 
+% subplot(5,3,6)
+% plot(t, f_non_lin(12,:)) ; %2 mode clamped 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('second mode clamped ')
+% 
+% subplot(5,3,9)
+% plot(t, f_non_lin(13,:)) ; %3 mode clamped  
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('third mode clamped ')
+% 
+% subplot(5,3,12)
+% plot(t, f_non_lin(14,:)) ; %4 mode clamped  
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fourth mode clamped ')
+% 
+% subplot(5,3,15)
+% plot(t, f_non_lin(15,:)) ; %5 mode clamped 
+% grid on;
+% xlabel('time [s]')
+% ylabel('frequency [Hz]')
+% legend('fifth mode clamped ')
+
 %% HW2-4
 % space definition
 
@@ -170,14 +256,15 @@ for i = 1:length(x)
     z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly)+ sin(m2*pi*x(i)/ Lx)*sin(n2*pi*y(j)/Ly);
     end
 end
-Z_1 = z_1.*(1i*130.8*(2*pi) -1000);
+Z_1 = z_1.*(1i*130.8*2*pi);
 %surf(x, y, abs(Z_1));
-
 
 %search maxima value around a given interval (there should be 4 points)
 v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M-1e-6);
+x1 = x(x1);
+y1 = y(y1);
 
 %% Hw2-5
 %% HW2-6
