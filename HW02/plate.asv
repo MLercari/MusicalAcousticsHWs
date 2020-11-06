@@ -117,24 +117,38 @@ span_c = f_nasa_c(5) - f_nasa_c(1);
 
 % Time history of the frequencies 
 
-ff = [6.9614 ,8.0668, 16.457, 16.712, 20.660];
-
-fss = [11.218, 22.627, 33.715	, 41.825, 45.368];
-
-fc = [21.391 , 34.885, 51.555, 57.354, 64.806];
-
-t = linspace(0, 0.02, 100);
+t = linspace(0, 0.01, 100);
 
 damp = a * exp(-alpha*t); % time decay of the amplitude
 
-w1 = 2*pi*ff(1)*(1 + 0.16.*(damp./h).^2);
-semilogx(t, w1);
-hold on;
+f_non_lin = [f_nasa_f, f_a_ss, f_nasa_c];
+f_non_lin = (1 + 0.16.*(damp./h).^2).*f_non_lin';
 
-w2 = 2*pi*ff(2)*(1 + 0.16.*(damp./h).^2);
-semilogx(t, w2);
+%plot
+subplot(5,3,1)
+plot(t, f_non_lin(1,:)) ; %1 mode free 
 grid on;
-
+xlabel('time [s]')
+ylabel('frequency [Hz]')
+subplot(5,3,4)
+plot(t, f_non_lin(2,:)) ; %2 mode free
+grid on;
+xlabel('time [s]')
+ylabel('frequency [Hz]')
+subplot(5,3,7)
+plot(t, f_non_lin(3,:)) ; %3 mode free 
+grid on;
+xlabel('time [s]')
+ylabel('frequency [Hz]')
+subplot(5,3,10)
+plot(t, f_non_lin(4,:)) ; %4 mode free 
+grid on;
+xlabel('time [s]')
+ylabel('frequency [Hz]')
+plot(t, f_non_lin(4,:)) ; %4 mode free 
+grid on;
+xlabel('time [s]')
+ylabel('frequency [Hz]')
 %% HW2-4
 % space definition
 
@@ -165,4 +179,5 @@ v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M-1e-6);
 
-
+%% Hw2-5
+%% HW2-6
