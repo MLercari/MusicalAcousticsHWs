@@ -165,5 +165,4 @@ v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M-1e-6);
 
-%% Hw2-5
-%% HW2-6
+
