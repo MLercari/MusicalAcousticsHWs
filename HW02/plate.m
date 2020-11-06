@@ -98,3 +98,34 @@ for i = 1:5
 end
 
 f_nasa_f = w_nasa_f/(2*pi);
+
+%% punto 4
+% space definition
+
+xSpatialNPoints = 100;
+ySpatialNPoints = 100;
+
+x = linspace(0 , Lx, xSpatialNPoints);
+y = linspace(0 , Ly, ySpatialNPoints);
+z_1 = zeros(length(y), length(x));
+
+% first approach: approximation 2 closest eigen modes
+m1 = 4; %relativo al lato corto
+n1 = 2; %relativo al lato lungo
+m2 = 3;
+n2 = 4;
+
+for i = 1:length(x)
+    for j = 1:length(y)
+    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly)+ sin(m2*pi*x(i)/ Lx)*sin(n2*pi*y(j)/Ly);
+    end
+end
+Z_1 = z_1.*(1i*130.8*(2*pi) -1000);
+%surf(x, y, abs(Z_1));
+
+
+%search maxima value around a given interval (there should be 4 points)
+v_a = abs(Z_1);
+M = max(v_a, [], 'all');
+[y1,x1]=find(v_a >= M-1e-6);
+
