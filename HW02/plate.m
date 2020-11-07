@@ -22,8 +22,8 @@ sigma = rho * h; %densità superficiale
 f = zeros(5,5);
 
 
-for i=0:5
-    for j=0:5
+for i=0:20
+    for j=0:20
         f(i+1, j+1) = 0.453*c_L*h*( ((i+1).^2/Lx^2) + ((j+1).^2/Ly^2) );
     end
 end
@@ -34,6 +34,7 @@ f_a_ss = [f(1,1) , f(1,2), f(2,1) , f(1,3), f(2,2)];
 % preso dal Fletcher e dalle slides
 
 % clamped 
+
 f00 = 1.654*c_L*h/(Lx^2);
 f_a_c = zeros(1,5);
 relative = [0.75, 1.88, 1.16, 2.27, 3.66]; %il quinto modo è in realtà quadrato
@@ -42,7 +43,7 @@ for i = 1:5
 end
 
 % free
-f11 = h*c_L*sqrt((1-nu)/2)/(1.2^2);
+f11 = h*c_L*sqrt((1-nu)/2)/(1.2^2); %una media delle lunghezze come L^2
 f_a_f = zeros(1,5);
 relative_f = [1, 1.52, 1.94, 2.71, 2.71];
 for i = 1:5
@@ -246,27 +247,74 @@ y = linspace(0 , Ly, ySpatialNPoints);
 z_1 = zeros(length(y), length(x));
 
 % first approach: approximation 2 closest eigen modes
-m1 = 4; %relativo al lato corto
-n1 = 2; %relativo al lato lungo
-m2 = 3;
-n2 = 4;
+m1 = 1; %relativo al lato corto
+n1 = 1; %relativo al lato lungo
+m2 = 1;
+n2 = 1;
 
 for i = 1:length(x)
     for j = 1:length(y)
-    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly)+ sin(m2*pi*x(i)/ Lx)*sin(n2*pi*y(j)/Ly);
+    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly);
     end
 end
 Z_1 = z_1.*1i*130.8*2*pi;
-%surf(x, y, abs(Z_1));
+surf(x, y, abs(Z_1));
 
 %search maxima value around a given interval (there should be 4 points)
 v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M -1e-3);
-x1 = x1*(Lx/xSpatialNPoints);
-y1 = y1*(Ly/ySpatialNPoints);
+x1 = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
+y1 = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
 
+
+%% HW2 -4 metodo più cazzuto
+
+w0 = 2*pi*130.8; %input frequency
+w_mn = 2*pi.*f;
+Z_mn = zeros(21,21,length(x), length(y)); %Z_mn(m,n,x,y)
+A_mn = 2/(sqrt(rho*h*Lx*Ly));
+
+for i = 1:length(x)
+    for j = 1:length(y)
+        for m = 0:20
+            for n = 0:20
+                Z_mn(m+1,n+1, i, j) = A_mn*sin((m+1)*pi*x(i)/ Lx)*sin((n+1)*pi*y(j)/Ly);
+            end
+        end 
+    end
+end
+
+%  Z_11 = squeeze(Z_mn(2,2,:,:));
+%  surf(x,y, Z_11);
+
+%%
+Y_in = zeros(length(x), length(y));
+alpha = 1000;
+
+for m = 0:20
+    for n = 0:20
+        Y_in = Y_in + (squeeze(Z_mn(m+1,n+1,:,:).^2)./(w_mn(m+1,n+1)^2 - w0^2 +2*1i*alpha*w0));
+    end
+end
+
+Y_in = 1i*w0.*Y_in;
+
+surf(x,y, abs(Y_in));
+
+
+v_a = abs(Y_in);
+M = max(v_a, [], 'all');
+[y1,x1]=find(v_a >= M-1e-7);
+
+x1 = x1*(Lx/xSpatialNPoints); %punti trovati con metodo cazzuto
+y1 = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo cazzuto
+[x1,y1]
 
 
 %% Hw2-5
+
+
+
+
 %% HW2-6
