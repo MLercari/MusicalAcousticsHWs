@@ -77,19 +77,23 @@ The weighted value given by table is $56$ while it is $57$ in the Excel, as well
 
 \subsection{Internal walls}
 From the catalogue of an italian company called FOROSON we found results of measurement realized on their bricks. We have considered walls made of FOROSON bricks with plaster, of total thickness equal to $33$ cm. The acoustic insulation properties were studied by the company according to UNI EN ISO 140-4 and $R_w'$ was computed following the UNI EN ISO 717-1. Since we used the same standards in our computations, our results for $R_w'$, $C$ and $C_{tr}$ are the same as those of the catalogue (see figure \ref{fig:poroton} ).
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\linewidth]{poroton}
 	\caption{Poroton results on plastered brick wall}
 	\label{fig:poroton}
 \end{figure}
 
-\subsubsection{Door}
-Since we wanted to have a wooden door while still keeping an high sound reduction index, we decided to use one made out of a particularly hard wood, the white live oak\cite{wood}. Its density is $\mathit{880 Kg/m^3}$ and we designed two layers of $\mathit{1 cm}$ of wood and a $\mathit{4 cm}$ of rockwool in between. Having these parameters and assuming a diffusive sound propagation through the door, we applied the mass law and obtained $R_w'= 40 dB (-4, -12)$. 
+\subsection{Door}
+%Since we wanted to have a wooden door while still keeping an high sound reduction index, we decided to use one made out of a particularly heavy wood, the ITIN (Prosopis kuntzei)\cite{wood}. Its density is $\mathit{1275 Kg/m^3}$ and we designed two layers of $\mathit{1 cm}$ of wood and a $\mathit{4 cm}$ of rockwool in between. Having these parameters and assuming a diffusive sound propagation through the door, we applied the mass law and obtained $R_w'= 40 dB (-4, -12)$. 
+
+To ensure a fairly high sound reduction index, we chose to use a composite door with two wooden panels containing an inner rockwool layer; moreover, we chose to use live white oak for its high density \cite{wood} ($\rho = \SI{800}{\kilogram\per\meter\cubed}$). The panels are $\SI{1}{\centi\meter}$ thick and the rockwool layer is $\SI{4}{\centi\meter}$ thick. Rockwool has a density of $\SI{70}{\kilogram\per\meter\cubed}$, which gives us an areic mass of $\SI{18.8}{\kilogram\per \meter\squared}$. The resulting SRI of the door is $\SI{39}{\decibel}$.
 
 \section{Verify the passive acoustic requirements of buildings}  
 
-In the Excel, section "data", are resumed sound absorption of each component between room A and room B given by direct and flanking contributions. In section "joints" are computed  vibration reduction index for each junction. The main result is the total weighted sound reduction index between room that is  $50,29$ $dB$, above the legal threshold of $50$ $dB$ (D.P.C.M 5-12-1997) as well as the facade sound reduction index, which is $53.3$ $dB$. 
+%In the Excel, section "data", are resumed sound absorption of each component between room A and room B given by direct and flanking contributions. In section "joints" are computed  vibration reduction index for each junction. The main result is the total weighted sound reduction index between room that is  $50,29$ $dB$, above the legal threshold of $50$ $dB$ (D.P.C.M 5-12-1997) as well as the facade sound reduction index, which is $53.3$ $dB$. 
+
+The apparent sound reduction index between rooms A and B has been computed from the SRIs of all components. The result is $R_w' = \SI{50.29}{\decibel}$, which is in compliance with the limit set for residential facilities by the DPCM 5-12-1997. The weighted standardized level difference of the façade was also computed, yielding $D_{2m,nT,w} = \SI{53.3}{\decibel}$, which is well above the threshold of $\SI{40}{\decibel}$ estabilished by the same document.
 
 \printbibliography
 
