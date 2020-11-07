@@ -327,7 +327,7 @@ Z_c = sqrt(mu_s*T); %characteristic impedance of the string [Kg/s]
 x01 = int8(x1/(Lx/xSpatialNPoints)); %conversione da coordinate a indici
 y01 = int8(y1/(Ly/ySpatialNPoints));  % conversione da coordinate a indici
 ki = 1i*Z_c*Y_in(x01(1),y01(1))/pi; %ki
-eps = linspace(-3/w_s, 3/w_s, 10000);
+eps = linspace(-3/w_s, 3/w_s, 1000);
 a = zeros(2, length(eps));
 a(1,:) = ki + eps + sqrt(eps.^2 + ki^2);
 a(2,:) = ki + eps - sqrt(eps.^2 + ki^2);
@@ -347,9 +347,8 @@ beta(2,:) = w_s + a(2,:).*w_s;
 
 figure(2)
 subplot(2,1,1)
-plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
+plot(w_s.*eps, w_s.*(real(beta(1,:))), w_s.*eps, w_s.*(real(beta(2,:))) ); %eigenfrequencies
 legend("a+","a-");
 subplot(2,1,2)
-plot(w_s.*eps, (imag(beta(1,:))).^-1 , w_s.*eps, (imag(beta(2,:))).^-1 ); %decay time
+plot(w_s.*eps, (w_s.*imag(beta(1,:)).^-1) , w_s.*eps, (w_s.*imag(beta(2,:)).^-1) ); ylim(]-0.4 0.4]%decay time
 legend("a+","a-");
-
