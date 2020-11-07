@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  3 NOV 2020 02:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  7 NOV 2020 14:58
 entering extended mode
 **./template_Scrartcl.tex
 (template_Scrartcl.tex
@@ -989,13 +989,13 @@ Package logreq Info: Writing requests to 'template_Scrartcl.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21147 strings out of 480236
- 416459 string characters out of 2881982
- 1266860 words of memory out of 3000000
- 37407 multiletter control sequences out of 15000+200000
- 550816 words of font info for 91 fonts, out of 3000000 for 9000
+ 21134 strings out of 480236
+ 415960 string characters out of 2881982
+ 1267860 words of memory out of 3000000
+ 37396 multiletter control sequences out of 15000+200000
+ 550115 words of font info for 89 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,14n,99p,10635b,1764s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,14n,99p,10635b,1751s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmc
 sc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
 /cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
@@ -1009,11 +1009,10 @@ iKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/i7/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/i7/AppData/Lo
 cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/i7/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/i7
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Use
-rs/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on template_Scrartcl.pdf (4 pages, 687705 bytes).
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on template_Scrartcl.pdf (4 pages, 677467 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
+ 137 PDF objects out of 1000 (max. 8388607)
  22 named destinations out of 1000 (max. 500000)
  72 words of extra memory for PDF output out of 10000 (max. 10000000)
 
