@@ -101,9 +101,11 @@ where $c_L$ is the longitudinal wave velocity and $h = \SI{3}{\milli\meter}$ is 
 \begin{table}[h]
 	\centering
 	$\begin{array}{l|lllll}
+		\toprule
 		\text{Modes} & (0,0) & (0,1) & (1,0) & (0,2) & (1,1) \\
 		\hline
 		\text{Freqs[Hz]} & 11.18 & 22.51 & 33.39 & 41.40 & 44.72\\
+		\bottomrule
 	\end{array}$
 	\caption{Modal frequencies for the lowest five modes with supported edges.}
 	\label{tab:ssfreq}
@@ -111,33 +113,74 @@ where $c_L$ is the longitudinal wave velocity and $h = \SI{3}{\milli\meter}$ is 
 
 \subsection{Free edges}
 
-Considering boundary conditions different from those of the previous case complicates the problem considerably. However, during class we have covered the eigenfrequencies of a square plate with free edges: in particular, we have been given the ratios of the frequencies of the first 10 modes with that of the first mode $f_{11}$ for a square plate with Poisson's ratio $\nu = 0.3$. Since the Poisson's ratio of our plate is close to this value and its aspect ratio is low, a first approach is to simply compute the natural frequencies as if the plate were square, with the lowest frequency written as:
+Considering boundary conditions different from those of the previous case complicates the problem considerably. However, during class we have covered the eigenfrequencies of a square plate with free edges: in particular, we have been given the ratios of the frequencies of the first 10 modes with that of the first mode $f_{11}$ for a square plate with Poisson's ratio $\nu = 0.3$. Since the Poisson's ratio of our plate is close to this value and its aspect ratio is quite close to 1, a first approach is to simply compute the natural frequencies as if the plate were square, with the lowest frequency written as:
 $$ f_{11} = \frac{hc_L}{L_x L_y} \sqrt{\frac{1-\nu}{2}} $$
+
+The modal frequencies computed with this approximation are reported in Tab. \ref{tab:sqffreq}. Notice how the last two modes are degenerate: this is of course true for a square plate, but we would expect to see two different frequencies for these two modes in our rectangular plate.
 
 
 \begin{table}[h]
 	\centering
 	$\begin{array}{l|lllll}
+		\toprule
 		\text{Modes} & (1,1) & (2,0) - (0,2) & (2,0) + (0,2) & (2,1) & (1,2) \\
 		\hline
 		\text{Freqs[Hz]} & 6.47 &  9.83 & 
 		12.55 &  17.53  & 17.53 \\
+		\bottomrule
 	\end{array}$
 	\caption{Modal frequencies for the lowest five modes with free edges, in the square plate approximation.}
 	\label{tab:sqffreq}
 \end{table}
 
+If we wanted a more refined model, of course, approximate solutions for this problem have been known since Lord Rayleigh; in \cite{leissa} we find a review of the main results of these kind of solutions developed throughout the 20th century. We report in Tab. \ref{tab:ffreq} the lowest five modal frequencies for a plate with aspect ratio $1.5$ and $\nu = 1/6 $.
+
 \begin{table}[h]
 	\centering
 	$\begin{array}{l|lllll}
+		\toprule
 		\text{Modes} & (1,1) & (0,2) & (1,2) & (2,0) & (3,0) \\
 		\hline
-		\text{Freqs[Hz]} & 7.44 &  7.47 & 
-		16.70 &  16.80  & 20.58
-		\\
+		\text{Freqs[Hz]} & 7.07 &  7.09 & 
+		15.87 &  15.96  & 19.55	\\
+		\bottomrule
 	\end{array}$
-	\caption{Modal frequencies for the lowest five modes for a $\nu = 1/6$ and $a/b = 2/3$ from \cite{leissa}.}
+	\caption{Modal frequencies for the lowest five modes for a free plate with $\nu = 1/6$ and $a/b = 2/3$ from \cite{leissa}.}
 	\label{tab:ffreq}
+\end{table}
+
+For this case and that of clamped edges we also performed numerical simulations in COMSOL. We report the results of these simulations in the appendix; however, we point out here that, despite the significant difference in the value of $\nu$ for the previous table from that of our plate, the results of the simulations are closer to these values than to those from the square plate approximation.
+
+\subsection{Clamped edges}
+
+For clamped edges, again, we don't have an analytical solution. We can use the same approach here and compute the eigenfrequencies as if the plate were square. The fundamental frequency can be written this time as $f_{00} = 1.654c_l h / L_xL_y$. The results are reported in Tab. \ref{tab:sqcfreq}.
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|lllll}
+		\toprule
+		\text{Modes} & (0,0) & (1,0) & (0,1) & (1,1) & (2,0) - (0,2) \\
+		\hline
+		\text{Freqs[Hz]} & 19.3 &  39.39 & 
+		39.39 &  58.11  & 70.66	\\
+		\bottomrule
+	\end{array}$
+	\caption{Modal frequencies for the lowest five modes of the clamped plate in the square plate approximation.}
+	\label{tab:sqcfreq}
+\end{table}
+
+In \cite{leissa} more accurate values for the eigenfrequencies of a clamped plate can be found for a variety of aspect ratios. The value of the aspect ratio closest to that of our plate is 0.72; the corresponding lowest five modal frequencies are reported in Tab. \ref{tab:cfreq}.
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|lllll}
+		\toprule
+		\text{Freqs[Hz]} & 21.06 & 34.33  & 
+		50.31 &  56.36  & 62.57\\
+		\bottomrule
+	\end{array}$
+	\caption{Modal frequencies for the lowest five modes of a clamped plate with aspect ratio 0.72.}
+	\label{tab:cfreq}
 \end{table}
 
 %\cite{leissa}
