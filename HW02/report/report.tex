@@ -153,7 +153,7 @@ For this case and that of clamped edges we also performed numerical simulations 
 
 \subsection{Clamped edges}
 
-For clamped edges, again, we don't have an analytical solution. We can use the same approach here and compute the eigenfrequencies as if the plate were square. The fundamental frequency can be written this time as $f_{00} = 1.654c_l h / L_xL_y$. The results are reported in Tab. \ref{tab:sqcfreq}.
+For clamped edges, again, we don't have an analytical solution. We can use the same approach here and compute the eigenfrequencies as if the plate were square. The fundamental frequency can be written this time as $f_{00} = 1.654c_l h / L_xL_y$. The results are reported in Tab. \ref{tab:sqcfreq}. Of course here too we find two degenerate modes, to which the same considerations as before apply.
 
 \begin{table}[h]
 	\centering
@@ -169,7 +169,7 @@ For clamped edges, again, we don't have an analytical solution. We can use the s
 	\label{tab:sqcfreq}
 \end{table}
 
-In \cite{leissa} more accurate values for the eigenfrequencies of a clamped plate can be found for a variety of aspect ratios. The value of the aspect ratio closest to that of our plate is 0.72; the corresponding lowest five modal frequencies are reported in Tab. \ref{tab:cfreq}.
+In \cite{leissa}, more accurate values for the eigenfrequencies of a clamped plate can be found for a variety of aspect ratios. The value of the aspect ratio closest to that of our plate is 0.72; the corresponding lowest five modal frequencies are reported in Tab. \ref{tab:cfreq}.
 
 \begin{table}[h]
 	\centering
@@ -186,6 +186,46 @@ In \cite{leissa} more accurate values for the eigenfrequencies of a clamped plat
 %\cite{leissa}
 %\cite{fletchross}
 %\cite{chker}
+
+\section{Boundary conditions and modal density}
+
+The frequency separations for the three cases discussed in the previous section can be seen in Tab. \ref{tab:sep}. 
+Moreover, we can compute a rough estimate of the modal density by dividing the number of modes (5) by the frequency separation between the highest and lowest modes. The results are $0.38~\si{\hertz^{-1}}$ for the free edges, $0.15~\si{\hertz^{-1}}$ for the supported edges and $0.12~\si{\hertz^{-1}}$ for the clamped edges.
+
+\begin{table}[h]
+		\centering
+		$\begin{array}{l|llll}
+			\toprule
+			 & \delta_{21} & \delta_{32} & \delta_{43} & \delta_{54}\\
+			\midrule
+			\text{Free edges} & \SI{0.03}{\hertz} & \SI{9.24}{\hertz} & \SI{0.10}{\hertz}  & \SI{3.78}{\hertz}\\
+			\text{Supported edges} & \SI{11.33}{\hertz}  & \SI{10.88}{\hertz}  &  \SI{8.01}{\hertz}  &  \SI{3.32}{\hertz}\\
+			\text{Clamped edges} & \SI{13.27}{\hertz} &  \SI{15.98}{\hertz}  &  \SI{6.05}{\hertz}  &  \SI{6.22}{\hertz}\\
+			\bottomrule
+		\end{array}$
+		\caption{Frequency separations between the lowest modes.}
+		\label{tab:sep}
+\end{table}
+
+Notice how increasing the restraint on the edges of the plate tends to increase the separations between the eigenfrequencies and, conversely, decrease the modal density. This is a consequence of the increase in stiffness that comes from these additional restraints, which means an increase in the fundamental frequency.
+
+
+\section{Effect on non-linearities on the natural frequencies}
+
+\begin{figure}[h]
+	\centering\includegraphics[width=0.95\textwidth]{point_3.png}
+	\caption{Time plots of the frequencies of the natural modes with decay time $1$ ms. From left to right: free edges, supported edges, clamped edges.}
+	\label{fig:dec}
+\end{figure}
+
+As we know from the study of the vibration of shells, the frequency of vibration can exhibit a dependency on the curvature of the plate. Therefore, for an exponentially decaying oscillating motion, if the decay time is much greater than a single period\footnote{Inour case there is ate least one order of magnitude of difference.}, we can express this nonlinear effect in terms of the instantaneous amplitude of the oscillation $a$:
+$$ \omega \simeq \omega_0 \left[ 1 + 0.16 \left( \frac{a}{h} \right)^2 \right] $$
+Now, since $a = a_0 e^{-\frac{t}{\tau}}$, with $a_0 = \SI{4}{\milli\meter}$ and $\tau = \SI{1}{\milli\second}$, we get a dependence of the frequency of the single mode on time, in the form:
+$$ \omega(t) \simeq \omega_0 \left[ 1 + 0.16 \left( \frac{a_0^2  e^{-\frac{2t}{\tau}}}{h^2} \right) \right] $$
+
+The plots for the frequencies of Section 1 can be seen in Fig. \ref{fig:dec}.
+
+\section{Impedance minima}
 
 
 
