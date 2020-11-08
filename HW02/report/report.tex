@@ -15,7 +15,10 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{verbatim} %multiline comments
+\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
+\addbibresource{source.bib}
 \captionsetup[subfigure]{labelfont=rm}
+
 
 %opening
 \title{}
@@ -23,7 +26,7 @@
 
 \pagestyle{fancy}
 \lhead{Musical Acoustics}
-\chead{Homework 1}
+\chead{Homework 2}
 \rhead{10743504, 10751919}
 \newcommand{\Rarrow}{\mbox{\Large$\Rightarrow$}}
 
@@ -86,7 +89,63 @@
 %\begin{abstract}
 %\end{abstract}
 
+\section{Lowest modal frequencies}
+\subsection{Supported edges}
+The most straightforward case is that of supported edges, as it is the only one for which we have an analytical expression of the eigenshapes and eigenfrequencies. As we have seen in class, the modal shapes are:
+$$ Z_{mn}(x, y) = A\sin\left( 	\frac{(m+1)\pi x}{L_x} \right) \sin\left( 	\frac{(n+1)\pi x}{L_y} \right), \quad m,n = 0, 1, \dots$$
+where in our case $L_x = \SI{1}{\meter}$ and $L_y = \SI{1.4}{\meter}$.
+The related eigenfrequencies are:
+$$ f_{mn} = 0.453c_L h \left[\frac{(m+1)^2}{L_x^2} + \frac{(n+1)^2}{L_y^2}\right] $$
+where $c_L$ is the longitudinal wave velocity and $h = \SI{3}{\milli\meter}$ is the plate thickness. The values of the lowest five modes for these boundary conditions are reported in Tab. \ref{tab:ssfreq}.
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|lllll}
+		\text{Modes} & (0,0) & (0,1) & (1,0) & (0,2) & (1,1) \\
+		\hline
+		\text{Freqs[Hz]} & 11.18 & 22.51 & 33.39 & 41.40 & 44.72\\
+	\end{array}$
+	\caption{Modal frequencies for the lowest five modes with supported edges.}
+	\label{tab:ssfreq}
+\end{table}
+
+\subsection{Free edges}
+
+Considering boundary conditions different from those of the previous case complicates the problem considerably. However, during class we have covered the eigenfrequencies of a square plate with free edges: in particular, we have been given the ratios of the frequencies of the first 10 modes with that of the first mode $f_{11}$ for a square plate with Poisson's ratio $\nu = 0.3$. Since the Poisson's ratio of our plate is close to this value and its aspect ratio is low, a first approach is to simply compute the natural frequencies as if the plate were square, with the lowest frequency written as:
+$$ f_{11} = \frac{hc_L}{L_x L_y} \sqrt{\frac{1-\nu}{2}} $$
 
 
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|lllll}
+		\text{Modes} & (1,1) & (2,0) - (0,2) & (2,0) + (0,2) & (2,1) & (1,2) \\
+		\hline
+		\text{Freqs[Hz]} & 6.47 &  9.83 & 
+		12.55 &  17.53  & 17.53 \\
+	\end{array}$
+	\caption{Modal frequencies for the lowest five modes with free edges, in the square plate approximation.}
+	\label{tab:sqffreq}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|lllll}
+		\text{Modes} & (1,1) & (0,2) & (1,2) & (2,0) & (3,0) \\
+		\hline
+		\text{Freqs[Hz]} & 7.44 &  7.47 & 
+		16.70 &  16.80  & 20.58
+		\\
+	\end{array}$
+	\caption{Modal frequencies for the lowest five modes for a $\nu = 1/6$ and $a/b = 2/3$ from \cite{leissa}.}
+	\label{tab:ffreq}
+\end{table}
+
+%\cite{leissa}
+%\cite{fletchross}
+%\cite{chker}
+
+
+
+\printbibliography
 
 \end{document}
