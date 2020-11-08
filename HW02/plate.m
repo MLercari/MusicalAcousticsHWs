@@ -116,12 +116,24 @@ end
 span_f = f_nasa_f(5) - f_nasa_f(1);
 span_ss = f_a_ss(5) - f_a_ss(1);
 span_c = f_nasa_c(5) - f_nasa_c(1);
-modes = linspace(1,4,4);
-figure(3)
-plot(modes, delta_f, modes, delta_ss, modes, delta_c);
+
+
 xlabel('mode')
-ylabel('\Delta f')
-legend('free', 'simply supported', 'clamped');
+bar(1:4, delta_ss);
+ylim([0, 16]);
+grid on;
+legend('supported');
+
+
+subplot 133;
+xlabel('mode')
+bar(1:4, delta_c);
+grid on;
+legend('clamped');
+
+
+
+
 
 %% HW2-3
 
