@@ -218,7 +218,7 @@ Notice how increasing the restraint on the edges of the plate tends to increase 
 	\label{fig:dec}
 \end{figure}
 
-As we know from the study of the vibration of shells, the frequency of vibration can exhibit a dependency on the curvature of the plate. Therefore, for an exponentially decaying oscillating motion, if the decay time is much greater than a single period\footnote{Inour case there is ate least one order of magnitude of difference.}, we can express this nonlinear effect in terms of the instantaneous amplitude of the oscillation $a$:
+As we know from the study of the vibration of shells, the frequency of vibration can exhibit a dependency on the curvature of the plate. Therefore, for an exponentially decaying oscillating motion, if the decay time is much greater than a single period\footnote{In our case there is at least one order of magnitude of difference.}, we can express this nonlinear effect in terms of the instantaneous amplitude of the oscillation $a$:
 $$ \omega \simeq \omega_0 \left[ 1 + 0.16 \left( \frac{a}{h} \right)^2 \right] $$
 Now, since $a = a_0 e^{-\frac{t}{\tau}}$, with $a_0 = \SI{4}{\milli\meter}$ and $\tau = \SI{1}{\milli\second}$, we get a dependence of the frequency of the single mode on time, in the form:
 $$ \omega(t) \simeq \omega_0 \left[ 1 + 0.16 \left( \frac{a_0^2  e^{-\frac{2t}{\tau}}}{h^2} \right) \right] $$
@@ -227,6 +227,28 @@ The plots for the frequencies of Section 1 can be seen in Fig. \ref{fig:dec}.
 
 \section{Impedance minima}
 
+Using the modal superposition approach, we find that the velocity of the plate when an harmonic force at $\omega_0$ is applied in $(x_0, y_0)$ is:
+$$ \dot z(x, y, t) = j \omega_0\left(\sum_{m,n} q_{mn,0}  Z_{mn}(x,y)\right) e^{j\omega_0 t} $$
+where $ q_{mn,0} = \frac{F_{0} Z_{mn}(x_0, y_0)}{(\omega_{mn}^2 - \omega_0^2) + 2j\alpha \omega_0} $ and $Z_{mn}$ is the $(m,n)$ modal shape. Note also that $alpha$ is the inverse of the decay time used in the previous section.
+
+By computing this expression in $(x_0, y_0)$ and dividing by $F_0$ we obtain the input admittance as a function of the input point coordinates:
+$$ Y_{in}(x_0, y_0) =  j\omega_0 \left( \sum_{m,n} \frac{Z_{mn}^2(x_0, y_0)}{(\omega_{mn}^2 - \omega_0^2) + 2j\alpha \omega_0} \right)$$
+
+We computed the input admittance by truncating the sum in the previous expression up to $m, n = 20$ (the first 400 modes). A plot of the admittance is reported in Fig. \ref{fig:adm}. The maxima are at coordinates:
+
+\begin{align*}
+	(x_1, y_1) = (\SI{0.100}{\metre}, \SI{0.182}{\meter}) \\
+	(x_2, y_2) = (\SI{0.100}{\metre}, \SI{1.232}{\meter}) \\
+	(x_3, y_3) = (\SI{0.910}{\metre}, \SI{0.182}{\meter}) \\
+	(x_4, y_4) = (\SI{0.910}{\metre}, \SI{1.232}{\meter})
+\end{align*}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{admittance.png}
+	\caption{Graph of the input admittance of the plate at $f_0 = \SI{130.8}{\hertz}$.}
+	\label{fig:adm}
+\end{figure}
 
 
 \printbibliography
