@@ -43,8 +43,9 @@ for i = 1:5
 end
 
 % free
-f11 = h*c_L*sqrt((1-nu)/2)/(1.2^2); %una media delle lunghezze come L^2
+f11 = h*c_L*sqrt((1-nu)/2)/(Lx*Ly); %una media delle lunghezze come L^2
 f_a_f = zeros(1,5);
+
 relative_f = [1, 1.52, 1.94, 2.71, 2.71];
 for i = 1:5
     f_a_f(i) = f11*relative_f(i);
@@ -70,14 +71,16 @@ f_nasa_c = w_nasa_c/(2*pi);
 
 % free tabella 4.72
 % assumendo nu = 1/6 e b/a = 1.5 
-nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
-%             (1,1)  (0,2)    (1,2)      (2,0)       (3,0)  (m,n) 
+%nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
+%             (1,1)  (0,2)  (1,2)    (2,0)    (3,0)  (m,n) 
 
+% b/a = 1.5 , nu = 0.3 dalla tabella 4.75
+ 
 % w a^2 sqrt(rho / D) = coeff 
 % w = coeff/(a^2*sqrt(rho/D)
 w_nasa_f = zeros(1,5);
 for i = 1:5
-    w_nasa_f(i) = nasa_coeff_f(i)/(Lx^2*sqrt(sigma/D));
+    w_nasa_f(i) = nasa_coeff_f(i)/(Lx^2*sqrt(sigma/(E*h^3/(12*(1 - (1/6)^2)))));
 end
 
 f_nasa_f = w_nasa_f/(2*pi);
@@ -290,7 +293,7 @@ end
 
 %%
 Y_in = zeros(length(x), length(y));
-alpha = 1000;
+
 
 for m = 0:20
     for n = 0:20
@@ -321,7 +324,7 @@ mu_s = 12e-3; % mass per unit length [Kg/m]
 f_0 = 130.8; % string frequency [Hz]
 w_s = f_0*2*pi; 
 
-T = mu_s*f_0^2*L_s^2/4; %string tension [N]
+T = mu_s*f_0^2*L_s^2*4; %string tension [N]
 Z_c = sqrt(mu_s*T); %characteristic impedance of the string [Kg/s]
 
 x01 = int8(x1/(Lx/xSpatialNPoints)); %conversione da coordinate a indici
@@ -340,16 +343,19 @@ plot(w_s.*eps, w_s.*imag(a(1,:)), w_s.*eps, w_s.*imag(a(2,:)));
 
 
 %% HW2-6
+
 beta = zeros(2,length(eps));
 
-beta(1,:) = w_s + a(1,:).*w_s;
+beta(1,:) = w_s + a(1,:).*w_s; %solution of the mechanical quantities defined as complex 
 beta(2,:) = w_s + a(2,:).*w_s;
+tau_1 = imag(beta(1,:)).^-1;
+tau_2 = imag(beta(2,:)).^-1;
 
 figure(2)
 subplot(2,1,1)
 plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
 legend("a+","a-");
 subplot(2,1,2)
-plot(w_s.*eps, (imag(beta(1,:))).^-1 , w_s.*eps, (imag(beta(2,:))).^-1 ); %decay time
+plot(w_s.*eps, tau_1 , w_s.*eps, tau_2 ); %decay time
 legend("a+","a-");
-
+ylim([-2 2])
