@@ -35,16 +35,18 @@ f_a_ss = [f(1,1) , f(1,2), f(2,1) , f(1,3), f(2,2)];
 
 % clamped 
 
-f00 = 1.654*c_L*h/(Lx^2);
+f00 = 1.654*c_L*h/(Lx*Ly);
 f_a_c = zeros(1,5);
-relative = [0.75, 1.88, 1.16, 2.27, 3.66]; %il quinto modo è in realtà quadrato
+relative = [1, 2.04, 2.04, 3.01, 3.66]; %il quinto modo è in realtà quadrato
+           %(0,0) 
 for i = 1:5
     f_a_c(i) = f00*relative(i);
 end
 
 % free
-f11 = h*c_L*sqrt((1-nu)/2)/(1.2^2); %una media delle lunghezze come L^2
+f11 = h*c_L*sqrt((1-nu)/2)/(Lx*Ly); %una media delle lunghezze come L^2
 f_a_f = zeros(1,5);
+
 relative_f = [1, 1.52, 1.94, 2.71, 2.71];
 for i = 1:5
     f_a_f(i) = f11*relative_f(i);
@@ -70,14 +72,16 @@ f_nasa_c = w_nasa_c/(2*pi);
 
 % free tabella 4.72
 % assumendo nu = 1/6 e b/a = 1.5 
-nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
-%             (1,1)  (0,2)    (1,2)      (2,0)       (3,0)  (m,n) 
+%nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
+%             (1,1)  (0,2)  (1,2)    (2,0)    (3,0)  (m,n) 
 
+% b/a = 1.5 , nu = 0.3 dalla tabella 4.75
+ 
 % w a^2 sqrt(rho / D) = coeff 
 % w = coeff/(a^2*sqrt(rho/D)
 w_nasa_f = zeros(1,5);
 for i = 1:5
-    w_nasa_f(i) = nasa_coeff_f(i)/(Lx^2*sqrt(sigma/D));
+    w_nasa_f(i) = nasa_coeff_f(i)/(Lx^2*sqrt(sigma/(E*h^3/(12*(1 - (1/6)^2)))));
 end
 
 f_nasa_f = w_nasa_f/(2*pi);
@@ -112,9 +116,9 @@ end
 span_f = f_nasa_f(5) - f_nasa_f(1);
 span_ss = f_a_ss(5) - f_a_ss(1);
 span_c = f_nasa_c(5) - f_nasa_c(1);
-
-plot(1:4, delta_f, 1:4, delta_ss, 1:4, delta_c);
-grid on
+modes = linspace(1,4,4);
+figure(3)
+plot(modes, delta_f, modes, delta_ss, modes, delta_c);
 xlabel('mode')
 ylabel('\Delta f')
 legend('free', 'simply supported', 'clamped');
@@ -247,14 +251,15 @@ y = linspace(0 , Ly, ySpatialNPoints);
 z_1 = zeros(length(y), length(x));
 
 % first approach: approximation 2 closest eigen modes
-m1 = 1; %relativo al lato corto
-n1 = 1; %relativo al lato lungo
-m2 = 1;
-n2 = 1;
+m1 = 4; %relativo al lato corto
+n1 = 2; %relativo al lato lungo
+
+m2 = 3;
+n2 = 4;
 
 for i = 1:length(x)
     for j = 1:length(y)
-    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly);
+    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly) + sin(m2*pi*x(i)/ Lx)*sin(n2*pi*y(j)/Ly);
     end
 end
 Z_1 = z_1.*1i*130.8*2*pi;
@@ -264,7 +269,7 @@ surf(x, y, abs(Z_1));
 v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M -1e-3);
-x1 = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
+x1_burdo = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
 y1 = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
 
 
@@ -290,7 +295,7 @@ end
 
 %%
 Y_in = zeros(length(x), length(y));
-alpha = 1000;
+
 
 for m = 0:20
     for n = 0:20
@@ -321,13 +326,13 @@ mu_s = 12e-3; % mass per unit length [Kg/m]
 f_0 = 130.8; % string frequency [Hz]
 w_s = f_0*2*pi; 
 
-T = mu_s*f_0^2*L_s^2/4; %string tension [N]
+T = mu_s*f_0^2*L_s^2*4; %string tension [N]
 Z_c = sqrt(mu_s*T); %characteristic impedance of the string [Kg/s]
 
 x01 = int8(x1/(Lx/xSpatialNPoints)); %conversione da coordinate a indici
 y01 = int8(y1/(Ly/ySpatialNPoints));  % conversione da coordinate a indici
 ki = 1i*Z_c*Y_in(x01(1),y01(1))/pi; %ki
-eps = linspace(-3/w_s, 3/w_s, 1000);
+eps = linspace(-3/w_s, 3/w_s, 10000);
 a = zeros(2, length(eps));
 a(1,:) = ki + eps + sqrt(eps.^2 + ki^2);
 a(2,:) = ki + eps - sqrt(eps.^2 + ki^2);
@@ -340,15 +345,19 @@ plot(w_s.*eps, w_s.*imag(a(1,:)), w_s.*eps, w_s.*imag(a(2,:)));
 
 
 %% HW2-6
+
 beta = zeros(2,length(eps));
 
-beta(1,:) = w_s + a(1,:).*w_s;
+beta(1,:) = w_s + a(1,:).*w_s; %solution of the mechanical quantities defined as complex 
 beta(2,:) = w_s + a(2,:).*w_s;
+tau_1 = imag(beta(1,:)).^-1;
+tau_2 = imag(beta(2,:)).^-1;
 
 figure(2)
 subplot(2,1,1)
-plot(w_s.*eps, w_s.*(real(beta(1,:))), w_s.*eps, w_s.*(real(beta(2,:))) ); %eigenfrequencies
+plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
 legend("a+","a-");
 subplot(2,1,2)
-plot(w_s.*eps, (w_s.*imag(beta(1,:)).^-1) , w_s.*eps, (w_s.*imag(beta(2,:)).^-1) ); ylim(]-0.4 0.4]%decay time
+plot(w_s.*eps, tau_1 , w_s.*eps, tau_2 ); %decay time
 legend("a+","a-");
+ylim([-2 2])
