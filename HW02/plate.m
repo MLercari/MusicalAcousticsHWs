@@ -35,9 +35,10 @@ f_a_ss = [f(1,1) , f(1,2), f(2,1) , f(1,3), f(2,2)];
 
 % clamped 
 
-f00 = 1.654*c_L*h/(Lx^2);
+f00 = 1.654*c_L*h/(Lx*Ly);
 f_a_c = zeros(1,5);
-relative = [0.75, 1.88, 1.16, 2.27, 3.66]; %il quinto modo è in realtà quadrato
+relative = [1, 2.04, 2.04, 3.01, 3.66]; %il quinto modo è in realtà quadrato
+           %(0,0) 
 for i = 1:5
     f_a_c(i) = f00*relative(i);
 end
@@ -116,14 +117,7 @@ span_f = f_nasa_f(5) - f_nasa_f(1);
 span_ss = f_a_ss(5) - f_a_ss(1);
 span_c = f_nasa_c(5) - f_nasa_c(1);
 
-subplot 131;
-bar(1:4, delta_f);
-ylabel('\Delta f [Hz]')
-grid on;
-ylim([0, 16]);
-legend('free');
 
-subplot 132;
 xlabel('mode')
 bar(1:4, delta_ss);
 ylim([0, 16]);
@@ -269,14 +263,15 @@ y = linspace(0 , Ly, ySpatialNPoints);
 z_1 = zeros(length(y), length(x));
 
 % first approach: approximation 2 closest eigen modes
-m1 = 1; %relativo al lato corto
-n1 = 1; %relativo al lato lungo
-m2 = 1;
-n2 = 1;
+m1 = 4; %relativo al lato corto
+n1 = 2; %relativo al lato lungo
+
+m2 = 3;
+n2 = 4;
 
 for i = 1:length(x)
     for j = 1:length(y)
-    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly);
+    z_1(j,i) = sin(m1*pi*x(i)/ Lx)*sin(n1*pi*y(j)/Ly) + sin(m2*pi*x(i)/ Lx)*sin(n2*pi*y(j)/Ly);
     end
 end
 Z_1 = z_1.*1i*130.8*2*pi;
@@ -286,8 +281,8 @@ surf(x, y, abs(Z_1));
 v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M -1e-3);
-x1 = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
-y1 = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
+x1_burdo = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
+y1_burdo = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
 
 
 %% HW2 -4 metodo più cazzuto
@@ -307,8 +302,8 @@ for i = 1:length(x)
     end
 end
 
-%  Z_11 = squeeze(Z_mn(2,2,:,:));
-%  surf(x,y, Z_11);
+  Z_11 = squeeze(Z_mn(2,2,:,:));
+  surf(x,y, Z_11);
 
 %%
 Y_in = zeros(length(x), length(y));
@@ -323,7 +318,9 @@ end
 Y_in = 1i*w0.*Y_in;
 
 surf(x,y, abs(Y_in));
-
+xlabel("x [m]")
+ylabel("y [m]")
+zlabel("Y [s/Kg]")
 
 v_a = abs(Y_in);
 M = max(v_a, [], 'all');
