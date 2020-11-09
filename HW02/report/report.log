@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  9 NOV 2020 12:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  9 NOV 2020 15:32
 entering extended mode
 **./report.tex
 (report.tex
@@ -821,7 +821,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Logo_Politecnico_Milano.png, id=35, 666.49pt x 489.83pt>
+<Logo_Politecnico_Milano.png, id=39, 666.49pt x 489.83pt>
 File: Logo_Politecnico_Milano.png Graphic file (type png)
 <use Logo_Politecnico_Milano.png>
 Package pdftex.def Info: Logo_Politecnico_Milano.png  used on input line 44.
@@ -835,7 +835,7 @@ page.1}) has been already used, duplicate ignored
                    \relax 
 l.137 
        [1] [2]
-<point_3.png, id=77, 862.72313pt x 487.06969pt>
+<point_3.png, id=81, 862.72313pt x 487.06969pt>
 File: point_3.png Graphic file (type png)
 <use point_3.png>
 Package pdftex.def Info: point_3.png  used on input line 216.
@@ -848,7 +848,7 @@ mm/m/it/10 Y[] \OT1/cmr/m/n/10 (-20) = (0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (-20
 n/10 (-20) 0014) []$. 
  []
 
-<admittance.png, id=90, 636.12656pt x 388.45125pt>
+<admittance.png, id=94, 636.12656pt x 388.45125pt>
 File: admittance.png Graphic file (type png)
 <use admittance.png>
 Package pdftex.def Info: admittance.png  used on input line 250.
@@ -857,19 +857,92 @@ Package pdftex.def Info: admittance.png  used on input line 250.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4]
-<doublet.png, id=100, 779.91376pt x 572.1375pt>
+<doublet.png, id=104, 779.91376pt x 572.1375pt>
 File: doublet.png Graphic file (type png)
 <use doublet.png>
 Package pdftex.def Info: doublet.png  used on input line 264.
 (pdftex.def)             Requested size: 276.00105pt x 202.46857pt.
  [5 <./admittance.png (PNG copy)> <./doublet.png>]
+<comsol/1ss.png, id=111, 481.8pt x 361.35pt>
+File: comsol/1ss.png Graphic file (type png)
+<use comsol/1ss.png>
+Package pdftex.def Info: comsol/1ss.png  used on input line 278.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/2ss.png, id=112, 481.8pt x 361.35pt>
+File: comsol/2ss.png Graphic file (type png)
+<use comsol/2ss.png>
+Package pdftex.def Info: comsol/2ss.png  used on input line 282.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/3ss.png, id=113, 481.8pt x 361.35pt>
+File: comsol/3ss.png Graphic file (type png)
+<use comsol/3ss.png>
+Package pdftex.def Info: comsol/3ss.png  used on input line 286.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/4ss.png, id=114, 481.8pt x 361.35pt>
+File: comsol/4ss.png Graphic file (type png)
+<use comsol/4ss.png>
+Package pdftex.def Info: comsol/4ss.png  used on input line 290.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/5ss.png, id=115, 481.8pt x 361.35pt>
+File: comsol/5ss.png Graphic file (type png)
+<use comsol/5ss.png>
+Package pdftex.def Info: comsol/5ss.png  used on input line 294.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/1f.png, id=116, 481.8pt x 361.35pt>
+File: comsol/1f.png Graphic file (type png)
+<use comsol/1f.png>
+Package pdftex.def Info: comsol/1f.png  used on input line 303.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/2f.png, id=117, 481.8pt x 361.35pt>
+File: comsol/2f.png Graphic file (type png)
+<use comsol/2f.png>
+Package pdftex.def Info: comsol/2f.png  used on input line 307.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/3f.png, id=118, 481.8pt x 361.35pt>
+File: comsol/3f.png Graphic file (type png)
+<use comsol/3f.png>
+Package pdftex.def Info: comsol/3f.png  used on input line 311.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/4f.png, id=119, 481.8pt x 361.35pt>
+File: comsol/4f.png Graphic file (type png)
+<use comsol/4f.png>
+Package pdftex.def Info: comsol/4f.png  used on input line 315.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+<comsol/5f.png, id=120, 481.8pt x 361.35pt>
+File: comsol/5f.png Graphic file (type png)
+<use comsol/5f.png>
+Package pdftex.def Info: comsol/5f.png  used on input line 319.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+File: comsol/1f.png Graphic file (type png)
+<use comsol/1f.png>
+Package pdftex.def Info: comsol/1f.png  used on input line 328.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+File: comsol/2f.png Graphic file (type png)
+<use comsol/2f.png>
+Package pdftex.def Info: comsol/2f.png  used on input line 332.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+File: comsol/3f.png Graphic file (type png)
+<use comsol/3f.png>
+Package pdftex.def Info: comsol/3f.png  used on input line 336.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+File: comsol/4f.png Graphic file (type png)
+<use comsol/4f.png>
+Package pdftex.def Info: comsol/4f.png  used on input line 340.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
+File: comsol/5f.png Graphic file (type png)
+<use comsol/5f.png>
+Package pdftex.def Info: comsol/5f.png  used on input line 344.
+(pdftex.def)             Requested size: 96.25359pt x 72.186pt.
 
-Package caption Warning: Unused \captionsetup[subfigure] on input line 20.
-See the caption package documentation for explanation.
 
-[6] (report.aux)
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6 <./comsol/1ss.png (PNG copy)> <./comsol/2ss.png (PNG copy)> <./comsol/3ss.pn
+g (PNG copy)> <./comsol/4ss.png (PNG copy)> <./comsol/5ss.png (PNG copy)> <./co
+msol/1f.png (PNG copy)> <./comsol/2f.png (PNG copy)> <./comsol/3f.png (PNG copy
+)> <./comsol/4f.png (PNG copy)> <./comsol/5f.png (PNG copy)>] [7] (report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: D4D71F658E7D1072912BFC76FB7F73B4;528.
+(rerunfilecheck)             Checksum: 8B27293C69ABFB40EE22FA32B19D9E8F;582.
 
 
 LaTeX Warning: There were undefined references.
@@ -884,34 +957,35 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19832 strings out of 480236
- 376909 string characters out of 2881982
- 1139839 words of memory out of 3000000
- 36031 multiletter control sequences out of 15000+200000
- 546249 words of font info for 100 fonts, out of 3000000 for 9000
+ 19911 strings out of 480236
+ 378104 string characters out of 2881982
+ 1140132 words of memory out of 3000000
+ 36091 multiletter control sequences out of 15000+200000
+ 546608 words of font info for 102 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,67p,741b,1772s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmcsc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmex10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmmi5.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/i7/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/i7/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/
-i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
-sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb
+x10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmcsc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/i7/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/i7/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/
+i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
+Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
-12.pfb>
-Output written on report.pdf (7 pages, 500829 bytes).
+10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmti12.pfb>
+Output written on report.pdf (8 pages, 1143606 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
- 27733 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 199 PDF objects out of 1000 (max. 8388607)
+ 34 named destinations out of 1000 (max. 500000)
+ 28303 words of extra memory for PDF output out of 29859 (max. 10000000)
 
