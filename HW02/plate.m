@@ -348,6 +348,7 @@ y01 = int8(y1/(Ly/ySpatialNPoints));  % conversione da coordinate a indici
 ki = 1i*Z_c*Y_in(x01(1),y01(1))/pi; %ki
 eps = linspace(-3/w_s, 3/w_s, 10000);
 a = zeros(2, length(eps));
+
 a(1,:) = ki + eps + sqrt(eps.^2 + ki^2);
 a(2,:) = ki + eps - sqrt(eps.^2 + ki^2);
 
@@ -364,14 +365,20 @@ beta = zeros(2,length(eps));
 
 beta(1,:) = w_s + a(1,:).*w_s; %solution of the mechanical quantities defined as complex 
 beta(2,:) = w_s + a(2,:).*w_s;
+
 tau_1 = imag(beta(1,:)).^-1;
 tau_2 = imag(beta(2,:)).^-1;
 
 figure(2)
 subplot(2,1,1)
 plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
-legend("a+","a-");
+legend("\omega_+","\omega_-");
+xlabel("\omega_0 \times \epsilon");
+ylabel("\omega [rad/s]");
+
 subplot(2,1,2)
 plot(w_s.*eps, tau_1 , w_s.*eps, tau_2 ); %decay time
 legend("a+","a-");
 ylim([-2 2])
+xlabel("\omega_0 \times \epsilon");
+ylabel("\tau [s]");

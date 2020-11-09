@@ -116,12 +116,24 @@ end
 span_f = f_nasa_f(5) - f_nasa_f(1);
 span_ss = f_a_ss(5) - f_a_ss(1);
 span_c = f_nasa_c(5) - f_nasa_c(1);
-modes = linspace(1,4,4);
-figure(3)
-plot(modes, delta_f, modes, delta_ss, modes, delta_c);
+
+
 xlabel('mode')
-ylabel('\Delta f')
-legend('free', 'simply supported', 'clamped');
+bar(1:4, delta_ss);
+ylim([0, 16]);
+grid on;
+legend('supported');
+
+
+subplot 133;
+xlabel('mode')
+bar(1:4, delta_c);
+grid on;
+legend('clamped');
+
+
+
+
 
 %% HW2-3
 
@@ -270,7 +282,7 @@ v_a = abs(Z_1);
 M = max(v_a, [], 'all');
 [y1,x1]=find(v_a >= M -1e-3);
 x1_burdo = x1*(Lx/xSpatialNPoints); %punti trovati con metodo semplice
-y1 = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
+y1_burdo = y1*(Ly/ySpatialNPoints);  % punti trovati con metodo semplice
 
 
 %% HW2 -4 metodo più cazzuto
@@ -290,8 +302,8 @@ for i = 1:length(x)
     end
 end
 
-%  Z_11 = squeeze(Z_mn(2,2,:,:));
-%  surf(x,y, Z_11);
+  Z_11 = squeeze(Z_mn(2,2,:,:));
+  surf(x,y, Z_11);
 
 %%
 Y_in = zeros(length(x), length(y));
@@ -306,7 +318,9 @@ end
 Y_in = 1i*w0.*Y_in;
 
 surf(x,y, abs(Y_in));
-
+xlabel("x [m]")
+ylabel("y [m]")
+zlabel("Y [s/Kg]")
 
 v_a = abs(Y_in);
 M = max(v_a, [], 'all');
@@ -334,6 +348,7 @@ y01 = int8(y1/(Ly/ySpatialNPoints));  % conversione da coordinate a indici
 ki = 1i*Z_c*Y_in(x01(1),y01(1))/pi; %ki
 eps = linspace(-3/w_s, 3/w_s, 10000);
 a = zeros(2, length(eps));
+
 a(1,:) = ki + eps + sqrt(eps.^2 + ki^2);
 a(2,:) = ki + eps - sqrt(eps.^2 + ki^2);
 
@@ -350,6 +365,7 @@ beta = zeros(2,length(eps));
 
 beta(1,:) = w_s + a(1,:).*w_s; %solution of the mechanical quantities defined as complex 
 beta(2,:) = w_s + a(2,:).*w_s;
+
 tau_1 = imag(beta(1,:)).^-1;
 tau_2 = imag(beta(2,:)).^-1;
 
@@ -357,6 +373,8 @@ figure(2)
 subplot(2,1,1)
 plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
 legend("a+","a-");
+xlabel("\omega_0 \times \epsilon");
+y
 subplot(2,1,2)
 plot(w_s.*eps, tau_1 , w_s.*eps, tau_2 ); %decay time
 legend("a+","a-");
