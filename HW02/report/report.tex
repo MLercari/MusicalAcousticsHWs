@@ -234,7 +234,7 @@ where $ q_{mn,0} = \frac{F_{0} Z_{mn}(x_0, y_0)}{(\omega_{mn}^2 - \omega_0^2) + 
 By computing this expression in $(x_0, y_0)$ and dividing by $F_0$ we obtain the input admittance as a function of the input point coordinates:
 $$ Y_{in}(x_0, y_0) =  j\omega_0 \left( \sum_{m,n} \frac{Z_{mn}^2(x_0, y_0)}{(\omega_{mn}^2 - \omega_0^2) + 2j\alpha \omega_0} \right)$$
 
-We computed the input admittance by truncating the sum in the previous expression up to $m, n = 20$ (the first 400 modes). A plot of the admittance is reported in Fig. \ref{fig:adm}. The maxima are at coordinates:
+We computed the input admittance by truncating the sum in the previous expression up to $m, n = 20$ (the first 400 modes). A plot of the admittance is reported in Fig. \ref{fig:adm}. The maxima of its absolute value are at coordinates:
 
 \begin{align*}
 	(x_1, y_1) = (\SI{0.100}{\metre}, \SI{0.182}{\meter}) \\
@@ -248,7 +248,7 @@ The value of the admittance in the maxima is $Y_{in, MAX} = (0.0017 + j0.0014)~\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{admittance.png}
-	\caption{Graph of the input admittance of the plate at $f_0 = \SI{130.8}{\hertz}$.}
+	\caption{Graph of the absolute value of the input admittance of the plate at $f_0 = \SI{130.8}{\hertz}$.}
 	\label{fig:adm}
 \end{figure}
 
@@ -262,13 +262,14 @@ where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the chara
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{doublet.png}
-	\caption{Eigenfrequencies and decay times of the string doublet when coupled to the soundboard, as a function of the detuning $\epsilon$.}
+	\caption{Eigenfrequencies and decay times of the string doublet when coupled to the plate, as a function of the detuning $\epsilon$.}
 	\label{fig:doub}
 \end{figure}
 
 \printbibliography
 
 \appendix
+\newpage
 \section{COMSOL Simulations}
 
 
@@ -276,22 +277,27 @@ where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the chara
 	\centering
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/1ss.png}
+		\caption*{\SI{11.218}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/2ss.png}
+		\caption*{\SI{22.627}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/3ss.png}
+		\caption*{\SI{33.715}{\hertz}}
 	\end{subfigure}
 
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/4ss.png}
+		\caption*{\SI{41.825}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/5ss.png}
+		\caption*{\SI{45.368}{\hertz}}
 	\end{subfigure}
 	\caption{Eigenshapes for the \textbf{supported edges} case as computed with COMSOL.}
 	\label{fig:ss_com}
@@ -301,22 +307,27 @@ where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the chara
 	\centering
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/1f.png}
+		\caption*{\SI{6.9614}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/2f.png}
+		\caption*{\SI{8.0668}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/3f.png}
+		\caption*{\SI{16.457}{\hertz}}
 	\end{subfigure}
 	
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/4f.png}
+		\caption*{\SI{16.712}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
 		\includegraphics[width=0.9\linewidth]{comsol/5f.png}
+		\caption*{\SI{20.66}{\hertz}}
 	\end{subfigure}
 	\caption{Eigenshapes for the \textbf{free edges} case as computed with COMSOL.}
 	\label{fig:f_com}
@@ -325,23 +336,28 @@ where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the chara
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.31\linewidth}
-		\includegraphics[width=0.9\linewidth]{comsol/1f.png}
+		\includegraphics[width=0.9\linewidth]{comsol/1c.png}
+		\caption*{\SI{21.391}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
-		\includegraphics[width=0.9\linewidth]{comsol/2f.png}
+		\includegraphics[width=0.9\linewidth]{comsol/2c.png}
+		\caption*{\SI{34.885}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
-		\includegraphics[width=0.9\linewidth]{comsol/3f.png}
+		\includegraphics[width=0.9\linewidth]{comsol/3c.png}
+		\caption*{\SI{51.555}{\hertz}}
 	\end{subfigure}
 	
 	\begin{subfigure}[b]{0.31\linewidth}
-		\includegraphics[width=0.9\linewidth]{comsol/4f.png}
+		\includegraphics[width=0.9\linewidth]{comsol/4c.png}
+		\caption*{\SI{57.354}{\hertz}}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.31\linewidth}
-		\includegraphics[width=0.9\linewidth]{comsol/5f.png}
+		\includegraphics[width=0.9\linewidth]{comsol/5c.png}
+		\caption*{\SI{64.806}{\hertz}}
 	\end{subfigure}
 	\caption{Eigenshapes for the \textbf{clamped edges} case as computed with COMSOL.}
 	\label{fig:c_com}
