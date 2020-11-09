@@ -243,6 +243,8 @@ We computed the input admittance by truncating the sum in the previous expressio
 	(x_4, y_4) = (\SI{0.910}{\metre}, \SI{1.232}{\meter})
 \end{align*}
 
+The value of the admittance in the maxima is $Y_{in, MAX} = (0.0017 + j0.0014)~\si{\second\per\kilogram}$.
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{admittance.png}
@@ -250,6 +252,19 @@ We computed the input admittance by truncating the sum in the previous expressio
 	\label{fig:adm}
 \end{figure}
 
+\section{Doublet of strings mounted to the plate}
+
+Following the treatment presented in \cite{chker}, we obtain that the eigenfrequencies of a pair of strings coupled to a soundboard can be written as a function of the detuning $\epsilon$:
+
+$$ \omega_{\pm} + j \frac{1}{\tau_{\pm}} = \chi + \epsilon \pm \sqrt{\chi^2 + \epsilon^2}  $$
+where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the characteristic impedance of the first string. When placing the bridge at one of the admittance maxima, we get $\chi = -0.0014 + j 0.0017$. With this value we can plot $\omega_{\pm}$ and $\tau_{\pm}$ as functions of $\epsilon$, as seen in Fig. \ref{fig:doub}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{doublet.png}
+	\caption{Eigenfrequencies and decay times of the string doublet when coupled to the soundboard, as a function of the detuning $\epsilon$.}
+	\label{fig:doub}
+\end{figure}
 
 \printbibliography
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  8 NOV 2020 23:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  9 NOV 2020 12:24
 entering extended mode
 **./report.tex
 (report.tex
@@ -821,7 +821,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Logo_Politecnico_Milano.png, id=31, 666.49pt x 489.83pt>
+<Logo_Politecnico_Milano.png, id=35, 666.49pt x 489.83pt>
 File: Logo_Politecnico_Milano.png Graphic file (type png)
 <use Logo_Politecnico_Milano.png>
 Package pdftex.def Info: Logo_Politecnico_Milano.png  used on input line 44.
@@ -835,41 +835,62 @@ page.1}) has been already used, duplicate ignored
                    \relax 
 l.137 
        [1] [2]
-<point_3.png, id=73, 862.72313pt x 487.06969pt>
+<point_3.png, id=77, 862.72313pt x 487.06969pt>
 File: point_3.png Graphic file (type png)
 <use point_3.png>
 Package pdftex.def Info: point_3.png  used on input line 216.
 (pdftex.def)             Requested size: 327.74895pt x 185.03636pt.
  [3 <./point_3.png>]
-<admittance.png, id=86, 636.12656pt x 388.45125pt>
+Overfull \hbox (16.10924pt too wide) in paragraph at lines 246--247
+[]\OT1/cmr/m/n/10 (-20) The value of the ad-mit-tance in the max-ima is $\OML/c
+mm/m/it/10 Y[] \OT1/cmr/m/n/10 (-20) = (0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (-20
+) 0017 + \OML/cmm/m/it/10 j\OT1/cmr/m/n/10 (-20) 0\OML/cmm/m/it/10 :\OT1/cmr/m/
+n/10 (-20) 0014) []$. 
+ []
+
+<admittance.png, id=90, 636.12656pt x 388.45125pt>
 File: admittance.png Graphic file (type png)
 <use admittance.png>
-Package pdftex.def Info: admittance.png  used on input line 248.
+Package pdftex.def Info: admittance.png  used on input line 250.
 (pdftex.def)             Requested size: 241.49895pt x 147.47075pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4]
+<doublet.png, id=100, 779.91376pt x 572.1375pt>
+File: doublet.png Graphic file (type png)
+<use doublet.png>
+Package pdftex.def Info: doublet.png  used on input line 264.
+(pdftex.def)             Requested size: 276.00105pt x 202.46857pt.
+ [5 <./admittance.png (PNG copy)> <./doublet.png>]
 
 Package caption Warning: Unused \captionsetup[subfigure] on input line 20.
 See the caption package documentation for explanation.
 
-[5 <./admittance.png (PNG copy)>] (report.aux)
+[6] (report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 5F58279162F6829F66E7EF74BA38739A;454.
+(rerunfilecheck)             Checksum: D4D71F658E7D1072912BFC76FB7F73B4;528.
+
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                report
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19819 strings out of 480236
- 376757 string characters out of 2881982
- 1139641 words of memory out of 3000000
- 36024 multiletter control sequences out of 15000+200000
- 546198 words of font info for 99 fonts, out of 3000000 for 9000
+ 19832 strings out of 480236
+ 376909 string characters out of 2881982
+ 1139839 words of memory out of 3000000
+ 36031 multiletter control sequences out of 15000+200000
+ 546249 words of font info for 100 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,13n,67p,741b,1677s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,13n,67p,741b,1772s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x12.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmcsc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
@@ -888,9 +909,9 @@ i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
 sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb
 ><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
 12.pfb>
-Output written on report.pdf (6 pages, 469538 bytes).
+Output written on report.pdf (7 pages, 500829 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 27720 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 173 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
+ 27733 words of extra memory for PDF output out of 29859 (max. 10000000)
 
