@@ -72,7 +72,7 @@ f_nasa_c = w_nasa_c/(2*pi);
 
 % free tabella 4.72
 % assumendo nu = 1/6 e b/a = 1.5 
-%nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
+nasa_coeff_f = [9.905, 9.944, 22.245, 22.373, 27.410]; 
 %             (1,1)  (0,2)  (1,2)    (2,0)    (3,0)  (m,n) 
 
 % b/a = 1.5 , nu = 0.3 dalla tabella 4.75
@@ -345,7 +345,9 @@ Z_c = sqrt(mu_s*T); %characteristic impedance of the string [Kg/s]
 
 x01 = int8(x1/(Lx/xSpatialNPoints)); %conversione da coordinate a indici
 y01 = int8(y1/(Ly/ySpatialNPoints));  % conversione da coordinate a indici
+
 ki = 1i*Z_c*Y_in(x01(1),y01(1))/pi; %ki
+
 eps = linspace(-3/w_s, 3/w_s, 10000);
 a = zeros(2, length(eps));
 
@@ -371,11 +373,18 @@ tau_2 = imag(beta(2,:)).^-1;
 
 figure(2)
 subplot(2,1,1)
-plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) ); %eigenfrequencies
-legend("a+","a-");
-xlabel("\omega_0 \times \epsilon");
-y
+plot(w_s.*eps, (real(beta(1,:))), w_s.*eps, (real(beta(2,:))) );%eigenfrequencies
+legend("\omega_+","\omega_-");
+hold on
+plot( w_s.*eps, ones(length(eps)).*w_s , "LineStyle" , "--" , "color" , "k" )
+plot(w_s.*eps, w_s.*(1 + 2.*eps), "LineStyle" , "--" , "color" , "k" );
+
+xlabel("\omega_0 \times \epsilon", "Linewidth" , 18);
+ylabel("\omega [rad/s]" , "Linewidth" , 18 );
+
 subplot(2,1,2)
 plot(w_s.*eps, tau_1 , w_s.*eps, tau_2 ); %decay time
-legend("a+","a-");
+legend(" +","a-");
 ylim([-2 2])
+xlabel("\omega_0 \times \epsilon");
+ylabel("\tau [s]");
