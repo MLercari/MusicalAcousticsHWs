@@ -187,6 +187,8 @@ In \cite{leissa}, more accurate values for the eigenfrequencies of a clamped pla
 %\cite{fletchross}
 %\cite{chker}
 
+Overall, we can gather that the boundary conditions have an impact on the eigenfrequencies that appears to be more significant than changes in the aspect ratio or the physical parameters.
+
 \section{Boundary conditions and modal density}
 
 The frequency separations for the three cases discussed in the previous section can be seen in Tab. \ref{tab:sep}. 
@@ -257,7 +259,7 @@ The value of the admittance in the maxima is $Y_{in, MAX} = (0.0017 + j0.0014)~\
 Following the treatment presented in \cite{chker}, we obtain that the eigenfrequencies of a pair of strings coupled to a soundboard can be written as a function of the detuning $\epsilon$:
 
 $$ \omega_{\pm} + j \frac{1}{\tau_{\pm}} = \chi + \epsilon \pm \sqrt{\chi^2 + \epsilon^2}  $$
-where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the characteristic impedance of the first string. When placing the bridge at one of the admittance maxima, we get $\chi = -0.0014 + j 0.0017$. With this value we can plot $\omega_{\pm}$ and $\tau_{\pm}$ as functions of $\epsilon$, as seen in Fig. \ref{fig:doub}.
+where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the characteristic impedance of the first string. When placing the bridge at one of the admittance maxima, we get $\chi = -0.0014 + j 0.0017$. With this value we can plot $\omega_{\pm}$ and $\tau_{\pm}$ as functions of $\epsilon$, as seen in Fig. \ref{fig:doub}. As expected, the decay time of one string diverges when $\epsilon$ goes to zero while the other only decreases slightly.
 
 \begin{figure}[h]
 	\centering
@@ -362,6 +364,7 @@ where $\chi$ is defined by $Y_B = \frac{\pi }{j Z_0}\chi$ and $Z_0$ is the chara
 	\caption{Eigenshapes for the \textbf{clamped edges} case as computed with COMSOL.}
 	\label{fig:c_com}
 \end{figure}
+
 
 
 \end{document}
