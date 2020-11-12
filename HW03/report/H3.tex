@@ -87,10 +87,10 @@
 	
 \end{titlepage}
 
-\section{Adjusting the radiation cutoff with the right thickness}
+\section{Adjusting the radiation cutoff by choosing the plate thickness}
 
 Assuming an infinite plate, we can study the sound radiation by imposing that the air's velocity field and the plate velocity are equal on the plate's surface. This yields the following expression for the component of the acoustic wave vector normal to the surface:
 $$ k_z = \omega \sqrt{\frac{1}{c^2} - \frac{1}{v_p^2}} $$
-where $c$ is the sound velocity in air and $v_p$ is the velocity of the bending waves in the plate.
+where $c$ is the sound velocity in air and $v_p$ is the velocity of the bending waves in the plate. Since bending waves in a plate are dispersive ($v_p \propto \omega^{\frac{1}{2}}$), the argument of the square root increases with frequency, which means there'll be a cutoff frequency below which $k_z$ becomes imaginary. In this case the solution for the acoustic field takes the form of a vanishing wave in the z direction, which doesn't carry any energy away from the plate's surface. Therefore, below the cutoff frequency there will not be any sound radiation.
 
 \end{document}
