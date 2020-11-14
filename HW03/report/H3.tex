@@ -101,16 +101,16 @@ where $c_L$ is the corresponding velocity of the quasi-longitudinal waves. For a
 \end{align*}
 where $\nu_{xy}$ and $\nu_{yx}$ are the Poisson's ratios relative to the two axes, while $E_x$ and $E_y$ are the Young's moduli.
 
-The values of these parameters for Sitka spruce can be seen in Tab. \ref{tab:wood}, together with the resulting velocities. Since the longitudinal velocity is the highest of the two, waves that propagate in the $x$ direction will be cutoff at a lower frequency than those that propate in the $y$ direction. The cuttoff frequency of the plate, therefore, is the one at which the velocity of the bending waves in the $x$ direction matches the speed of sound in the air. We can tune this frequency by varying the plate's thickness $h$: if we want a cutoff at $\SI{1.2}{\kilo\hertz}$, we will need to use a plate of thickness $h = \SI{9.5}{\milli\meter}$.
+The values of these parameters for Sitka spruce can be seen in Tab. \ref{tab:wood}, together with the resulting velocities. Since the longitudinal velocity is the highest of the two, waves that propagate in the $x$ direction will be cut off at a lower frequency than those that propagate in the $y$ direction. The cutoff frequency of the plate, therefore, is the one at which the velocity of the bending waves in the $x$ direction matches the speed of sound in the air. We can tune this frequency by varying the plate's thickness $h$: if we want a cutoff at $\SI{1.2}{\kilo\hertz}$, we will need to use a plate of thickness $h = \SI{9.5}{\milli\meter}$.
 
 \begin{table}[h]
 	\centering
-	$\begin{array}{llll|rr}
+	$\begin{array}{lllll|rr}
 		\toprule
-		E_x~[\si{\giga\pascal]}& E_y~[\si{\giga\pascal}] & \nu_{xy} & \nu_{yx} & c_x~[\si{\meter\per\second}] &  c_y~[\si{\meter\per\second}]\\
+		E_x~[\si{\giga\pascal]}& E_y~[\si{\giga\pascal}] & \nu_{xy} & \nu_{yx} & \rho~[\si{\kilogram\per\meter\cubed}] & c_x~[\si{\meter\per\second}] &  c_y~[\si{\meter\per\second}]\\
 		%\hline
 		\midrule
-		10.80 & 1.112 & 0.372 & 0.040 & 5.73\times10^3 & 1.60\times10^3\\
+		14.26 & 1.112 & 0.372 & 0.040 & 440 & 5.73\times10^3 & 1.60\times10^3\\
 		\bottomrule
 	\end{array}$
 	\caption{Mechanical parameters of Sitka spruce, from \cite{wood}.}
@@ -130,7 +130,7 @@ Much like before, the presence of $v_p$ in this expression implies a dependence 
 	\caption{Plot of $\theta$ as a function of $f$.}
 	\label{fig:dir}
 \end{figure}
-
+Notice that what we are plotting here is actually the real part of the ratio $\frac{k_z}{k_x}$: this is why the graph is zero below the cutoff frequency.
 
 \section{Effects of the finite extension of real plates}
 
