@@ -66,8 +66,9 @@ tg_theta = sqrt(v_p.^2/c^2 - 1);
 %plot
 
 figure(1)
-semilogx(f, real( radtodeg(atan(tg_theta))), 'LineWidth', 2 , "color", "k")
-grid on
-xlabel(" f [Hz]")
-ylabel(" \theta [°] ")
+%semilogx(f, real( radtodeg(atan(tg_theta))), 'LineWidth', 2 , "color", "k");
+plot(f/1000, real( radtodeg(atan(tg_theta))), 'LineWidth', 2 , "color", "k");
+grid on;
+xlabel(" f [kHz]")
+ylabel(" \theta [deg] ")
 
