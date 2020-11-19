@@ -1,0 +1,6 @@
+1) check the dimension scale: the exitation 
+shape doesn't change after few millisend but the 
+deformation increases with time
+2) in this study we used extra-fine mesh in 
+order to increase the spatial resolution of
+the impulsive response at moments very close to zero

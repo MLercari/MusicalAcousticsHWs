@@ -1,0 +1,16 @@
+SIDE LOAD
+1) In plots named "A" we've chosen 
+only 5 modes around 110 Hz
+to compute the modal superposition. For this
+reason, the displacement given by an oscillating
+force which oscillates around 110 Hz seems
+accurate (see picture "A1" ) while it is 
+not when the frequency
+of the force is higher than the modal frequency
+refered to the fifth mode (262.91 Hz) (see picture "A2")
+2) In plots named "B" instead we increased 
+number of modes around the same 
+previous eigenfrequency and then we increased
+the number of modes 
+into the superposition and therefore the results 
+are both more accurate
