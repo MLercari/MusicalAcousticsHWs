@@ -103,9 +103,38 @@
 	\label{fig:shape}
 \end{figure}
 
-The modeling of the bell started with the drawing of the 2D shape seen in Fig. \ref{fig:shape}. This is a Bézier polygon, i. e. a closed curve formed by connecting line segments and Bézier curves. In our case we have two cubic Bézier curves connecting two segments, one of which marks the edge of the bell while the other coincides with the intersection of the bell with its rotation axis.
+The modeling of the bell started with the drawing of the 2D shape seen in Fig. \ref{fig:shape}. This is a Bézier polygon, i. e. a closed curve formed by connecting line segments and Bézier curves. In our case we have two cubic Bézier curves connecting two segments, one of which marks the edge of the bell while the other coincides with the intersection of the object with its rotation axis. The actual 3D bell model is indeed obtained by rotating this figure about the $x=0$ line, and it too can be seen in Fig. \ref{fig:shape}.
+
+The way this is done in Comsol is by creating a 3D component, then adding a Work Plane node in its geometry, where the above-mentioned Bézier polygon is drawn, followed by a Revolve node to generate the solid.
+
+The most common material for bellfounding is the aptly named ``bell metal'' which is a kind of bronze with a ratio of copper to tin of roughly 4:1. However, since the bronze alloys available in the Comsol libraries seemed to all have incomplete information regarding their mechanical parameters, we opted for cast iron (from the ``Built-in'' materials library), which is, by the way, another metal that has been historically used for bells, albeit less frequently.
+
+\subsection{Eigenfrequency study}
+
+We performed an eigenfrequency study with free boundary conditions. This meant keeping only the default subnodes in the Solid Mechanics node of our model, of which ``Free 1'' in particular is where the boundary conditions are set. The results are presented in Tab. \ref{tab:freq}.
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{ll}
+		\toprule
+		\text{Eigenfrequencies [Hz]} & \text{Angular frequency [rad/s]}\\
+		
+		\bottomrule
+	\end{array}$
+	\caption{}
+	\label{tab:freq}
+\end{table}
 
 
 
+\section{Church Bell - 2D Axisymmetric Model}
+
+\begin{figure}[h!]
+	\centering\includegraphics[width=0.75\linewidth]{axisMode.png}
+	\caption{Mode shape with axial symmetry.}
+	\label{fig:ax}
+\end{figure}
+
+In this case we simply imported the same 2D figure as before in the Geometry node of a 2D-axisymmetric component. We then performed an eigenfrequency study much like in the previous case. The eigenfrequencies do not appear to be the same as before. The main reason is that for a 2D-axisymmetric component, studies get carried out on the 2D shape and then the results are extrapolated to the entire object under the assumption that we are only looking for axysimmetric properties. When looking for vibration eigenmodes, this means that we are ignoring the modes that do not exhibit this symmetry, which in our case were all the modes studied previously.
 
 \end{document}
