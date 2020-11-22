@@ -144,11 +144,15 @@ The first six results are not eigenfrequencies of the system but they refer to t
 
 
 \subsection{Time domain study}
-We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component.  The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
+We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component. The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
 
 More precisely, all of this was done twice: once on the edge of the bell and once on its side. For example, for the time domain study that concerned the side excitation, all boundary loads except the gaussian impulse which acts on the side have been disabled. Vice versa in the other case. We report here some snapshots of the results highlighting the time history of the displacement of the bell. 
 
 \subsection{Frequency domain study}
+Two harmonic forces were added as boundary loads in the Definition node of the component, one of them impinges on the side while the other one on the edge. In the "frequency response" study node, by enabling one harmonic force at the time, it is possible to compute the frequency response of the bell in the selected range and the deformation for each frequency is stored in the result node, under "deformation freq study" subnode. 
+
+\subsection{Frequency domain modal study}
+A similar procedure was followed in order to perform a frequency domain modal study. This, much like the previous case, gives as a result the frequency response of the object (for a given set of frequencies). The main difference is that the modal study computes this response as a superposition of the eigenmodes from the eigenfrequency study. Actually, th predefined modal study in Comsol includes an eigenfrequency study as its first step, so in practice we didn't reuse the results from the study we performed earlier for this, but the eigenmodes were computed a second time. However, since from the first eigenfrequency study the geometry (and therefore the mesh) has been slightly modified, the frequencies at this step are a bit different from the previous results. Moreover, we included 30 modes at this step. In figure ... the frequency response can be seen. Of course, if the number of modes is decreased, a less refined approximation of the response is expected, as it can be observed in figure ... 
 
 \begin{figure}[h!]
 	\centering
