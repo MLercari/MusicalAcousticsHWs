@@ -136,23 +136,17 @@ We performed an eigenfrequency study with free boundary conditions. This meant k
      	509.56  &  3201.69 \\
 		\bottomrule
 	\end{array}$
-\caption{}
-\label{tab:freq}
+	\caption{Eigenfrequencies of the bell.}
+	\label{tab:freq}
 \end{table}
 
-The first six results are not eigenfrequencies of the system but they refer to the rigid body motion of the bell. Each of them represents one degree of freedom of a tridimensional system in a free configuration. They should have frequency zero but, because of the computational error, are rather very small number. Below these six values, every eigenfrequency shows degeneracy because of the symmetry under axial rotation. Three modeshapes animations can be found in the folder shared with this report: the gifs called "mode 1" and "mode 2" show the lowest pair of degenerate mode, while "mode 9-10" is the eigenshape refered to the last two value of the table. 
+The first six results are not eigenfrequencies of the system but they refer to the rigid body motion of the bell. Each of them represents one degree of freedom of a tridimensional system in a free configuration. They should have frequency zero but, because of the computational error, are rather very small numbers. Below these six values, every eigenfrequency shows degeneracy because of the symmetry under axial rotation. Three modeshapes animations can be found in the folder shared with this report: the gifs called "mode 1" and "mode 2" show the lowest pair of degenerate modes, while "mode 9-10" is the eigenshape referred to the last two value of the table. 
 
 
 \subsection{Time domain study}
 We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component. The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
 
 More precisely, all of this was done twice: once on the edge of the bell and once on its side. For example, for the time domain study that concerned the side excitation, all boundary loads except the gaussian impulse which acts on the side have been disabled. Vice versa in the other case. We report here some snapshots of the results highlighting the time history of the displacement of the bell. 
-
-\subsection{Frequency domain study}
-Two harmonic forces were added as boundary loads in the Definition node of the component, one of them impinges on the side while the other one on the edge. In the "frequency response" study node, by enabling one harmonic force at the time, it is possible to compute the frequency response of the bell in the selected range and the deformation for each frequency is stored in the result node, under "deformation freq study" subnode. 
-
-\subsection{Frequency domain modal study}
-A similar procedure was followed in order to perform a frequency domain modal study. This, much like the previous case, gives as a result the frequency response of the object (for a given set of frequencies). The main difference is that the modal study computes this response as a superposition of the eigenmodes from the eigenfrequency study. Actually, th predefined modal study in Comsol includes an eigenfrequency study as its first step, so in practice we didn't reuse the results from the study we performed earlier for this, but the eigenmodes were computed a second time. However, since from the first eigenfrequency study the geometry (and therefore the mesh) has been slightly modified, the frequencies at this step are a bit different from the previous results. Moreover, we included 30 modes at this step. In figure ... the frequency response can be seen. Of course, if the number of modes is decreased, a less refined approximation of the response is expected, as it can be observed in figure ... 
 
 \begin{figure}[h!]
 	\centering
@@ -163,7 +157,7 @@ A similar procedure was followed in order to perform a frequency domain modal st
 	\begin{subfigure}{0.47\textwidth}
 		\includegraphics[width=0.8\textwidth]{time domain study edge/initial time 2.png}
 	\end{subfigure}
-
+	
 	\begin{subfigure}{0.47\textwidth}
 		\includegraphics[width=0.8\textwidth]{time domain study edge/middle time.png}
 	\end{subfigure}
@@ -171,7 +165,7 @@ A similar procedure was followed in order to perform a frequency domain modal st
 	\begin{subfigure}{0.47\textwidth}
 		\includegraphics[width=0.8\textwidth]{time domain study edge/final time.png}
 	\end{subfigure}
-	\caption{Snapshots of the displacement of the surface when the impulse is applied on the \textbf{edge} of the bell.}
+	\caption{Snapshots of the displacement of the bell when the impulse is applied on the \textbf{edge}.}
 	\label{fig:timeEdge}
 \end{figure}
 
@@ -192,8 +186,56 @@ A similar procedure was followed in order to perform a frequency domain modal st
 	\begin{subfigure}{0.47\textwidth}
 		\includegraphics[width=0.8\textwidth]{time domain study side/final time.png}
 	\end{subfigure}
-	\caption{Snapshots of the displacement of the surface when the impulse is applied on the \textbf{side} of the bell.}
+	\caption{Snapshots of the displacement of the bell when the impulse is applied on the \textbf{side}.}
 	\label{fig:timeSide}
+\end{figure}
+
+\subsection{Frequency domain study}
+Two harmonic forces were added as boundary loads in the Definition node of the component, one of them impinges on the side while the other one on the edge. In the "frequency response" study node, by enabling one harmonic force at the time, it is possible to compute the frequency response of the bell in the selected range and the deformation for each frequency is stored in the result node, under "deformation freq study" subnode. 
+
+\subsection{Frequency domain modal study}
+A similar procedure was followed in order to perform a frequency domain modal study. This, much like the previous case, gives as a result the frequency response of the object (for a given set of frequencies). The main difference is that the modal study computes this response as a superposition of the eigenmodes from the eigenfrequency study. Actually, th predefined modal study in Comsol includes an eigenfrequency study as its first step, so in practice we didn't reuse the results from the study we performed earlier for this, but the eigenmodes were computed a second time. However, since from the first eigenfrequency study the geometry (and therefore the mesh) has been slightly modified, the frequencies at this step are a bit different from the previous results. Moreover, we included 30 modes at this step to obtain an accurate result. In Fig. \ref{fig:modal} we report the graphs of the deformation for some of the frequencies that were considered. It can be seen in the Results node that the response is very similar to the one obtained in the frequency domain study. Of course, if the number of modes is decreased, a less refined approximation of the response is expected, as it can be observed in Fig. \ref{fig:5modes}, where we report a plot from a similar study performed with only the first 5 modes. This is especially true at higher frequencies.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study/B1.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study/B2.png}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study side/B1.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study side/B2.png}
+	\end{subfigure}
+	\caption{Amplitude of the displacements in the modal study with 30 modes. On the top the excitation is applied at the edge of the bell while at the bottom it is applied at the side.}
+	\label{fig:modal}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study/A1.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study/A2.png}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study side/A1.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency modal study side/A2.png}
+	\end{subfigure}
+	\caption{Amplitude of the displacements in the modal study with 5 modes. On the top the excitation is applied at the edge of the bell while at the bottom it is applied at the side.}
+	\label{fig:5modes}
 \end{figure}
 
 \section{Church Bell - 2D Axisymmetric Model}
@@ -204,6 +246,24 @@ A similar procedure was followed in order to perform a frequency domain modal st
 	\label{fig:ax}
 \end{figure}
 
-In this case we simply imported the same 2D figure as before in the Geometry node of a 2D-axisymmetric component. We then performed an eigenfrequency study much like in the previous case. The eigenfrequencies do not appear to be the same as before. The main reason is that for a 2D-axisymmetric component, studies get carried out on the 2D shape and then the results are extrapolated to the entire object under the assumption that we are only looking for axysimmetric properties. When looking for vibration eigenmodes, this means that we are ignoring the modes that do not exhibit this symmetry, which in our case were all the modes studied previously.
+In this case we simply imported the same 2D figure as before in the Geometry node of a 2D-axisymmetric component. We then performed an eigenfrequency study much like in the previous case. However, the eigenfrequencies (see Tab. \ref{tab:2D}) do not appear to be the same as before. The main reason is that for a 2D-axisymmetric component, studies get carried out on the 2D shape and then the results are extrapolated to the entire object under the assumption that we are only looking for axysimmetric properties. When looking for vibration eigenmodes, this means that we are ignoring the modes that do not exhibit this symmetry, which in our case were all the modes studied in Section 1.2.
+
+\begin{table}[h]
+	\centering
+	$\begin{array}{ll}
+		\toprule
+		\text{Eigenfrequencies [Hz]} & \text{Angular frequency [rad/s]}\\
+		1.68\times 10^{-4} & 0.001 \\
+		767.1 & 4819.8\\
+		1017 & 6390 \\
+		1100 & 6912\\
+		1400 & 8800\\
+		1743 & 10951 \\
+		1954 & 12278\\		
+		\bottomrule
+	\end{array}$
+	\caption{Eigenfrequencies of the axysimmetric modes.}
+	\label{tab:2D}
+\end{table}
 
 \end{document}
