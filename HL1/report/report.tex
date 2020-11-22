@@ -144,9 +144,11 @@ The first six results are not eigenfrequencies of the system but they refer to t
 
 
 \subsection{Time domain study}
-We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component. The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
+We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component.  The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
 
-More precisely, all of this was done twice: once on the edge of the bell and once on its side. We report here some snapshots of the results highlighting the displacement of the bell. 
+More precisely, all of this was done twice: once on the edge of the bell and once on its side. For example, for the time domain study that concerned the side excitation, all boundary loads except the gaussian impulse which acts on the side have been disabled. Vice versa in the other case. We report here some snapshots of the results highlighting the time history of the displacement of the bell. 
+
+\subsection{Frequency domain study}
 
 \begin{figure}[h!]
 	\centering\includegraphics[width=0.75\linewidth]{axisMode.png}
