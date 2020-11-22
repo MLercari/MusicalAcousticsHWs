@@ -118,18 +118,41 @@ We performed an eigenfrequency study with free boundary conditions. This meant k
 	$\begin{array}{ll}
 		\toprule
 		\text{Eigenfrequencies [Hz]} & \text{Angular frequency [rad/s]}\\
-		
+				i7.61\times 10^{-5} & i4.78\times 10^{-4} \\
+		i1.19\times 10^{-4} &  i7.48\times 10^{-4} \\
+		2.03\times 10^{-5} & 1.28\times 10^{-4} \\
+		5.19\times 10^{-5} & 3.26\times 10^{-4} \\
+		1.1\times 10^{-4} & 6.9\times 10^{-4} \\
+		1.29\times 10^{-4} & 8.13\times 10^{-4}  \\
+		111.98  &  703.6 \\
+		111.98  &  703.6 \\
+		262.72 &   1650.7\\ 
+		262.72 &   1650.7\\  
+		385.48 &   2422.028 \\   
+		385.48 &   2422.028 \\ 
+		489.14 &  3073.35 \\
+     	489.14 &  3073.35 \\
+     	509.56  &  3201.69 \\
+     	509.56  &  3201.69 \\
 		\bottomrule
 	\end{array}$
-	\caption{}
-	\label{tab:freq}
+\caption{}
+\label{tab:freq}
 \end{table}
+
+The first six results are not eigenfrequencies of the system but they refer to the rigid body motion of the bell. Each of them represents one degree of freedom of a tridimensional system in a free configuration. They should have frequency zero but, because of the computational error, are rather very small number. Below these six values, every eigenfrequency shows degeneracy because of the symmetry under axial rotation. Three modeshapes animations can be found in the folder shared with this report: the gifs called "mode 1" and "mode 2" show the lowest pair of degenerate mode, while "mode 9-10" is the eigenshape refered to the last two value of the table. 
 
 
 \subsection{Time domain study}
 We set up a time-domain study to simulate the response of the object to an impulsive force. The impulse was modeled defining a short gaussian pulse in the Definition node of the component. The area where the impulse was applied was defined by taking the intersection between the bell and a cylinder of radius 1 cm with an axis orthogonal to the one of the bell. A force defined with the gaussian pulse was set to be applied to this area by adding a Boundary Load to the physics of the object.
 
-More precisely, all of this was done twice: once on the edge of the bell and once on its side. We report here some snapshots of the results highlighting the displacement of the bell
+More precisely, all of this was done twice: once on the edge of the bell and once on its side. We report here some snapshots of the results highlighting the displacement of the bell. 
+
+\begin{figure}[h!]
+	\centering\includegraphics[width=0.75\linewidth]{axisMode.png}
+	\caption{Mode shape with axial symmetry.}
+	\label{fig:ax}
+\end{figure}
 
 \section{Church Bell - 2D Axisymmetric Model}
 
