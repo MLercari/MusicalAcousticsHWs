@@ -58,7 +58,7 @@ x1 = 0.5;
 syms x
 
 S = zeros(1, 4);
-S(1) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 2);
+S(1) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 2); % NB: remember to fplot the lhs of the equation to check for the zeros
 S(2) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 5);
 S(3) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 8);
 S(4) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 11);
