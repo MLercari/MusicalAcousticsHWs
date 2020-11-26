@@ -96,7 +96,7 @@ xlim([0 4000]);
 
 
 syms kappa;
-ZcSym = (1i*rho*c/S1)*(1/(cot(kappa*L1corr) + 1/(kappa*x1)));
+ZcSym = (1i*rho*c/S1).*(1./(cot(k.*L1corr) + 1./(k.*x1)));
 ZSym = Z01*((ZcSym*cos(kappa*L1) + 1i*Z01*sin(kappa*L1))/(1i*ZcSym*sin(kappa*L1) + Z01*cos(kappa*L1)));
 min = vpasolve(ZSym == 0, kappa, (2*pi*200)/c);
 min = (min*c)/(2*pi);
