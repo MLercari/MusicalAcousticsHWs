@@ -26,7 +26,7 @@ ka = k.*a1; %[-] adimensional ka for pipe only
 %actually, DeltaL1 is a function of ka: see fig. 8.9 of Fletcher(pag. 201)
 % let's take a mean value of Delta/a between 0.1 and 0.61
 
-DeltaL1 = 0.35*a1; %[m]
+DeltaL1 = 0.61*a1; %[m]
 
 L1corr = L1 + DeltaL1; 
 
