@@ -1,4 +1,4 @@
-clear all
+clear all, close all, clc;
 %% Homework 4 - horns and pipes
 % Data 
 
@@ -56,11 +56,13 @@ xlim([0 2.5133e+04]);
 x1 = 0.5; 
 
 syms x
+figure(2);
+fplot(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)));
 
 S = zeros(1, 4);
-S(1) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 2); % NB: remember to fplot the lhs of the equation to check for the zeros
-S(2) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 5);
-S(3) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 8);
+S(1) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 1.5); % NB: remember to fplot the lhs of the equation to check for the zeros
+S(2) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 4.5);
+S(3) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 7.7);
 S(4) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 11);
 
 f_max_2 = (S*c)/(2*pi);
@@ -87,7 +89,7 @@ Zc = (1i*rho*c/S1).*(1./(cot(k.*L1corr) + 1./(k.*x1)));
 
 Zin2 = Z01.*((Zc.*cos(k.*L1) + 1i*Z01*sin(k.*L1))./(1i.*Zc.*sin(k.*L1) + Z01.*cos(k.*L1)));
 
-figure(2)
+figure(3)
 plot(f, imag(Zin2))
 ylim([ -1e6 1e6]);
 xlim([0 4000]);
