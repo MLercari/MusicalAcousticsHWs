@@ -108,12 +108,17 @@ Zc = (1i*rho*c/S1).*(1./(cot(k.*L1corr) + 1./(k.*x1)));
 
 Zin2 = Z01.*((Zc.*cos(k.*L1) + 1i*Z01*sin(k.*L1))./(1i.*Zc.*sin(k.*L1) + Z01.*cos(k.*L1)));
 
-figure(3)
+figure(4)
 plot(f, abs(Zin2),'k', 'lineWidth' , 0.7);
+hold on 
+xline(205,'-.',{'213.8 Hz'}  , 'lineWidth' , 1.5);
+xline(359,'-.',{'343 Hz'}  , 'lineWidth' , 1.5);
+xline(508,'-.',{'532.3 Hz'}  , 'lineWidth' , 1.5);
+xline(678,'-.',{'686 Hz'}  , 'lineWidth' , 1.5);
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylabel("$|Z_{in}|$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylim([0 1e6]);
-xlim([0 4000]);
+xlim([0 700]);
 
 
 syms kappa;
