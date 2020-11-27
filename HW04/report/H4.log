@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.1)  27 NOV 2020 19:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.1)  27 NOV 2020 20:57
 entering extended mode
 **./H4.tex
 (H4.tex
@@ -594,19 +594,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.101 \end{document}
+l.103 \end{document}
                      [1 <./diagramma.pdf>] (H4.aux)
 Package rerunfilecheck Info: File `H4.out' has not changed.
 (rerunfilecheck)             Checksum: 2F88F252B8168531ADEE3D94777F6ED1;63.
  ) 
 Here is how much of TeX's memory you used:
- 12537 strings out of 479799
- 235711 string characters out of 2868773
- 562917 words of memory out of 3000000
+ 12541 strings out of 479799
+ 235739 string characters out of 2868773
+ 564917 words of memory out of 3000000
  29309 multiletter control sequences out of 15000+200000
- 541078 words of font info for 64 fonts, out of 3000000 for 9000
+ 541180 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,10n,73p,956b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 66i,10n,73p,1081b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Alessio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb><C:/Users/Alessio/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmcsc10.pfb><C:/Users/Alessio/AppData/Local/Programs/MiKTeX/fonts/
@@ -618,7 +618,7 @@ ssio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/
 Users/Alessio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb><C:/Users/Alessio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmti12.pfb>
-Output written on H4.pdf (2 pages, 179473 bytes).
+Output written on H4.pdf (2 pages, 183036 bytes).
 PDF statistics:
  68 PDF objects out of 1000 (max. 8388607)
  4 named destinations out of 1000 (max. 500000)

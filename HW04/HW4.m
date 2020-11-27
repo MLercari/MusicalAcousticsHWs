@@ -102,4 +102,4 @@ min = vpasolve(ZSym == 0, kappa, (2*pi*200)/c);
 min = (min*c)/(2*pi);
 
 
- 
+ %ka = a2pi f / c
