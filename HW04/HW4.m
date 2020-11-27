@@ -40,12 +40,18 @@ omega_max_1 = (n - 0.5).*(pi*c/L1corr);
 
 %let's take a look at 
 figure(1)
-plot( omega, imag(Zin1), 'lineWidth' , 0.7);
+plot( f, imag(Zin1),'c', 'lineWidth' , 0.5);
 hold on 
-plot ( omega, imag(1i*Z01*tan(k.*L1)));
+plot ( f, imag(1i*Z01*tan(k.*L1)), 'm', 'lineWidth' , 0.5);
+xline(162,'-.',{'161.6 Hz'}  , 'lineWidth' , 1.5);
+xline(485,'-.',{'484.9 Hz'}  , 'lineWidth' , 1.5);
+xline(808,'-.',{'808.2 Hz'}  , 'lineWidth' , 1.5);
+xline(1132,'-.',{'1131.5 Hz'}  , 'lineWidth' , 1.5);
 legend(["with radiation load", "without radiation load"])
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$Z_{in}$ open pipe [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylim([ -1e6 1e6]);
-xlim([0 2.5133e+04]);
+xlim([0 1500]);
 
 %% Question 2 Consider now the compound horn. Determine the frequencies 
 %of the first four maxima of the input impedance.
@@ -67,6 +73,19 @@ S(4) = vpasolve(tan(x*L1corr) - cot(x*L2) - (1/(x*x1)) == 0, x, 11);
 
 f_max_2 = (S*c)/(2*pi);
 
+figure(2)
+
+plot( f, tan(k.*L1corr) - cot(k.*L2) - (1./(k.*x1)),'b', 'lineWidth' , 0.5);
+hold on 
+xline(107,'-.',{'106.8 Hz'}  , 'lineWidth' , 1.5);
+xline(262,'-.',{'262.1 Hz'}  , 'lineWidth' , 1.5);
+xline(422,'-.',{'421.3 Hz'}  , 'lineWidth' , 1.5);
+xline(589,'-.',{'589 Hz'}  , 'lineWidth' , 1.5);
+yline(0)
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$\tan(kL_2) - \cot(kL_1) - 1/kx_1$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylim([ -40 40]);
+xlim([0 700]);
 % syms x 
 % eqn = tan(x*L1) - cot(x*L2) - (1/(x*x1)) == 0;
 % for n = 1:4 
@@ -90,7 +109,9 @@ Zc = (1i*rho*c/S1).*(1./(cot(k.*L1corr) + 1./(k.*x1)));
 Zin2 = Z01.*((Zc.*cos(k.*L1) + 1i*Z01*sin(k.*L1))./(1i.*Zc.*sin(k.*L1) + Z01.*cos(k.*L1)));
 
 figure(3)
-plot(f, abs(Zin2));
+plot(f, abs(Zin2),'k', 'lineWidth' , 0.7);
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$|Z_{in}|$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylim([0 1e6]);
 xlim([0 4000]);
 
