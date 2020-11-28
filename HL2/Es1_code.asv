@@ -15,10 +15,11 @@ R = (rho*c)/S;
 M = rho*l/S;
 
 f0 = 1/(2*pi*sqrt(M*C));
-% f0 is 54590
+% f0 is 5459 Hz, so sampling frequency must be at least 11000 Hz
+
 %%
 % Simulation Parameters
-Fs = 2000;                  % Sampling Frequency
+Fs = 20000;                  % Sampling Frequency
 signalLen = 3;              % Simulation Duration
 
 %load simulation
