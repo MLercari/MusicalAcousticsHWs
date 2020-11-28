@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{amsmath} % per ambienti tipo cases
+\usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{siunitx}
 \usepackage{graphicx} % per includere figure
@@ -92,12 +93,25 @@
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{diagramma.pdf}
-	\caption{Scheme of the compound horn system.}
+	\caption{Scheme of the compound horn system. Beside each end a drawing of the corresponding cross section can be seen.}
 	\label{fig:diag}
 \end{figure}
 
-In order to compute the acoustic input impedance of a pipe, one needs to account not only for the air contained in the pipe as an ideal fluid but also for two phenomena occurring around it: the radiation load at the end and the wall losses along its length. The latter is relevant for narrow pipes in particular, but in this case, since the ratio between the pipe's length and the radius of its cross section is $L_1/a_1 = 10$, it is clear that we are not dealing with this condition. Moreover, a common way to characterize the influence of the viscous drag is the ratio of the pipe radius with the boundary layer thickness $r_v$. If this parameter is greater than $10$, it is usually considered safe to neglect the wall losses. Since $r_v \propto \sqrt{f} $, this might not be true at low frequencies; however, in our case, we can see that $r_v$ increases very rapidly from zero and at $\SI{1}{\hertz}$ is already $ \sim 30 $. We assume, therefore, that it is safe for us to ignore such losses in the computation of the impedance. 
+In order to compute the acoustic input impedance of a pipe, one needs to account not only for the air contained in the pipe as an ideal fluid but also for two phenomena occurring around it: the radiation load at the end and the wall losses along its length. The latter is relevant for narrow pipes in particular, but in our case, since the ratio between the pipe's length and the radius of its cross section is $L_1/a_1 = 10$, it is clear that we are not dealing with this condition. Moreover, a common way to characterize the influence of the viscous drag is the ratio of the pipe radius with the boundary layer thickness $r_v$. If this parameter is greater than $10$, it is usually considered safe to neglect the wall losses. Since $r_v \propto \sqrt{f} $, this might not be true at low frequencies; however, in our case, we can see that $r_v$ increases very rapidly from zero and at $\SI{1}{\hertz}$ is already $ \sim 30 $. We assume, therefore, that it is safe for us to ignore such losses in the computation of the impedance. 
 
-Concerning the radiation, instead, we know that its influence on an open-ended pipe is usually not negligible. At low frequency, the strategy that is commonly used to address the study of radiation is to add an end correction $\Delta^{open}$ . At first order in $ka$ the radiation impedance of an open end is equal to the input impedance of an open pipe of length $\Delta^{open}$. We take the value $\Delta^{open} = 0.61 a$; this holds well under the assumption $ka \ll 1 $. However, for us $ka = 1$ at $\sim 1$ kHz, which is well inside the range of frequencies we are interested in. At higher frequencies it is still possible to use this model\footnote{As long as the wavefronts are planar, i. e. for $ka<3.83$.}, but the end correction decreases with $ka$. This means that the values for the frequencies of the impedance maxima we will compute will be slightly underestimated at higher frequencies.
+Concerning the radiation, instead, we know that its influence on an open-ended pipe is usually not negligible. At low frequency, the strategy that is commonly used to address the study of radiation is to add an end correction $\Delta^{open}$ . At first order in $ka$ the radiation impedance of an open end is equal to the input impedance of an open pipe of length $\Delta^{open}$. We take the value $\Delta^{open} = 0.61 a$; this holds well under the assumption $ka \ll 1 $. However, for us $ka = 1$ at $\sim 1$ kHz, which is well inside the range of frequencies we are interested in. At higher frequencies it is still possible to use this model\footnote{As long as the wavefronts are planar, i. e. for $ka<3.83$.}, but the end correction decreases with $ka$. This means that the values for the frequencies of the impedance maxima we will compute will be slightly underestimated in the higher range.
+
+The input impedance of the pipe is therefore, in our model:
+
+\begin{align*}
+	Z_{in} = jZ_0 \tan{kL} \qquad & \text{, with } L = L_2 + \Delta^{open}
+\end{align*}
+
+The corresponding maxima are at
+$$ f_n = \frac{nc}{2L}, \qquad n \in \mathbb{N} $$
+
+\section{Compund horn}
+
+
 
 \end{document}
