@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  27 NOV 2020 21:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  29 NOV 2020 04:01
 entering extended mode
 **./H4.tex
 (H4.tex
@@ -113,6 +113,17 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
 Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
 
@@ -462,22 +473,22 @@ Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
 (H4.aux)
 \openout1 = `H4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
 
 (C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx-abbreviati
 ons.cfg
@@ -510,7 +521,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 34.
+Package hyperref Info: Link coloring OFF on input line 35.
  (C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -522,21 +533,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count311
 )
-LaTeX Info: Redefining \ref on input line 34.
-LaTeX Info: Redefining \pageref on input line 34.
-LaTeX Info: Redefining \nameref on input line 34.
+LaTeX Info: Redefining \ref on input line 35.
+LaTeX Info: Redefining \pageref on input line 35.
+LaTeX Info: Redefining \nameref on input line 35.
  (H4.out) (H4.out)
 \@outlinefile=\write3
 \openout3 = `H4.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 34.
+LaTeX Info: Redefining \microtypecontext on input line 35.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 34.
+LaTeX Info: Redefining \showhyphens on input line 35.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -544,6 +555,24 @@ Package microtype Info: No adjustment of character kerning.
 (C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+
+
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+
+
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(C:\Users\i7\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -553,59 +582,73 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Logo_Politecnico_Milano.png, id=7, 666.49pt x 489.83pt>
+<Logo_Politecnico_Milano.png, id=11, 666.49pt x 489.83pt>
 File: Logo_Politecnico_Milano.png Graphic file (type png)
 <use Logo_Politecnico_Milano.png>
-Package pdftex.def Info: Logo_Politecnico_Milano.png  used on input line 45.
+Package pdftex.def Info: Logo_Politecnico_Milano.png  used on input line 46.
 (pdftex.def)             Requested size: 137.9979pt x 101.41733pt.
 
 [1
 
 {C:/Users/i7/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./Logo_Politecnico
 _Milano.png>]
-<diagramma.pdf, id=20, 433.6011pt x 110.08864pt>
+<diagramma.pdf, id=24, 495.07794pt x 162.18071pt>
 File: diagramma.pdf Graphic file (type pdf)
 <use diagramma.pdf>
-Package pdftex.def Info: diagramma.pdf  used on input line 94.
-(pdftex.def)             Requested size: 276.00105pt x 70.07516pt.
-
-
-Package caption Warning: Unused \captionsetup[subfigure] on input line 17.
-See the caption package documentation for explanation.
-
+Package pdftex.def Info: diagramma.pdf  used on input line 95.
+(pdftex.def)             Requested size: 276.00105pt x 90.41472pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.103 \end{document}
-                     [1 <./diagramma.pdf>] (H4.aux)
+l.117 \end{equation}
+                     [1 <./diagramma.pdf>]
+<maxmin.png, id=51, 664.73344pt x 492.33937pt>
+File: maxmin.png Graphic file (type png)
+<use maxmin.png>
+Package pdftex.def Info: maxmin.png  used on input line 136.
+(pdftex.def)             Requested size: 276.00105pt x 204.4222pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Package caption Warning: Unused \captionsetup[subfigure] on input line 18.
+See the caption package documentation for explanation.
+
+[2] [3 <./maxmin.png (PNG copy)>] (H4.aux)
 Package rerunfilecheck Info: File `H4.out' has not changed.
-(rerunfilecheck)             Checksum: 2F88F252B8168531ADEE3D94777F6ED1;63.
+(rerunfilecheck)             Checksum: A8EF52FC363FA137D554B22D25D69970;111.
  ) 
 Here is how much of TeX's memory you used:
- 12561 strings out of 480236
- 234748 string characters out of 2881982
- 569756 words of memory out of 3000000
- 28877 multiletter control sequences out of 15000+200000
- 544609 words of font info for 82 fonts, out of 3000000 for 9000
+ 13117 strings out of 480236
+ 241137 string characters out of 2881982
+ 573520 words of memory out of 3000000
+ 29389 multiletter control sequences out of 15000+200000
+ 546987 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,67p,1081b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,13n,67p,1080b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x12.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmcsc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/i7/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/i7/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on H4.pdf (2 pages, 211786 bytes).
+sfonts/cm/cmex10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/i7/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/i7/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/
+i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
+sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb
+><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols
+/msbm10.pfb>
+Output written on H4.pdf (4 pages, 276269 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 5 named destinations out of 1000 (max. 500000)
- 25107 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 120 PDF objects out of 1000 (max. 8388607)
+ 11 named destinations out of 1000 (max. 500000)
+ 25120 words of extra memory for PDF output out of 29859 (max. 10000000)
 
