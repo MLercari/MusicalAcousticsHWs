@@ -108,7 +108,7 @@ The input impedance of the pipe is therefore, in our model:
 \end{align*}
 
 The corresponding maxima are at
-$$ f_n = \frac{nc}{2L}, \qquad n \in \mathbb{N} $$
+$$ f_n = \biggl(n - \frac{1}{2}\biggr) \frac{c}{2L}, \qquad n \in \mathbb{N} $$
 
 \section{Compound horn}
 We know that the expression for the input impedance of the pipe in terms of the load impedance $Z_L$ at the far end is
@@ -120,9 +120,9 @@ with $Z_0 = \frac{\rho c}{S_1}$ being the characteristic impedance of the pipe. 
 	Z_c = \frac{j\rho c}{S_1} \biggl( \cot{kL_1} + \frac{1}{kx_1} \biggr)^{-1}
 \end{equation}
 
-However, if we want to include the radiation impedance, we run into the same problem as before, except even worse, since the radius of the open end of the horn is double that of the pipe. In this case we get $ka = 1$ at $\sim 545$ Hz: as we will see shortly, the first maxima and minima of the impedance do not surpass this value by a large margin, so we can assume that using a constant value of the end correction doesn't have a devastating impact on our estimation of their position. When considering higher frequencies, we will need to use a different approach.
+However, if we want to include the radiation impedance, we run into the same problem as before, except even worse, since the radius of the open end of the horn is double that of the pipe. In this case we get $ka = 1$ at $\sim 545$ Hz: as we will see shortly, the first maxima and minima of the impedance do not surpass this value by a large margin, so we can assume that using a constant value of the end correction doesn't have a devastating impact on our estimation of their position. When considering higher frequencies, this won't be true anymore.
 
-With that being said, let us now discuss the maxima and minima of the impedance at low frequencies. For the impedance of the horn we can take \ref{eq:zc} and substitute $L_1$ with $L_1 + 0.61a_2 $. We can then use this value of $Z_c$ in lieu of the impedance load $Z_L$ in \ref{eq:zin}. This gives us an equation for the maxima and one for the minima: the former is obtained by requesting that the denominator in \ref{eq:zin} be zero, while the latter results from doing the same thing with the numerator. Explicitly:
+With that being said, let us now discuss the maxima and minima of the impedance at low frequencies. For the impedance of the horn we can take (\ref{eq:zc}) and substitute $L_1$ with $L_1 + 0.61a_2 $. We can then use this value of $Z_c$ in lieu of the impedance load $Z_L$ in (\ref{eq:zin}). This gives us an equation for the maxima and one for the minima: the former is obtained by requesting that the denominator in (\ref{eq:zin}) be zero, while the latter results from doing the same thing with the numerator. Explicitly:
 
 \begin{align*}
 	&\text{\underline{maxima}:} \quad & \tan{kL_2} - \cot{kL_1} + \frac{1}{kx_1} = 0\\
@@ -137,5 +137,7 @@ The results are shown together with a graph of the magnitude of the impedance in
 	\caption{Magnitude of the impedance of the compound horn. The red vertical lines correspond to the maxima, while the blue ones to the minima.}
 	\label{fig:maxmin}
 \end{figure}
+
+
 
 \end{document}

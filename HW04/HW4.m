@@ -11,6 +11,7 @@ rho = 1.25; %[kg/m2] density of air
 S1 = pi*(a1)^2; %[m^2] surface of pipe section
 S2 = pi*(a2)^2; %[m^2] surface of cone section (ending)
 Z01 = rho*c/S1; %characteristic impedance of pipe
+Z02 = rho*c/S2; %characteristic impedance of the mouth of the horn
 
 f = linspace(0 , 4000, 4000); %[Hz] frequency range 
 omega = f.*(2*pi); %[rad/s] frequency range
@@ -144,11 +145,30 @@ ylabel("$|Z_{in}|$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bol
 ylim([0 1e6]);
 xlim([0 700]);
 
+ZcHigh = Z01 .* ( (i.*Z02 .* ( sin( k.*L1 - atan(k.*1) ) + (rho.*c)/S2.*sin(k.*L1) ) ) / ( Z02 .* ( sin(k.*L2 + atan(k.*x1)- atan(k.*1) ) )/(sin(atan(k.*x1)).*sin(atan(k.*1)) ) - (i.*Z02.*( sin(k.*L2 + atan(k.*x1))/sin(atan(k.*x1)) ) )) );
+Zin2High = Z01.*((ZcHigh.*cos(k.*L1) + 1i*Z01*sin(k.*L1))./(1i.*ZcHigh.*sin(k.*L1) + Z01.*cos(k.*L1)));
+
 figure(5);
-plot(f, abs(Zin2),'k', 'lineWidth' , 0.7);
+subplot 211;
+hold on;
+%plot(f, real(Zin2), 'lineWidth' , 0.7, 'color', '#980002');
+plot(f, real(Zin2), 'color', '#5b7c99');
+plot(f, real(Zin2High),'color', '#980002');
+legend('$Z_R \simeq jZ_0k \Delta $', '$Z_R \simeq Z_0 $' , 'interpreter','latex')
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-ylabel("$|Z_{in}|$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-ylim([0 1e6]);
+ylabel("$\mathrm{Re}(Z_{in})$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylim([-10 10]);
+xlim([0 4e3]);
+
+subplot 212;
+hold on;
+%plot(f, real(Zin2), 'lineWidth' , 0.7, 'color', '#980002');
+plot(f, imag(Zin2), 'color', '#5b7c99');
+plot(f, imag(Zin2High),'color', '#980002');
+legend('$Z_R \simeq jZ_0k \Delta $', '$Z_R \simeq Z_0 $' , 'interpreter','latex')
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$\mathrm{Im}(Z_{in})$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylim([-1e5 1e5]);
 xlim([0 4e3]);
 
 

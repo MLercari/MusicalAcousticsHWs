@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  29 NOV 2020 04:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  29 NOV 2020 15:45
 entering extended mode
 **./H4.tex
 (H4.tex
@@ -603,7 +603,7 @@ been already used, duplicate ignored
                    \relax 
 l.117 \end{equation}
                      [1 <./diagramma.pdf>]
-<maxmin.png, id=51, 664.73344pt x 492.33937pt>
+<maxmin.png, id=52, 664.73344pt x 492.33937pt>
 File: maxmin.png Graphic file (type png)
 <use maxmin.png>
 Package pdftex.def Info: maxmin.png  used on input line 136.
@@ -621,11 +621,11 @@ Package rerunfilecheck Info: File `H4.out' has not changed.
 (rerunfilecheck)             Checksum: A8EF52FC363FA137D554B22D25D69970;111.
  ) 
 Here is how much of TeX's memory you used:
- 13117 strings out of 480236
- 241137 string characters out of 2881982
+ 13115 strings out of 480236
+ 241123 string characters out of 2881982
  573520 words of memory out of 3000000
  29389 multiletter control sequences out of 15000+200000
- 546987 words of font info for 98 fonts, out of 3000000 for 9000
+ 546936 words of font info for 97 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,67p,1080b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
@@ -646,7 +646,7 @@ i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
 sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb
 ><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols
 /msbm10.pfb>
-Output written on H4.pdf (4 pages, 276269 bytes).
+Output written on H4.pdf (4 pages, 276336 bytes).
 PDF statistics:
  120 PDF objects out of 1000 (max. 8388607)
  11 named destinations out of 1000 (max. 500000)
