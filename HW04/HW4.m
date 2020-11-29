@@ -140,9 +140,17 @@ for i=1:length(f_max_2)
 end
 
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-ylabel("$|Z_{in}|$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$|Z_{in}|$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylim([0 1e6]);
 xlim([0 700]);
+
+figure(5);
+plot(f, abs(Zin2),'k', 'lineWidth' , 0.7);
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$|Z_{in}|$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylim([0 1e6]);
+xlim([0 4e3]);
+
 
 
 syms kappa;
