@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  29 NOV 2020 15:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  30 NOV 2020 19:55
 entering extended mode
 **./H4.tex
 (H4.tex
@@ -597,17 +597,36 @@ File: diagramma.pdf Graphic file (type pdf)
 <use diagramma.pdf>
 Package pdftex.def Info: diagramma.pdf  used on input line 95.
 (pdftex.def)             Requested size: 276.00105pt x 90.41472pt.
+<input_impedance_pipe.png, id=27, 743.77875pt x 274.02374pt>
+File: input_impedance_pipe.png Graphic file (type png)
+<use input_impedance_pipe.png>
+Package pdftex.def Info: input_impedance_pipe.png  used on input line 117.
+(pdftex.def)             Requested size: 310.4979pt x 114.3951pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.117 \end{equation}
-                     [1 <./diagramma.pdf>]
-<maxmin.png, id=52, 664.73344pt x 492.33937pt>
+l.122 \section
+              {Compound horn} [1 <./diagramma.pdf>]
+<maxmin.png, id=55, 664.73344pt x 492.33937pt>
 File: maxmin.png Graphic file (type png)
 <use maxmin.png>
-Package pdftex.def Info: maxmin.png  used on input line 136.
+Package pdftex.def Info: maxmin.png  used on input line 145.
 (pdftex.def)             Requested size: 276.00105pt x 204.4222pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2 <./input_impedance_pipe.png>]
+<q4.png, id=66, 1229.34282pt x 692.5875pt>
+File: q4.png Graphic file (type png)
+<use q4.png>
+Package pdftex.def Info: q4.png  used on input line 163.
+(pdftex.def)             Requested size: 310.4979pt x 174.92188pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -616,16 +635,16 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Package caption Warning: Unused \captionsetup[subfigure] on input line 18.
 See the caption package documentation for explanation.
 
-[2] [3 <./maxmin.png (PNG copy)>] (H4.aux)
+[3 <./maxmin.png (PNG copy)>] [4 <./q4.png>] (H4.aux)
 Package rerunfilecheck Info: File `H4.out' has not changed.
 (rerunfilecheck)             Checksum: A8EF52FC363FA137D554B22D25D69970;111.
  ) 
 Here is how much of TeX's memory you used:
- 13115 strings out of 480236
- 241123 string characters out of 2881982
- 573520 words of memory out of 3000000
- 29389 multiletter control sequences out of 15000+200000
- 546936 words of font info for 97 fonts, out of 3000000 for 9000
+ 13134 strings out of 480236
+ 241409 string characters out of 2881982
+ 575906 words of memory out of 3000000
+ 29401 multiletter control sequences out of 15000+200000
+ 546987 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,67p,1080b,828s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
@@ -633,22 +652,23 @@ x12.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmcsc10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmex10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmmi10.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/i7/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/i7/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/
-i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
-sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb
-><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols
-/msbm10.pfb>
-Output written on H4.pdf (4 pages, 276336 bytes).
+e1/public/amsfonts/cm/cmmi5.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/i7/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/i7/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/i7/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/i7/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/i7/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/i7/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/i
+7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/U
+sers/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+<C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti1
+2.pfb><C:/Users/i7/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb>
+Output written on H4.pdf (5 pages, 361836 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
- 11 named destinations out of 1000 (max. 500000)
- 25120 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 136 PDF objects out of 1000 (max. 8388607)
+ 14 named destinations out of 1000 (max. 500000)
+ 25130 words of extra memory for PDF output out of 29859 (max. 10000000)
 

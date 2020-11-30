@@ -28,7 +28,7 @@
 
 \pagestyle{fancy}
 \lhead{Musical Acoustics}
-\chead{HL1}
+\chead{H4}
 \rhead{10743504, 10751919}
 \newcommand{\Rarrow}{\mbox{\Large$\Rightarrow$}}
 
@@ -110,6 +110,15 @@ The input impedance of the pipe is therefore, in our model:
 The corresponding maxima are at
 $$ f_n = \biggl(n - \frac{1}{2}\biggr) \frac{c}{2L}, \qquad n \in \mathbb{N} $$
 
+In Fig. \ref{fig:pipe} we can see the difference between the curve computed with and without the end correction, as well as the first four maxima for the former.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{input_impedance_pipe.png}
+	\caption{Imaginary part of the input impedance for the pipe. The two curves are computed with two different values of the length of the tube, one of which includes an end correction to account for the radiation.}
+	\label{fig:pipe}
+\end{figure}
+
 \section{Compound horn}
 We know that the expression for the input impedance of the pipe in terms of the load impedance $Z_L$ at the far end is
 \begin{equation}\label{eq:zin}
@@ -138,6 +147,23 @@ The results are shown together with a graph of the magnitude of the impedance in
 	\label{fig:maxmin}
 \end{figure}
 
+Finally, in Fig. \ref{fig:q4} we report the graph for the two limiting cases of the impedance (low and high frequencies) from 0 up to 4 kHz. We expect of course the previous approximation to not give satisfactory results for higher values of $ka$, which goes up to more than 7 in this case. However we know that for increasing frequency the imaginary part of the radiation impedance tends to $Z_R \simeq Z_0$, so we used this value as the load $Z_L$ in the expression for the input impedance of the finite conical horn, which is:
+
+$$
+\begin{array}{c}
+	Z_{\mathrm{IN}}^{\mathrm{horn}}=\frac{\rho c}{S_{1}}\left\{\frac{j Z_{L}\left[\sin \left(k L-\theta_{2}\right) / \sin \theta_{2}\right]+\left(\rho c / S_{2}\right) \sin k L}{Z_{L}\left[\sin \left(k L+\theta_{1}-\theta_{2}\right) / \sin \theta_{1} \sin \theta_{2}\right]-\left(j \rho c / S_{2}\right)\left[\sin \left(k L+\theta_{1}\right) / \sin \theta_{1}\right]}\right\} \\
+	\text{where }\theta_{1 / 2}=\tan ^{-1}\left(k x_{1 / 2}\right)
+\end{array}
+$$
+
+Again, substituting this value in (\ref{eq:zin}) gives us the input impedance of the compund horn in this limiting case.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{q4.png}
+	\caption{Input impedance for the compund horn. The two curves represent the approximations at low (blue) and high (red) frequencies.}
+	\label{fig:q4}
+\end{figure}
 
 
 \end{document}
