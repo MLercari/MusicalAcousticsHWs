@@ -14,13 +14,16 @@ C = V/(rho*c^2);
 R = (rho*c)/S;
 M = rho*l/S;
 
-f0 = 1/(2*pi*sqrt(M*C - 1i*R*C));
-% f0 is 5459 Hz, so sampling frequency must be at least 11000 Hz
+omega0 = 1/(sqrt(M*C));
+% considering damping
+omegad = omega0*sqrt(1 - (R/(2*M*omega0))^2); 
+fd = omegad/(2*pi);
+
 
 %%
 % Simulation Parameters
-Fs = 20000;                  % Sampling Frequency
-signalLen = 3;              % Simulation Duration
+Fs = 100000;                  % Sampling Frequency
+signalLen = 10;              % Simulation Duration
 
 %load simulation
 open_system(['Es1.slx'], 'loadonly');
@@ -32,9 +35,9 @@ simulation = sim(['Es1.slx'], signalLen);
     input = simulation.input.data;
     output = simulation.output.data;
     f = 0:Fs/length(input):Fs-(1/length(input));    
-    H = abs(fft(output) ./ fft(input));
+    H = db(abs(fft(output) ./ fft(input)));
     
     plot(f, H);
     pause(0.05);
     hold on
-    xline(real(f0));
+    xline(real(fd));
