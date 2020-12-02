@@ -15,7 +15,6 @@ R = (rho*c)/S;
 L = rho*l/S;
 
 
-
 %% Simulation
 
 % Simulation Parameters
@@ -32,36 +31,41 @@ simulation = sim(['Es2.slx'], signalLen);
     input = simulation.input.data;
     output = simulation.output.data;
     f = 0:Fs/length(input):Fs-(1/length(input));    
-    H = db(abs(fft(output) ./ fft(input)));
+    H = abs(fft(output) ./ fft(input));
     
-    plot(f, H);
-    pause(0.05);
-    hold on
-    xline(real(fd));
+
+
     
  %%
  % compare with analytical frequency response
-N = 4; %height
-K = 1; %leaves
-
-  f = linspace(0 , 10e5 , 10e5);
+N = 2; %height
+K = 2; %leaves
   
-  
-  Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
+  Zs0 = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
 
   
-%   for n = 1:N
-%       Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + K./Zs);
-%       Zs = Z;
-%   end
-  
-  for n = 1:N
-      Z = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(C*R) + 1)./(1i*2*C*pi.*f + K./Zs);
+  for n = 1:N-1
+      Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + K./Zs0);
       Zs = Z;
+      Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + 1./Zs + 1./Zs0);
   end
+ 
 
-  H_a = db(abs(Z.^(-1)));
+%   for n = 1:N-1
+%       Z = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(C*R) + 1)./(1i*2*C*pi.*f + K./Zs0);
+%       Zs = Z;
+%       Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + 1./Zs + 1./Zs0);
+%   end
+
+  H_a = abs(Z.^(-1));
   
-    figure(2)
-   semilogx(f, H_a);
+   figure(1)
+    plot(f, H);
+    pause(0.05);
+    hold on
+    plot(f, H_a);
+    legend(["simulation" , "analytical"]);
+    grid on
+    xlim([0 50000])
+    
 
