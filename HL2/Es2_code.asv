@@ -14,7 +14,8 @@ C = V/(rho*c^2);
 R = (rho*c)/S;
 L = rho*l/S;
 
-
+N = 2; %height
+K = 2; %leaves
 
 %% Simulation
 
@@ -41,27 +42,15 @@ simulation = sim(['Es2.slx'], signalLen);
     
  %%
  % compare with analytical frequency response
-N = 4; %height
-K = 1; %leaves
 
-  f = linspace(0 , 10e5 , 10e5);
-  
-  
-  Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
-
-  
-%   for n = 1:N
-%       Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + K./Zs);
-%       Zs = Z;
-%   end
-  
+  figure(2)
+  Zs = ((1i*2*pi.*f).^2.*(M*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
   for n = 1:N
-      Z = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(C*R) + 1)./(1i*2*C*pi.*f + K./Zs);
+      Z = 1i*2*pi*L + R + 1./(1i*2*pi.*f + K./Zs);
       Zs = Z;
-  end
-
+      
   H_a = db(abs(Z.^(-1)));
-  
-    figure(2)
-   semilogx(f, H_a);
-
+  plot(f, H_a);
+  ylim([ -350 0])
+  hold on
+  xline(real(fd));
