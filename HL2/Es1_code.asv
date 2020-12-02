@@ -42,12 +42,10 @@ simulation = sim(['Es1.slx'], signalLen);
     pause(0.05);
     hold on
     xline(real(fd));
- %%
  % compare with analytical frequency response
-  figure(2)
-  Z = ((1i*2*pi.*f).^2.*(M*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
+  figure(2
+  Z = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
   H_a = db(abs(Z.^(-1)));
   plot(f, H_a);
-  ylim([ -350 0])
   hold on
   xline(real(fd));
