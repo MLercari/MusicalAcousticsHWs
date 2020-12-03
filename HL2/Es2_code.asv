@@ -1,9 +1,10 @@
-%% Es. 2 HL1
+%% Es. 2 HL2
 clear all;
 close all;
 clc;
 
 %physical parameters
+
 V = 0.1; 
 l = 0.1;
 S = 100; 
@@ -22,13 +23,13 @@ Fs = 100000;                  % Sampling Frequency
 signalLen = 10;              % Simulation Duration
 
 %load simulation
-open_system(['Es2.slx'], 'loadonly');
+open_system(['subsToComp.slx'], 'loadonly');
 
 %perform simulation
-simulation = sim(['Es2.slx'], signalLen);
+simulation = sim(['subsToComp.slx'], signalLen);
 
  % Compute Frequency Response
-    input = simulation.input.data;
+input = simulation.input.data;
     output = simulation.output.data;
     f = 0:Fs/length(input):Fs-(1/length(input));    
     H = abs(fft(output) ./ fft(input));
@@ -39,9 +40,9 @@ simulation = sim(['Es2.slx'], signalLen);
  %%
  % compare with analytical frequency response
 N = 2; %height
-K = 2; %leaves
+K = 3; %leaves
   
- Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
+Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
 
   
   for n = 1:N
@@ -56,15 +57,15 @@ K = 2; %leaves
 %       Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + 1./Zs + 1./Zs0);
 %   end
 
-  H_a = abs(Z.^(-1));
+H_a = abs(Z.^(-1));
   
-   figure(1)
-    plot(f, H);
-    pause(0.05);
-    hold on
-    plot(f, H_a);
-    legend(["simulation" , "analytical"]);
-    grid on
-    xlim([0 50000])
+figure(1)
+plot(f, H);
+pause(0.05);
+hold on
+plot(f, H_a);
+legend(["simulation" , "analytical"]);
+grid on
+xlim([0 50000])
     
 

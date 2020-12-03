@@ -14,6 +14,8 @@ C = V/(rho*c^2);
 R = (rho*c)/S;
 M = rho*l/S;
 
+%characteristic impedance of pipe
+Z0 = 
 
 omega0 = 1/(sqrt(M*C));
 
@@ -49,17 +51,16 @@ H_a = abs(Z.^(-1));
 figure(1)
 %plot of transfer function from simulated data
 
-semilogx(f, 20*log10(H.*R));
+semilogx(f, 20*log10(H));
 pause(0.05);
 hold on
+xline(real(fd),'-',{'Resonance frequency: 54522 Hz'});
 
-xline(real(fd),'-',{'54522 Hz'});
 %plot of tranfer function from analytical solution
-semilogx(f, 20*log10(H_a.*R));
-legend(["FRF from simulated data" , "Resonance frequency ", "FRF from analytical data" ],'Location','northwest')
+semilogx(f, 20*log10(H_a));
+legend(["FRF from simulated data" , "FRF from analytical data"],'Location','northwest')
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-ylabel("$|H(f) \times R|$ [$dB$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-
+ylabel("$|H(f)|$ [$\frac{Pa \times s}{m^3}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 xlim([0 50000])
 grid on
 
