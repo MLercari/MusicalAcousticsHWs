@@ -1,0 +1,37 @@
+% This component was automatically generated using 'subsystem2ssc'. 
+%   Subsystem: subsToComp/HelmholtzRes 
+%   MATLAB version: 9.9 
+%   Simulink version: 10.2 
+%   Simscape version: 5.0 
+%   Generated on: 03-Dec-2020 17:27:31
+
+component (Propagation = blocks) HelmholtzRes
+  parameters
+    c = {7.08e-07, 'F'}; %Capacitance
+    l = {.0012, 'H'}; %Inductance
+    R = {4.116, 'Ohm'}; %Resistance
+  end
+  outputs
+    flow = {0.0, 'A'};
+  end
+  nodes
+    out = foundation.electrical.electrical;
+    in0 = foundation.electrical.electrical;
+  end
+  components(ExternalAccess = observe)
+    Resistor = foundation.electrical.elements.resistor(R = R);
+    Inductor = foundation.electrical.elements.inductor(r = {0, 'Ohm'}, g = {0, '1/Ohm'}, l = l);
+    Electrical_Reference = foundation.electrical.elements.reference;
+    Current_Sensor = foundation.electrical.sensors.current;
+    Capacitor = foundation.electrical.elements.capacitor(r = {0, 'Ohm'}, g = {0, '1/Ohm'}, c = c);
+  end
+  connections
+    connect(Current_Sensor.I,flow);
+    connect(in0,Resistor.p);
+    connect(Inductor.p,Resistor.n);
+    connect(out,Current_Sensor.p);
+    connect(out,Inductor.n);
+    connect(Capacitor.p,Current_Sensor.n);
+    connect(Capacitor.n,Electrical_Reference.V);
+  end
+end

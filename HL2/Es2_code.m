@@ -22,10 +22,10 @@ Fs = 100000;                  % Sampling Frequency
 signalLen = 10;              % Simulation Duration
 
 %load simulation
-open_system(['Es2.slx'], 'loadonly');
+open_system(['subsToComp.slx'], 'loadonly');
 
 %perform simulation
-simulation = sim(['Es2.slx'], signalLen);
+simulation = sim(['subsToComp.slx'], signalLen);
 
  % Compute Frequency Response
     input = simulation.input.data;
@@ -38,8 +38,8 @@ simulation = sim(['Es2.slx'], signalLen);
     
  %%
  % compare with analytical frequency response
-N = 1; %height
-K = 1; %leaves
+N = 2; %height
+K = 3; %leaves
   
  Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
 
