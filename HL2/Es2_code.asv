@@ -38,8 +38,8 @@ simulation = sim(['Es2.slx'], signalLen);
     
  %%
  % compare with analytical frequency response
-N = 1; %height
-K = 1; %leaves
+N = 2; %height
+K = 2; %leaves
   
  Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
 
