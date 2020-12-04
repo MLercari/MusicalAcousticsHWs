@@ -40,10 +40,10 @@ f = 0:Fs/length(input):Fs-(1/length(input));
 H = abs(fft(output) ./ fft(input));
     
 figure(1)
-plot(f, H, 'DisplayName',"NK" + int2str(indexes(i)) );
+plot(f, H , "LineWidth", 1.2 );
 pause(0.05);
 hold on
-%legend(["NK" + int2str(indexes(i))],'Location','northwest')
+
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 ylabel("$|H(f)|$ " ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 
@@ -53,6 +53,7 @@ grid on
 
 end
 
+legend(["NK 12", "NK 21", "NK 22", "NK 23", "NK 32", "NK 33"])
     
 %% compare the simulated FRF with analytical FRF
  
