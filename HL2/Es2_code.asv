@@ -37,8 +37,8 @@ input = simulation.input.data;
 
 
     
- %%
- % compare with analytical frequency response
+%% compare the simulated FRF with analytical FRF
+ 
 N = 2; %height
 K = 3; %leaves
   
@@ -50,22 +50,21 @@ Zs = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(R*C) + 1)./(1i*C*2*pi.*f);
       Zs = Z;
   end
  
-
-%   for n = 1:N-1
-%       Z = ((1i*2*pi.*f).^2.*(L*C) + 1i*2*pi.*f.*(C*R) + 1)./(1i*2*C*pi.*f + K./Zs0);
-%       Zs = Z;
-%       Z = 1i*2*pi*L.*f + R + 1./(1i*2*C*pi.*f + 1./Zs + 1./Zs0);
-%   end
-
 H_a = abs(Z.^(-1));
   
 figure(1)
-plot(f, H);
+semilogx(f, 20*log10(H.*R));
 pause(0.05);
 hold on
-plot(f, H_a);
-legend(["simulation" , "analytical"]);
-grid on
-xlim([0 50000])
-    
 
+%plot of tranfer function from analytical solution
+semilogx(f, 20*log10(H_a.*R));
+
+legend(["FRF from simulated data 2x3" , "FRF from analytical data 2x3" ],'Location','northwest')
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$|H(f) \times R|$ [$dB$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
+xlim([0 50000])
+grid on
+    
+%% perform some 
