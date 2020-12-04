@@ -26,6 +26,7 @@ signalLen = 2;              % Simulation Duration
 %N is the height and K are the number of leaves
 
 indexes = [12, 21, 22, 23, 32, 33]; % NK
+plotcolours = ["k", "m", "b", "g", "r", "c"];
 
 for i = 1:6
 
@@ -42,20 +43,20 @@ f = 0:Fs/length(input):Fs-(1/length(input));
 H = abs(fft(output) ./ fft(input));
     
 figure(1)
-plot(f, H , "LineWidth", 1.2 );
+subplot (3, 2, i)
+plot(f, 20*log10(H.*R) , plotcolours(i) , "LineWidth", 1.2 );
 pause(0.05);
-hold on
 
 xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-ylabel("$|H(f)|$ " ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
-
+ylabel("$|H(f)|\times R [dB]$ " ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 xlim([0 50000])
-
+ylim([ -60 0 ])
+legend(int2str(indexes(i))); 
 grid on
 
 end
 
-legend(["NK 12", "NK 21", "NK 22", "NK 23", "NK 32", "NK 33"])
+%legend(["NK 12", "NK 21", "NK 22", "NK 23", "NK 32", "NK 33"])
     
 %% compare the simulated FRF with analytical FRF
  
