@@ -118,6 +118,13 @@ The simulation has been carried out over 10 seconds, with a sampling frequency o
 
 \section{The Helmholtz resonator tree}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{tree.pdf}
+	\caption{$2\times2$ Helmholtz resonator tree.}
+	\label{fig:tree}
+\end{figure}
+
 By cascading several Helmoltz resonators in the manner shown in Fig. \ref{fig:tree}, we obtain what we refer to as a Helmholtz resonator tree. A tree of this kind is characterized by the parameters $N, K \in \mathbb{N}$, where $N$ is the height of the tree and $K$ is the branch division.
 
 To realize different trees of this kind in Simscape, we set up a template of a subsystem containing a single Helmholtz resonator, as seen in Fig. \ref{fig:sims}, in order to keep things as tidy as possible. The Simscape models can be seen in the files named \texttt{RTNK.slx}, with $(N, K) = (1,2), (2,1), (2, 2), (2, 3), (3,2), (3,3)$.
