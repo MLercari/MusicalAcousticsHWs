@@ -23,7 +23,9 @@ L = rho*l/S;
 Fs = 100000;                  % Sampling Frequency
 signalLen = 10;              % Simulation Duration
 
-indexes = [12, 21, 22, 23, 32, 33];
+%N is the height and K are the number of leaves
+
+indexes = [12, 21, 22, 23, 32, 33]; % NK
 
 for i = 1:6
 
