@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{amsmath} % per ambienti tipo cases
+\usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{siunitx}
 \usepackage{graphicx} % per includere figure
@@ -89,6 +90,13 @@
 
 \section{Simulating a Helmholtz resonator}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{es1.png}
+	\caption{Plot of the magnitude $R|H(f)|$ in dB, both for the analytical expression and for the Simscape simulation. The resonance frequency is also highlighted.}
+	\label{fig:es1}
+\end{figure}
+
 The Helmholtz resonator can be modelled in the impedance analogy as an RLC series circuit, with:
 
 \begin{align*}
@@ -105,12 +113,33 @@ where the last member is the analytical expression of $H$ which is easily comput
 
 The simulation has been carried out over 10 seconds, with a sampling frequency of 100 kHz. The frequency spectra of the resulting signals have been obtained by computing their DFT with Matlab's \texttt{fft} function. The result of the simulation is compared with the analytical expression for $H$ in Fig. \ref{fig:es1}, showing that the two are remarkably close up to the highest frequencies.
 
+
+
+
+\section{The Helmholtz resonator tree}
+
+By cascading several Helmoltz resonators in the manner shown in Fig. \ref{fig:tree}, we obtain what we refer to as a Helmholtz resonator tree. A tree of this kind is characterized by the parameters $N, K \in \mathbb{N}$, where $N$ is the height of the tree and $K$ is the branch division.
+
+To realize different trees of this kind in Simscape, we set up a template of a subsystem containing a single Helmholtz resonator, as seen in Fig. \ref{fig:sims}, in order to keep things as tidy as possible. The Simscape models can be seen in the files named \texttt{RTNK.slx}, with $(N, K) = (1,2), (2,1), (2, 2), (2, 3), (3,2), (3,3)$.
+
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{es1.png}
-	\caption{Plot of the magnitude $R|H(f)!$ in dB, both for the analytical expression and for the Simscape simulation. The resonance frequency is also highlighted.}
-	\label{fig:es1}
+	\includegraphics[width=0.7\linewidth]{sims.png}
+	\caption{Single Helmholtz resonator subsystem in Simscape. The ports are points that can be accessed from outside the subsystem: ports 1 and 2 allow connections of the resonators with eachother and/or with the generator, while port 3 allows to read the value of the current flowing in the single loop.}
+	\label{fig:sims}
 \end{figure}
+
+We computed a frequency response by reading the current at one of the resonators in the lowest level of the tree (the farthest from the tree inlet). Fig. \ref{fig:es2} shows the plots of the responses. We can see how incrementing the height of the tree seems to add a peak to the response, and indeed there seem to always be $N+1$ resonances. Conversely, increasing $K$ leaves the number of resonances unchanged, but the separation between neighboring peaks grows.
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{es2.png}
+	\caption{FRFs of the different trees at the bottom level.}
+	\label{fig:es2}
+\end{figure}
+
 
 
 \end{document}
