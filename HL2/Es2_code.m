@@ -21,7 +21,7 @@ L = rho*l/S;
 % current is measured at the end of each tree.
 % Simulation Parameters
 Fs = 100000;                  % Sampling Frequency
-signalLen = 10;              % Simulation Duration
+signalLen = 2;              % Simulation Duration
 
 %N is the height and K are the number of leaves
 
