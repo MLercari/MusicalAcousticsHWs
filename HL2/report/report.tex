@@ -87,7 +87,30 @@
 	
 \end{titlepage}
 
-\section{Simulating an Helmholtz resonator}
+\section{Simulating a Helmholtz resonator}
+
+The Helmholtz resonator can be modelled in the impedance analogy as an RLC series circuit, with:
+
+\begin{align*}
+	R &= \frac{\rho c}{S}\, &
+	L &= \frac{\rho l}{S}\, &
+	C &= \frac{V}{\rho c^2}
+\end{align*}
+
+This model has been implemented in Simscape, and it can be seen in \texttt{Es1.slx}. In order to obtain the frequency response of the system we are interested in retrieving the current signal (which in our analogy represents the volume flow $U$) from the simulation: this can be done by simply adding an amperometer in the loop, in series with the other components.
+
+Moreover, we will need to provide a known input to the system, and specifically an impulsive one, since the FRF is the Fourier transform of the impulse response. We can create an input signal in Simulink by subtracting together two discrete step functions that are offset by 1 sample with eachother, obtaining a discrete impulse. The Simulink signal is then converted into a Simscape physical signal and fed to a controlled voltage source block that will serve as the generator for our circuit. Thus, the input voltage (i. e. pressure) signal and the resulting current can be sent to a \texttt{To Workspace} Simulink block\footnote{The output of the amperometer will need to be converted into a Simulink signal first.} that will allow us to access the results with Matlab. The FRF can then be computed as the ratio between the volume flow and the input pressure (in the frequency domain):
+$$ H(\omega) = \frac{U(\omega)}{p(\omega)} = \biggl( \mathrm{j}\omega L + R + \frac{1}{\mathrm{j}\omega C} \biggr)^{-1}$$
+where the last member is the analytical expression of $H$ which is easily computed as the input admittance of the series of the three components.
+
+The simulation has been carried out over 10 seconds, with a sampling frequency of 100 kHz. The frequency spectra of the resulting signals have been obtained by computing their DFT with Matlab's \texttt{fft} function. The result of the simulation is compared with the analytical expression for $H$ in Fig. \ref{fig:es1}, showing that the two are remarkably close up to the highest frequencies.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{es1.png}
+	\caption{Plot of the magnitude $R|H(f)!$ in dB, both for the analytical expression and for the Simscape simulation. The resonance frequency is also highlighted.}
+	\label{fig:es1}
+\end{figure}
 
 
 \end{document}
