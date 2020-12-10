@@ -17,7 +17,7 @@ N_E1R1 = round(T_E1R1*Fs);
 N_S = round(T_S*Fs);
 
 %filter from Simulink
-signalLen = 10;
+signalLen = 5; %duration of simulation
 
 %load simulation
 open_system(['ques2.slx'], 'loadonly');
@@ -50,7 +50,7 @@ C_v = V/(rho*c^2);  % cavity compliance
 
 %plot of the bridge impedance
 
-f = 0:1/Fs:500; %[Hz] range of frequency in Hz
+f = 0:Fs/length(input):Fs-(1/length(input));  %[Hz] range of frequency in Hz
 w = 2*pi*f; %[rad/s] range of angular frequency 
 
 Z_p = 1i.*w*L_p + R_p + (1i.*w*C_p).^(-1); %[Kg/m^4s] plate impedance
@@ -58,3 +58,20 @@ Z_v = 1./(1i.*w*C_v); %[Ks/m^4 s] cavity impedance
 Z_h = 1i.*w*L_h + R_h; %[Ks/m^4 s] hole impedance
 
 Z_b = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
+
+%filter without bridge impedance
+H_1 = (abs(fft(output) ./ fft(input)))';
+
+%filter with bridge impedance
+H = H_1.*abs(Z_h);
+
+plot(f, db(abs(H))./(max(abs(H))));
+xlim([0 500])
+grid on
+
+
+%%
+
+t = 0:1/Fs:signalLen-1/Fs;
+y = sin(2*pi*82.*t);
+Y = fft(y);
