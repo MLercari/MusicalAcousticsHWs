@@ -17,7 +17,7 @@ N_E1R1 = round(T_E1R1*Fs);
 N_S = round(T_S*Fs);
 
 %filter from Simulink
-signalLen = 10;
+signalLen = 5; %duration of simulation
 
 %load simulation
 open_system(['ques2.slx'], 'loadonly');
@@ -63,7 +63,8 @@ Z_b = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
 H_1 = (abs(fft(output) ./ fft(input)))';
 
 %filter with bridge impedance
-H = H_1.*Z_h;
+H = H_1.*abs(Z_h);
 
-semilogy(f, abs(H));
+plot(f, db(abs(H))./(max(abs(H))));
 xlim([0 500])
+grid on
