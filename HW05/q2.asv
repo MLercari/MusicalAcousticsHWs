@@ -1,7 +1,35 @@
-%% QUESTION 1 - BRIDGE IMPEDANCE IN THE TWO-MASS MODEL
 clc, clear all, close all;
+%% Question2
+L = 0.645;   % [m] Length of the string
+fE2 = 82;   % [Hz]
+mu = 5.78e-3;    % [kg m^-1] linear density
+T_str = 4*(L^2)*mu*fE2^2;   % [N] tension
+c = sqrt(T_str/mu);
+beta = 1/5;
 
-%% Parameters
+Fs = 44100; %sampling frequency
+T_E2E1 = (2*L*(1-beta))/c;
+T_E1R1 = (beta*L)/c;
+T_S = (2*L)/c;
+
+N_E = round(T_E2E1*Fs);
+N_E1R1 = round(T_E1R1*Fs);
+N_S = round(T_S*Fs);
+
+%filter from Simulink
+signalLen = 10;
+
+%load simulation
+open_system(['ques2.slx'], 'loadonly');
+
+%perform simulation
+simulation = sim(['ques2.slx'], signalLen);
+
+input = simulation.input.data;
+output = simulation.filter.data;
+
+%bridge impedance from q1
+% Parameters of the bridge 
 k_p = 1.41e5; % [N/m] top plate stiffness
 m_p = 0.128*0.385;    % [kg] top plate effective mass
 A_p = 0.0375*0.385;   % [m^2] top plate area
@@ -29,23 +57,4 @@ Z_p = 1i.*w*L_p + R_p + (1i.*w*C_p).^(-1); %[Kg/m^4s] plate impedance
 Z_v = 1./(1i.*w*C_v); %[Ks/m^4 s] cavity impedance
 Z_h = 1i.*w*L_h + R_h; %[Ks/m^4 s] hole impedance
 
-Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
-
-fH = sqrt(1.4*101000*A_h^2/(m_h*V))/(2*pi); %[Hz] Helmholtz resonance frequency
-
-figure(1);
-subplot 211;
-semilogy(f, abs(1./Z));
-grid on
-xline(fH);
-subplot 212;
-plot(f, angle(1./Z));
-grid on
-xline(fH);
-
-
-
-
-
-
-
+Z_b = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
