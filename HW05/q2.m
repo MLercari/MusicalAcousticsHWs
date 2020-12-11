@@ -77,6 +77,7 @@ ylim([0 1])
 grid on
 
 %% analytical q2
+
 %fare una formula analitica di H, parametrica rispetto a beta (definire i
 %delay time rispetto a beta e rispetto alla nota (il valore di c cambia a
 %seconda della frequenza (possibile? non renderebbe il filtro non lineare?)
@@ -95,13 +96,14 @@ H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w)));
 S = 1./(1 - 0.99*exp(-T_S.*1i.*w).*H_ma);
 
 
-H_EB = 2.*H_E.*(Z_b./(maxZ(2))).*H_E1R1.*S.*(1./(1i.*(w + 1)));
+H_EB = 2.*H_E.*(Z_b./(maxZ(2))).*H_E1R1.*S.*(1./(1i.*w));
 
-H_EB(1) = 1;
+H_EB(1) = 0;
 figure(2)
-plot(f, abs(H_EB)./(abs(max(H_EB))))
+semilogy(f, abs(H_EB)./(abs(max(H_EB))))
 ylim([0 1])
 xlim([0 500])
+grid on
 
 %%  q3
 
