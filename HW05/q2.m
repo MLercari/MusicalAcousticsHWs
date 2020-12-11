@@ -52,7 +52,7 @@ C_v = V/(rho*c^2);  % cavity compliance
 
 %plot of the bridge impedance
 
-f = 0:Fs/length(input):Fs-(1/length(input));  %[Hz] range of frequency in Hz
+f = 1:Fs/length(input):Fs-(1/length(input)) +1;  %[Hz] range of frequency in Hz
 w = 2*pi*f; %[rad/s] range of angular frequency 
 
 Z_p = 1i.*w*L_p + R_p + (1i.*w*C_p).^(-1); %[Kg/m^4s] plate impedance
@@ -69,10 +69,11 @@ Z_b(1) = 1;
 maxZ = maxk(abs(Z_b), 2);
 H = H_1.*(Z_b./(maxZ(2)));
 
+
 figure(1)
 semilogy(f, abs(H)./(max(abs(H))));
 xlim([0 500])
-ylim([0 10e-5])
+ylim([0 1])
 grid on
 
 %% analytical q2
@@ -92,13 +93,14 @@ H_E1R1 = 0.99*exp(-T_E1R1*1i.*w);
 H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w))); 
 
 S = 1./(1 - 0.99*exp(-T_S.*1i.*w).*H_ma);
-%Z_b = Z_b./(abs(max(Z_b)));
 
-H_EB = 2.*H_E.*Z_b.*H_E1R1.*S.*(1./(1i.*(w + 1)));
 
+H_EB = 2.*H_E.*(Z_b./(maxZ(2))).*H_E1R1.*S.*(1./(1i.*(w + 1)));
+
+H_EB(1) = 1;
 figure(2)
 plot(f, abs(H_EB)./(abs(max(H_EB))))
-ylim([0 10e-6])
+ylim([0 1])
 xlim([0 500])
 
 %%  q3
@@ -111,5 +113,8 @@ Ai = fft(ai);
 Fo = Ai.*H;
 Fo(1) = 1;
 fo = ifft(Fo);
+
+figure(3)
 plot(t, abs(fo));
+xlim([0 2])
  

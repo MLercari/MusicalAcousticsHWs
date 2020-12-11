@@ -69,10 +69,11 @@ Z_b(1) = 1;
 maxZ = maxk(abs(Z_b), 2);
 H = H_1.*(Z_b./(maxZ(2)));
 
+
 figure(1)
 semilogy(f, abs(H)./(max(abs(H))));
 xlim([0 500])
-ylim([0 10e-5])
+ylim([0 10e-4])
 grid on
 
 %% analytical q2
@@ -92,19 +93,19 @@ H_E1R1 = 0.99*exp(-T_E1R1*1i.*w);
 H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w))); 
 
 S = 1./(1 - 0.99*exp(-T_S.*1i.*w).*H_ma);
-%Z_b = Z_b./(abs(max(Z_b)));
 
-H_EB = 2.*H_E.*Z_b.*H_E1R1.*S.*(1./(1i.*(w + 1)));
 
+H_EB = 2.*H_E.*(Z_b./(maxZ(2))).*H_E1R1.*S.*(1./(1i.*(w + 1)));
+
+H_EB(1) = 1;
 figure(2)
 plot(f, abs(H_EB)./(abs(max(H_EB))))
-ylim([0 10e-6])
+ylim([0 10e-4])
 xlim([0 500])
 
 %%  q3
 
 t = 0:1/Fs:signalLen; %time vector
-
 
 ai = zeros(1, length(t));
 ai(1) = 0.003;
@@ -113,4 +114,5 @@ Fo = Ai.*H;
 Fo(1) = 1;
 fo = ifft(Fo);
 plot(t, abs(fo));
+xlim([0 2])
  
