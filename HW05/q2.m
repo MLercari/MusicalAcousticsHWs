@@ -65,11 +65,12 @@ Z_b = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
 H_1 = (abs(fft(output) ./ fft(input)))';
 
 %filter with bridge impedance
-H = H_1.*abs(Z_h);
+H = (A_p^2).*H_1.*Z_b;
 
 figure(1)
-plot(f, db(abs(H))./(max(abs(H))));
+plot(f, abs(H)./(max(abs(H))));
 xlim([0 500])
+ylim([0 10e-5])
 grid on
 
 %% esperimenti q2
@@ -102,19 +103,18 @@ xlim([0 500])
 
 t = 0:1/Fs:signalLen; %time vector
 
-x=rand(1,100);
-x=[x zeros(1,220401)]; %eccitazione generica
-
-X = fft(x) ; %speed of plucking as input in freq domain
-
-Y = X.*H; %output in freq domain
-
-y = ifft(Y); %output in time domain
-
-y = cumtrapz(t, y); %trapezoidal integration along y to get the displacement
+% X = fft(input) ; %speed of plucking as input in freq domain
+% 
+% Y = X'.*(H.^(-1)); %output in freq domain
+% 
+% y = ifft(Y); %output in time domain
+% 
+% y = cumtrapz(t, y); %trapezoidal integration along y to get the displacement
 
  % moltiplicare per 3 per avere la velocità corretta?
  
- figure(3)
- plot(t, abs(y));
+%velocity od the plate
+Vp = (1/(A_p^2)).*H_1.*(Z_b.^(-1));
+vp = ifft(Vp);
+plot(t, abs(vp));
  
