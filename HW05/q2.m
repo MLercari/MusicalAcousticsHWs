@@ -91,7 +91,7 @@ H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w)));
 S = 1./(1 - 0.99*exp(-T_S.*1i.*w).*H_ma);
 %Z_b = Z_b./(abs(max(Z_b)));
 
-H_EB = 2.*H_E.*Z_b.*H_E1R1.*S;
+H_EB = 2.*H_E.*Z_b.*H_E1R1.*S.*(1./(1i.*(w + 1)));
 
 figure(2)
 plot(f, abs(H_EB)./(abs(max(H_EB))))
@@ -102,15 +102,19 @@ xlim([0 500])
 
 t = 0:1/Fs:signalLen; %time vector
 
-X = fft(input) ; %speed of plucking as input in freq domain
+x=rand(1,100);
+x=[x zeros(1,220401)]; %eccitazione generica
 
-Y = abs(H).*abs(X'); %output in freq domain
+X = fft(x) ; %speed of plucking as input in freq domain
+
+Y = X.*H; %output in freq domain
 
 y = ifft(Y); %output in time domain
 
-y = trapz(t, y); %trapezoidal integration along y to get the displacement
+y = cumtrapz(t, y); %trapezoidal integration along y to get the displacement
 
  % moltiplicare per 3 per avere la velocità corretta?
  
- plot(t, 3.*db(y));
+ figure(3)
+ plot(t, abs(y));
  
