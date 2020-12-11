@@ -105,6 +105,7 @@ xlim([0 500])
 
 t = 0:1/Fs:signalLen; %time vector
 
+
 ai = zeros(1, length(t));
 ai(1) = 0.003;
 Ai = fft(ai);
