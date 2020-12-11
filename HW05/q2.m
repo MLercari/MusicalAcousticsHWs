@@ -109,14 +109,20 @@ grid on
 
 t = 0:1/Fs:signalLen; %time vector
 
-ai = zeros(1, length(t));
+ai = zeros(1, length(t)); %impulsive signal = displacement at 0.003 [m]
 ai(1) = 0.003;
-Ai = fft(ai);
-Fo = Ai.*H;
-Fo(1) = 1;
-fo = ifft(Fo);
+
+Ai = fft(ai, Fs*signalLen +1 ); %fft of input signal
+
+Fo = Ai.*abs(H); %system frequency response 
+
+Fo(1) = 1; %remove singolarities
+
+fo = ifft(Fo, Fs*signalLen +1 , 'nonsymmetric'); %force at the bridge = system time response
 
 figure(3)
 plot(t, abs(fo));
 xlim([0 2])
- 
+
+filename = 'force.wav';
+audiowrite(filename, 100000.*abs(fo),Fs);
