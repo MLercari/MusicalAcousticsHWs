@@ -16,6 +16,8 @@ N_E = round(T_E2E1*Fs);
 N_E1R1 = round(T_E1R1*Fs);
 N_S = round(T_S*Fs);
 
+%% Digital filter design with Simulink
+
 %filter from Simulink
 signalLen = 5; %duration of simulation
 
@@ -65,7 +67,50 @@ H_1 = (abs(fft(output) ./ fft(input)))';
 %filter with bridge impedance
 H = H_1.*abs(Z_h);
 
+figure(1)
 plot(f, db(abs(H))./(max(abs(H))));
 xlim([0 500])
 grid on
 
+%% esperimenti q2
+%fare una formula analitica di H, parametrica rispetto a beta (definire i
+%delay time rispetto a beta e rispetto alla nota (il valore di c cambia a
+%seconda della frequenza (possibile? non renderebbe il filtro non lineare?)
+%provare a plottare diversi filtri, magari fissando c e cambiando beta
+%(punto di applicazione) o fissando beta e cambiando c (nota suonata)
+%ricordati di plottare anche la fase dei filtri
+
+% analytical filter in Laplace domain
+
+H_E = 0.5*(1 + 0.99*exp(-T_E2E1*1i.*w));
+
+H_E1R1 = 0.99*exp(-T_E1R1*1i.*w);
+
+H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w))); 
+
+S = 1./(1 - 0.99*exp(-T_S.*1i.*w).*H_ma);
+%Z_b = Z_b./(abs(max(Z_b)));
+
+H_EB = 2.*H_E.*Z_b.*H_E1R1.*S;
+
+figure(2)
+plot(f, abs(H_EB)./(abs(max(H_EB))))
+ylim([0 10e-6])
+xlim([0 500])
+
+%% esperimenti su q3
+
+t = 0:1/Fs:signalLen; %time vector
+
+X = fft(input) ; %speed of plucking as input in freq domain
+
+Y = abs(H).*abs(X'); %output in freq domain
+
+y = ifft(Y); %output in time domain
+
+y = trapz(t, y); %trapezoidal integration along y to get the displacement
+
+ % moltiplicare per 3 per avere la velocità corretta?
+ 
+ plot(t, 3.*db(y));
+ 
