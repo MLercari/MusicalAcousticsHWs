@@ -92,10 +92,8 @@ H_E = 0.5*(1 + 0.99*exp(-T_E2E1*1i.*w));
 H_E1R1 = 0.99*exp(-T_E1R1*1i.*w);
 
 %H_ma = 0.5.*((1 - exp(-2*(1/Fs).*1i.*w))./(1 - exp(-(1/Fs)*1i.*w))); 
-%H_ma = sin(2*pi.*f)./(2.*sin(pi.*f));
 
 S = 1./(1 - 0.99*exp(-T_S.*1i.*w));
-
 
 H_EB = 2.*H_E.*(Z_b./(maxZ(2))).*H_E1R1.*S.*(1./(1i.*w));
 
@@ -108,22 +106,22 @@ grid on
 
 %%  q3
 
-t = 0:1/Fs:signalLen; %time vector
+t = linspace(0, signalLen,  Fs*signalLen + 1); %time vector
 
 ai = zeros(1, length(t)); %impulsive signal = displacement at 0.003 [m]
-ai(1) = 0.003;
+ai(1) = 10;
 
-Ai = fft(ai, Fs*signalLen +1); %fft of input signal
+Ai = fft(ai, Fs*signalLen + 1); %fft of input signal
 
-Fo = Ai.*H; %system frequency response 
+Fo = Ai.*H_EB; %system frequency response 
 
 Fo(1) = 1; %remove singolarities
 
-fo = ifft(Fo, Fs*signalLen +1 , 'nonsymmetric'); %force at the bridge = system time response
+fo = ifft(Fo, Fs*signalLen + 1, 'nonsymmetric'); %force at the bridge = system time response
 
 figure(3)
 plot(t, abs(fo));
-xlim([0 2])
+
 
 
 % filename = 'force.wav';

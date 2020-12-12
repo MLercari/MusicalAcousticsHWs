@@ -123,10 +123,11 @@ Lmax = 3e-3;
 deltaamp = Lmax/(beta*L0) + Lmax/(L0*(1-beta));
 
 acc = zeros(size(t));
-acc(1) = -deltaamp;
+acc(1) = deltaamp;
 spec_acc = fft(acc);
+spec_acc(1) = 0;
 spec_out = spec_acc.*H_eb';
-output = ifft(spec_out).*exp(-2*t);
+output = ifft(spec_out);
 
 figure(100)
 plot(t, abs(output));
