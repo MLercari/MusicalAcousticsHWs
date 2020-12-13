@@ -48,8 +48,8 @@ H_S = 1/(1 - H_loop);
 integr = 2/(1-0.9*z^(-1));
 %}
 
-[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.99],1, length(t), Fs);
-[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.99],1, length(t), Fs);
+[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.9],1, length(t), Fs);
+[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.9],1, length(t), Fs);
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
 loopDel = freqz([zeros(N_S,1); 1], 1, length(t), Fs);
@@ -67,12 +67,14 @@ Z_v = 1./(1i.*w*C_v); %[Ks/m^4 s] cavity impedance
 Z_h = 1i.*w*L_h + R_h; %[Ks/m^4 s] hole impedance
 
 Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
+Z = 2*Z./(1i.*w);
+Z = Z.*(A_p^2);
 
 Z(1) = 0;
-Z = Z./(max(abs(Z))); %perchè z a 0 + infinito
+Z = Z./(max(abs(Z(50:length(Z))))); %perchè z a 0 + infinito
 
 
-H1 = H_E.*H_E1R1.*H_S.*integr.*Z;
+H1 = H_E.*H_E1R1.*H_S.*Z;
 
 
 %% quest 3
@@ -102,5 +104,9 @@ out2 = ifft(imp.*H1.*filt, length(t));
 
 figure(666)
 plot(t, real(out2));
+hold on;
+plot(t, zeros(1,length(t)), 'LineStyle', '--', 'Color', 'k');
+
+%% Simulink
 
 

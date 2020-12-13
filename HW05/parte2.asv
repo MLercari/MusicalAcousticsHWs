@@ -53,8 +53,8 @@ integr = 2/(1-0.9*z^(-1));
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
 loopDel = freqz([zeros(N_S,1); 1], 1, length(t), Fs);
-H_S = 1./(1 - movAvg.*loopDel);
-[integr, f] = freqz(2, [1; 0.9], length(t), Fs);
+H_S = 0.9./(1 - movAvg.*loopDel);
+%[integr, f] = freqz(2, [1; 0.9], length(t), Fs);
 
 %f = w/(2*pi);
 
@@ -67,8 +67,9 @@ Z_v = 1./(1i.*w*C_v); %[Ks/m^4 s] cavity impedance
 Z_h = 1i.*w*L_h + R_h; %[Ks/m^4 s] hole impedance
 
 Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
+Z = Z
 
-Z(1) = 0;
+%Z(1) = 0;
 Z = Z./(max(abs(Z))); %perchè z a 0 + infinito
 
 
@@ -95,12 +96,14 @@ plot(t, real(out));
 
 filter = designfilt('highpassiir','FilterOrder',8, ...
          'PassbandFrequency',10,'PassbandRipple',0.2, ...
-         'SampleRate',200e3);
+         'SampleRate',Fs);
      
 [filt, ~] = freqz(filter, length(H1));
 out2 = ifft(imp.*H1.*filt, length(t));
 
 figure(666)
-
+plot(t, real(out2));
+hold on;
+plot(t, zeros(1,length(t)), 'LineStyle', '--');
 
 
