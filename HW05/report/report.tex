@@ -143,7 +143,7 @@ The magnitude and phase of $Z$ as functions of the frequency are shown in Fig. \
 A guitar string can be modelled as two transmission lines in opposite directions with two reflection filters at the end points (see Fig. \ref{fig:dwg}), with the input being given at a certain fraction $\beta$ of the length. This model can be implemented easily with digital waveguides, as is done in most synthesis applications.  However, if the model is an LTI system, the various components can be commuted to obtain a single-delay loop (SDL), resulting in an increase in efficiency, which is a desirable feature in real time synthesis\cite{kar98}. When we use acceleration as a wave variable, the transfer function of the system is:
 
 \begin{align*}
-	H_{EB}(s) &= &\frac{1}{2}\biggl[ 1 + H_{E2R1}(s) \biggr] \frac{H_{E1R1}(s)}{1 - H_{loop}(s)} Z(s) \frac{1}{s} \biggl[ 1 - R_b(s) \biggr] = \\[5pt] &= &H_E (s) H_{E1R1}(s) S(s) H_B(s) 
+	H_{EB}(s) = &\frac{1}{2}\biggl[ 1 + H_{E2R1}(s) \biggr] \frac{H_{E1R1}(s)}{1 - H_{loop}(s)} Z(s) \frac{1}{s} \biggl[ 1 - R_b(s) \biggr] = \\[5pt] =~ &H_E (s) H_{E1R1}(s) S(s) H_B(s) 
 \end{align*}
 
 
