@@ -83,7 +83,8 @@ Teq = T_str*(disp/(beta*L) + (disp/(1 - beta)*L));
 
 a0 = zeros(length(t), 1);
 %a0(1) = (Teq*20)/(beta*L*mu);
-a0(1) = disp*Fs/c;  %sar
+%a0(1) = disp*Fs/c;  %sarà giusto?
+a0(1) = (c^2).*(disp/(beta*L) + (disp/(1 - beta)*L));
 
 imp = fft(a0, length(t));
 
