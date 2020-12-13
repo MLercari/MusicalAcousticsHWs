@@ -89,8 +89,19 @@ imp = fft(a0, length(t));
 out = ifft(imp.*H1, length(t));
 
 figure(69);
+subplot 211;
 semilogy(f, abs(H1));
 xlim([0 500]);
+xlabel('f [Hz]');
+ylabel('|H_{EB}| [kg]');
+grid on;
+
+subplot 212;
+plot(f, angle(H1));
+xlim([0 500]);
+xlabel('f [Hz]');
+ylabel('\angle H_{EB}');
+grid on;
 
 figure(420);
 plot(t, real(out));

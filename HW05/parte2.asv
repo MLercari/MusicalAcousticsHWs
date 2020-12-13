@@ -33,7 +33,7 @@ T_E2E1 = (2*L*(1-beta))/c;
 T_E1R1 = (beta*L)/c;
 T_S = (2*L)/c;
 
-duration = 5;   % [s]
+duration = 2.5;   % [s]
 t = 0:1/Fs:duration;
 
 N_E = round(T_E2E1*Fs);
@@ -71,7 +71,7 @@ Z = 2*Z./(1i.*w);
 Z = Z.*(A_p^2);
 
 Z(1) = 0;
-Z = Z./(max(abs(Z(50:length(Z))))); %perchè z a 0 + infinito
+%Z = Z./(max(abs(Z(50:length(Z))))); %perchè z a 0 + infinito
 
 
 H1 = H_E.*H_E1R1.*H_S.*Z;
@@ -89,8 +89,11 @@ imp = fft(a0, length(t));
 out = ifft(imp.*H1, length(t));
 
 figure(69);
+subplot 211;
+grid on;
 semilogy(f, abs(H1));
 xlim([0 500]);
+xlabel();
 
 figure(420);
 plot(t, real(out));
@@ -107,6 +110,12 @@ plot(t, real(out2));
 hold on;
 plot(t, zeros(1,length(t)), 'LineStyle', '--', 'Color', 'k');
 
+figure(777)
+semilogy(f, abs(fft(out2, length(f))));
+ylim([ 0 1e4]);
+xlim([0 600]);
+
+%{
 %% Simulink
 
 %load simulation
@@ -120,8 +129,15 @@ output = simulation.filter.data;
 
 
 Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
-Z = 2*Z./(1i.*w);
+%Z = 2*Z./(1i.*w);
 Z = Z.*(A_p^2);
+Z(1) = 0;
+Z = Z./(max(abs(Z(50:length(Z))))); %perchè z a 0 + infinito
 
-out3 = fft(output, length(t))*Z
+out3 = fft(output, length(t)).*Z.*filt;
+%out3 = ifft(out3, length(t));
 
+figure(33)
+plot(f, abs(out3));
+
+%}
