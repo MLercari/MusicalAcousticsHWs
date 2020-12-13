@@ -135,7 +135,9 @@ ylim([ 0 1e4]);
 xlim([0 600]);
 
 
-%% Simulink
+%% Simulink (non funzionante)
+
+%{
 
 %load simulation
 open_system(['ques2.slx'], 'loadonly');
@@ -167,3 +169,14 @@ xlabel('f [Hz]');
 ylabel('\angle H_{EB}');
 grid on;
 
+out3 = ifft(imp.*Hsz.*filt, length(t));
+
+figure(667)
+plot(t, real(out3));
+hold on;
+plot(t, zeros(1,length(t)), 'LineStyle', '--', 'Color', 'k');
+grid on;
+xlabel("t [s]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("F [N]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
+%}
