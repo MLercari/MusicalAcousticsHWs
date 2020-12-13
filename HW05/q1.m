@@ -27,27 +27,37 @@ f = 0:1/Fs:500; %[Hz] range of frequency in Hz
 w = 2*pi*f; %[rad/s] range of angular frequency 
 
 Z_p = 1i.*w*L_p + R_p + (1i.*w*C_p).^(-1); %[Kg/m^4s] plate impedance
-Z_v = 1./(1i.*w*C_v); %[Ks/m^4 s] cavity impedance
-Z_h = 1i.*w*L_h + R_h; %[Ks/m^4 s] hole impedance
+Z_v = 1./(1i.*w*C_v); %[Kg/m^4 s] cavity impedance
+Z_h = 1i.*w*L_h + R_h; %[Kg/m^4 s] hole impedance
 
-Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
+Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Kg/m^4 s] bridge impedance
 
 fH = sqrt(1.4*101000*A_h^2/(m_h*V))/(2*pi); %[Hz] Helmholtz resonance frequency
 
 fp = sqrt((k_p + (1/C_v)*A_p^2)/m_p)/(2*pi); %[Hz] closed box bridge resonance frequency
 fa = sqrt(((1/C_v)*A_p^2)/m_p)/(2*pi); %[Hz] no stiffness in the sound board
 
+fres = [1 0 (-fp^2 -fH^2) 0 (fp^(2)*fH^(2) - fa^(2)*fH^(2)) ];
+fsol = roots(fres);
+
+
 figure(1);
 subplot 211;
-semilogy(f, abs(1./Z));
+semilogy(f, abs(Z), 'lineWidth' , 1);
 grid on
-xline(fH);
-xline(fp);
+xline(fH, '-.',{'fh = 126.3 Hz'}  , 'lineWidth' , 1);
+xline(fp, '-.',{'fp = 270.8 Hz'}  , 'lineWidth' , 1);
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$|Z|$  [$\frac{Kg}{m^4 \times s}$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
 subplot 212;
-plot(f, angle(1./Z));
+plot(f, angle(Z), 'lineWidth' , 1);
 grid on
-xline(fH);
-xline(fp);
+xline(fH, '-.',{'fh = 126.3 Hz'}  , 'lineWidth' , 1);
+xline(fp, '-.',{'fp = 270.8 Hz'}  , 'lineWidth' , 1);
+xlabel("f [Hz]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+ylabel("$ \angle Z$  [$rad$]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
 
 
 
