@@ -20,6 +20,7 @@ C_p = A_p^2/k_p;    % plate compliance
 C_v = V/(rho*c^2);  % cavity compliance
 
 %% Question2
+
 L = 0.64516;   % [m] Length of the string
 fE2 = 82;   % [Hz]
 mu = 5.78e-3;    % [kg m^-1] linear density
@@ -90,6 +91,7 @@ imp = fft(a0, length(t));
 
 out = ifft(imp.*H1, length(t));
 
+
 figure(69);
 subplot 211;
 semilogy(f, abs(H1));
@@ -105,8 +107,11 @@ xlabel('f [Hz]');
 ylabel('\angle H_{EB}');
 grid on;
 
+%{
 figure(420);
 plot(t, real(out));
+%}
+
 
 filter = designfilt('highpassiir','FilterOrder',8, ...
          'PassbandFrequency',10,'PassbandRipple',0.2, ...
@@ -129,7 +134,7 @@ semilogy(f, abs(fft(out2, length(f))));
 ylim([ 0 1e4]);
 xlim([0 600]);
 
-%{
+
 %% Simulink
 
 %load simulation
@@ -146,7 +151,6 @@ Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
 %Z = 2*Z./(1i.*w);
 Z = Z.*(A_p^2);
 Z(1) = 0;
-Z = Z./(max(abs(Z(50:length(Z))))); %perchè z a 0 + infinito
 
 out3 = fft(output, length(t)).*Z.*filt;
 %out3 = ifft(out3, length(t));
@@ -154,4 +158,3 @@ out3 = fft(output, length(t)).*Z.*filt;
 figure(33)
 plot(f, abs(out3));
 
-%}
