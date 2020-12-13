@@ -53,7 +53,7 @@ integr = 2/(1-0.9*z^(-1));
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
 loopDel = freqz([zeros(N_S,1); 1], 1, length(t), Fs);
-H_S = 0.9./(1 - movAvg.*loopDel);
+H_S = 1./(1 - movAvg.*loopDel);
 [integr, f] = freqz(2, [1; 0.9], length(t), Fs);
 
 %f = w/(2*pi);
@@ -95,12 +95,12 @@ plot(t, real(out));
 
 filter = designfilt('highpassiir','FilterOrder',8, ...
          'PassbandFrequency',10,'PassbandRipple',0.2, ...
-         'SampleRate',Fs);
+         'SampleRate',200e3);
      
 [filt, ~] = freqz(filter, length(H1));
 out2 = ifft(imp.*H1.*filt, length(t));
 
 figure(666)
-plot(t, real(out2));
+
 
 
