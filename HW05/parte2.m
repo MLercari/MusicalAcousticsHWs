@@ -48,12 +48,12 @@ H_S = 1/(1 - H_loop);
 integr = 2/(1-0.9*z^(-1));
 %}
 
-[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.9],1, length(t), Fs);
-[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.9],1, length(t), Fs);
+[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.8],1, length(t), Fs);
+[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.8],1, length(t), Fs);
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
 loopDel = freqz([zeros(N_S,1); 1], 1, length(t), Fs);
-H_S = 0.9./(1 - movAvg.*loopDel);
+H_S = 1./(1 - 0.999.*movAvg.*loopDel);
 [integr, f] = freqz(2, [1; 0.9], length(t), Fs);
 
 %f = w/(2*pi);
@@ -82,7 +82,8 @@ disp = 0.003;
 Teq = T_str*(disp/(beta*L) + (disp/(1 - beta)*L));
 
 a0 = zeros(length(t), 1);
-a0(1) = (Teq*20)/(beta*L*mu);
+%a0(1) = (Teq*20)/(beta*L*mu);
+a0(1) = disp*Fs/c;  %sarà giusto?
 
 imp = fft(a0, length(t));
 
@@ -117,6 +118,10 @@ figure(666)
 plot(t, real(out2));
 hold on;
 plot(t, zeros(1,length(t)), 'LineStyle', '--', 'Color', 'k');
+grid on;
+xlabel("t [s]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("F [N]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
 
 figure(777)
 semilogy(f, abs(fft(out2, length(f))));
