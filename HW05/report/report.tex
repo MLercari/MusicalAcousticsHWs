@@ -17,6 +17,7 @@
 \usepackage{subcaption}
 \captionsetup[subfigure]{labelfont=rm}
 \usepackage{verbatim} %multiline comments
+\usepackage{wrapfig}
 %\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
 %\addbibresource{source.bib}	% uncomment for bibliography
 
@@ -89,5 +90,76 @@
 \end{titlepage}
 
 \section{Bridge impedance}
-The bridge impedance is computed as the ratio between the pressure action on the sound plate and the volume flow in the sound hole. The bridge is modeled as a two-masses system in which each element is assumed to be lumped; a reasonable assumption considering that we are intersted . The equivalent eletrical circuit shows how the pressure on the wood plate is distribuited on every element; our aim is to 
+The bridge impedance is computed as the ratio between the pressure on the top plate (the force applied to the top plate divided by the effective top plate area) and the volume velocity of the plate itself. The guitar body is modelled as a two-mass system, neglecting the back plate and the ribs, and each element is assumed to be lumped, a reasonable assumption considering that we are interested in the frequencies below 500 Hz. The elements in question are the top plate, the air cavity and the sound hole, and their impedances are:
+\begin{align*}
+	Z_p &= \mathrm{j}\omega M_p + R_p + \frac{1}{\mathrm{j}\omega C_p}, \quad &\text{where } M_p = \frac{m_p}{A_p^2}, ~ C_p = \frac{A_p^2}{K_p} \\
+	Z_v &= \frac{1}{\mathrm{j}\omega C_v} + R_v, \quad &\text{where } C_v = \frac{V}{\rho c^2} \\
+	Z_h &= \mathrm{j}\omega M_h + R_h \quad &\text{where } M_h = \frac{m_h}{A_h^2}.
+\end{align*}
+
+The system can be thought of as composed of two coupled oscillators: one is the top plate, while the other is the  cavity/sound hole resonator. The resulting equivalent circuit can be seen in Fig. \ref{fig:2mass}.
+
+
+\begin{wrapfigure}{R}{0.4\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{2mass.png}
+	\caption{Two-mass model of the guitar body.}
+	\label{fig:2mass}
+\end{wrapfigure}
+
+The input impedance of this circuit is the series of $Z_p$ with the parallel of $Z_v$ and $Z_h$
+$$ Z = Z_p + \frac{Z_v Z_h}{Z_v + Z_h} .$$
+The magnitude and phase of $Z$ as functions of the frequency are shown in Fig. \ref{fig:brimp}. The magnitude graph shows two points of resonance with one anti-resonance in between, as expected. The antiresonance corresponds to the Helmholtz resonance frequency $f_h$ of the cavity/sound hole subsystem (the $A_0$ mode of the cavity). The highest resonance occurs at the resonance frequency $f_p$ of the system without the sound hole. This tells us that the effects of the losses due to the resistances are very small, since these frequencies are computed for the conservative case.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{bridge_impedance.png}
+	\caption{Bridge impedance as a function of the frequency. The values of $f_h$ and $f_p$ are highlighted.}
+	\label{fig:brimp}
+\end{figure}
+
+
+ \begin{table}[h]
+ 	\centering
+ 	$\begin{array}{lc}
+ 		\toprule
+ 		C_p & \SI{1.48e-9}{\newton\per\meter^5}\\
+ 		M_p & \SI{236.4}{\kilogram\per\meter\squared}\\
+ 		R_p & \SI{32.0}{\newton\second\per\meter^5}\\
+ 		\midrule
+ 		C_v & \SI{1.22e-7}{\newton\per\meter^5}\\
+ 		R_v & 0\\
+ 		\midrule
+ 		M_h & \SI{13.05}{\kilogram\per\meter\squared}\\
+ 		R_h & \SI{30.0}{\newton\second\per\meter^5}\\
+ 		\bottomrule
+ 	\end{array}$
+	 \caption{Values of the compliances, inertances and resistances of the system.}
+	\label{tab:vals}
+ \end{table}
+
+
+\section{Transfer function from the plucking point to the bridge}
+A guitar string can be modelled as two transmission lines in opposite directions with two reflection filters at the end points (see Fig. \ref{fig:dwg}), with the input being given at a certain fraction $\beta$ of the length. This model can be implemented easily with digital waveguides, as is done in most synthesis applications.  However, if the model is an LTI system, the various components can be commuted to obtain a single-delay loop (SDL), resulting in an increase in efficiency, which is a desirable feature in real time synthesis\cite{kar98}. When we use acceleration as a wave variable, the transfer function of the system is:
+
+\begin{align*}
+	H_{EB}(s) &= &\frac{1}{2}\biggl[ 1 + H_{E2R1}(s) \biggr] \frac{H_{E1R1}(s)}{1 - H_{loop}(s)} Z(s) \frac{1}{s} \biggl[ 1 - R_b(s) \biggr] = \\[5pt] &= &H_E (s) H_{E1R1}(s) S(s) H_B(s) 
+\end{align*}
+
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{synth.png}
+	\caption{Model of the bidirectional waveguide model coupled with the bridge impedance $Z(s)$.}
+	\label{fig:dwg}
+\end{figure}
+
+
+
+
+
+
+
+
 \end{document}
