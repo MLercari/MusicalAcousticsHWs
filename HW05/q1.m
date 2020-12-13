@@ -34,7 +34,7 @@ Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Kg/m^4 s] bridge impedance
 
 fH = sqrt(1.4*101000*A_h^2/(m_h*V))/(2*pi); %[Hz] Helmholtz resonance frequency
 
-fp = sqrt((k_p + (1/C_v)*A_p^2)/m_p)/(2*pi); %[Hz] closed box bridge resonance frequency
+fp = sqrt((k_p + (1/C_v)*A_p^2)/m_p)/(2*pi); %[Hz] closed box resonance frequency
 fa = sqrt(((1/C_v)*A_p^2)/m_p)/(2*pi); %[Hz] no stiffness in the sound board
 
 fres = [1 0 (-fp^2 -fH^2) 0 (fp^(2)*fH^(2) - fa^(2)*fH^(2)) ];
