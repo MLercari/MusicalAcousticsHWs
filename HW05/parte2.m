@@ -30,6 +30,7 @@ beta = 1/5;
 
 
 Fs = 20*c/(beta*L); %sampling frequency
+Xs = c/Fs;
 T_E2E1 = (2*L*(1-beta))/c;
 T_E1R1 = (beta*L)/c;
 T_S = (2*L)/c;
@@ -49,8 +50,8 @@ H_S = 1/(1 - H_loop);
 integr = 2/(1-0.9*z^(-1));
 %}
 
-[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.8],1, length(t), Fs);
-[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.8],1, length(t), Fs);
+[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); -0.5*0.9],1, length(t), Fs);
+[H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.99],1, length(t), Fs);
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
 loopDel = freqz([zeros(N_S,1); 1], 1, length(t), Fs);
@@ -86,6 +87,7 @@ a0 = zeros(length(t), 1);
 %a0(1) = (Teq*20)/(beta*L*mu);
 %a0(1) = disp*Fs/c;  %sarà giusto?
 a0(1) = (c^2).*(disp/(beta*L) + (disp/(1 - beta)*L));
+
 
 imp = fft(a0, length(t));
 
@@ -135,12 +137,14 @@ ylim([ 0 1e4]);
 xlim([0 600]);
 
 %% displacement function
+figure(13);
 x = 0:c/Fs:L;
 %disp
 y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
 plot(x , y_x);
 xlim([ 0 L])
-ylim([0 disp])
+%ylim([0 disp])
+hold on;
 %vel
 v_x = diff(y_x)./diff(x);
 x(end) = [];
