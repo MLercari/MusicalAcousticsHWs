@@ -194,7 +194,7 @@ Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \
 	\caption{Schematics of the filter components. See Section 3 for the sampling frequency.}
 \end{figure}
 
-The resulting $H_{EB}$ has been plotted as a function of the frequency in Fig. \ref{fig:q2}. We simulated the E\textsubscript{2} string of an acoustic guitar, taking as scale length the nominal value of $25.4''$ of a Martin D-28 and with $\mu = \SI{5.78}{\gram\per\meter}$.
+The resulting $H_{EB}$ has been plotted as a function of the frequency in Fig. \ref{fig:q2}. We simulated the E\textsubscript{2} string of an acoustic guitar, taking as scale length the nominal value of $25.4''$ of a Martin D-28 and with $\mu = \SI{5.78}{\gram\per\meter}$. The plucking happens at 1/5 of the length of the string. At $\sim126$ Hz and $\sim270$ Hz we can see the modes of the bridge impedance. Moreover, we can see resonances at the fundamental (82 Hz) and its multiples. Notice how the resonance at the fifth harmonic appears less pronounced than the others, as expected.
 
 
 \begin{figure}[h]
@@ -208,8 +208,19 @@ The resulting $H_{EB}$ has been plotted as a function of the frequency in Fig. \
 
 \section{Making a sound: the time domain response}
 
-We now turn to investigating the response of our model to a pluck
-
+We now turn to investigating the response of our model to a pluck with maximum displacement $d = \SI{3}{\milli\meter}$. If $\beta L$ is the distance from the bridge to the plucking point, the initial configuration of the string will be:
+$$ 
+y(x, 0) = \left\{
+	\begin{array}{lr}
+		\frac{d}{\beta L}x & x \in [0, \beta L] \\[4pt]
+		d \bigl[ 1 - \frac{x}{(1 - \beta) L} \bigr] & x \in [\beta L, L]
+	\end{array}
+\right.
+$$
+We can recover the initial acceleration noting that, thanks to the wave equation, it is proportional to the curvature of the string $\frac{\partial^2 y}{\partial x^2}$. The result is a Dirac delta centered in the plucking point:
+$$
+\ddot y(x, 0) = c^2 \biggl( \frac{d}{\beta L} - \frac{d}{(1 - \beta) L} \biggr).
+$$
 
 
 
