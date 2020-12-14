@@ -134,7 +134,15 @@ semilogy(f, abs(fft(out2, length(f))));
 ylim([ 0 1e4]);
 xlim([0 600]);
 
-
+%% displacement function
+x = 0:c/Fs:L;
+y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
+plot(x , y_x);
+xlim([ 0 L])
+ylim([0 disp])
+v_x = diff(y_x)./diff(x);
+x(end) = [];
+plot(x , y_x);
 %% Simulink (non funzionante)
 
 %{

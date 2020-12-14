@@ -134,8 +134,24 @@ semilogy(f, abs(fft(out2, length(f))));
 ylim([ 0 1e4]);
 xlim([0 600]);
 
+%% displacement function
+x = 0:c/Fs:L;
+%disp
+y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
+plot(x , y_x);
+xlim([ 0 L])
+ylim([0 disp])
+%vel
+v_x = diff(y_x)./diff(x);
+x(end) = [];
+plot(x , v_x);
+%curv
+a_x = diff(v_x)./diff(x);
+x(end) = [];
+plot(x , a_x);
+%% Simulink (non funzionante)
 
-%% Simulink
+%{
 
 %load simulation
 open_system(['ques2.slx'], 'loadonly');
@@ -146,15 +162,35 @@ simulation = sim(['ques2.slx'], duration);
 input = simulation.input.data;
 output = simulation.filter.data;
 
+%filter without bridge impedance
+Hs = (abs(fft(output) ./ fft(input)))';
 
-Z = Z_p + ( Z_v .* Z_h ) ./ (Z_v + Z_h ); %[Ks/m^4 s] bridge impedance
-%Z = 2*Z./(1i.*w);
-Z = Z.*(A_p^2);
-Z(1) = 0;
+Hsz = Hs'.*Z;
 
-out3 = fft(output, length(t)).*Z.*filt;
-%out3 = ifft(out3, length(t));
+figure(22)
 
-figure(33)
-plot(f, abs(out3));
+subplot 211;
+semilogy(f, abs(Hsz));
+xlim([0 500]);
+xlabel('f [Hz]');
+ylabel('|H_{EB}| [kg]');
+grid on;
 
+subplot 212;
+plot(f, angle(Hsz));
+xlim([0 500]);
+xlabel('f [Hz]');
+ylabel('\angle H_{EB}');
+grid on;
+
+out3 = ifft(imp.*Hsz.*filt, length(t));
+
+figure(667)
+plot(t, real(out3));
+hold on;
+plot(t, zeros(1,length(t)), 'LineStyle', '--', 'Color', 'k');
+grid on;
+xlabel("t [s]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("F [N]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+
+%}
