@@ -138,7 +138,8 @@ xlim([0 600]);
 
 %% displacement function
 figure(13);
-x = 0:c/Fs:L;
+dx = c/(Fs);
+x = 0:dx:L;
 %disp
 y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
 plot(x , y_x);
@@ -153,6 +154,11 @@ plot(x , v_x);
 a_x = diff(v_x)./diff(x);
 x(end) = [];
 plot(x , a_x);
+
+%per donzo: nota che il valore della curvatura moltiplicato per dx epoi 
+% per c^2 è (molto) simile all'accelerazione in input (che è ipotizzata
+% essere per uno spazio continuo)
+
 %% Simulink (non funzionante)
 
 %{

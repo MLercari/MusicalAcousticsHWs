@@ -18,8 +18,8 @@
 \captionsetup[subfigure]{labelfont=rm}
 \usepackage{verbatim} %multiline comments
 \usepackage{wrapfig}
-%\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
-%\addbibresource{source.bib}	% uncomment for bibliography
+\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
+\addbibresource{source.bib}	% uncomment for bibliography
 
 
 
@@ -208,7 +208,7 @@ The resulting $H_{EB}$ has been plotted as a function of the frequency in Fig. \
 
 \section{Making a sound: the time domain response}
 
-We now turn to investigating the response of our model to a pluck with maximum displacement $d = \SI{3}{\milli\meter}$. If $\beta L$ is the distance from the bridge to the plucking point, the initial configuration of the string will be:
+We now turn to investigating the response of our model to a pluck with maximum displacement $d = \SI{3}{\milli\meter}$. We follow here \cite{smith92} to obtain a suitable If $\beta L$ is the distance from the bridge to the plucking point, the initial configuration of the string will be:
 $$ 
 y(x, 0) = \left\{
 	\begin{array}{lr}
@@ -219,9 +219,21 @@ y(x, 0) = \left\{
 $$
 We can recover the initial acceleration noting that, thanks to the wave equation, it is proportional to the curvature of the string $\frac{\partial^2 y}{\partial x^2}$. The result is a Dirac delta centered in the plucking point:
 $$
-\ddot y(x, 0) = c^2 \biggl( \frac{d}{\beta L} - \frac{d}{(1 - \beta) L} \biggr).
+\ddot y(x, 0) = c^2 \biggl( \frac{d}{\beta L} + \frac{d}{(1 - \beta) L} \biggr) \delta(x - \beta L).
 $$
+Now, when implementing a digital waveguide we need to sample both the time and the spatial variable. The sampling interval in time and the sampling interval in space must satisfy $X = cT$, where $c$ is the wave velocity in the string. Furthermore, the input needs to be bandlimited in the spatial frequency. If we use an ideal lowpass for antialiasing and convolve it with the impulse, we get $\ddot y (x, 0) \propto \mathrm{sinc}\left( \frac{x-\beta L}{X} \right)$. If $\beta L$ is an integer multiple of $X$, this becomes a discrete impulse, which allows us to lump the excitation on a single point of the waveguide and thus to commute the components of the filters like we saw in the previous section.
+
+Fig. \ref{fig:dleng} shows the time history of the force on the bridge when using the input described above.
 
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{time.png}
+	\caption{Time history of the force on the bridge.}
+	\label{fig:dleng}
+\end{figure}
+
+
+\printbibliography
 
 \end{document}
