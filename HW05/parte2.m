@@ -136,13 +136,19 @@ xlim([0 600]);
 
 %% displacement function
 x = 0:c/Fs:L;
+%disp
 y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
 plot(x , y_x);
 xlim([ 0 L])
 ylim([0 disp])
+%vel
 v_x = diff(y_x)./diff(x);
 x(end) = [];
-plot(x , y_x);
+plot(x , v_x);
+%curv
+a_x = diff(v_x)./diff(x);
+x(end) = [];
+plot(x , a_x);
 %% Simulink (non funzionante)
 
 %{
