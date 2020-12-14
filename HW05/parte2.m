@@ -50,7 +50,7 @@ H_S = 1/(1 - H_loop);
 integr = 2/(1-0.9*z^(-1));
 %}
 
-[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); 0.5*0.8],1, length(t), Fs);
+[H_E, ~, ~] = freqz([0.5; zeros(N_E - 1, 1); -0.5*0.9],1, length(t), Fs);
 [H_E1R1, ~, ~] = freqz([zeros(N_E1R1, 1); 0.99],1, length(t), Fs);
 %[H_S, ~, ~] = freqz(1, [zeros(N_S, 1); -0.5; -0.5], length(t), Fs);
 movAvg = freqz([0.5 0.5], 1, length(t), Fs);
