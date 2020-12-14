@@ -140,13 +140,6 @@ The magnitude and phase of $Z$ as functions of the frequency are shown in Fig. \
 
 
 \section{Transfer function from the plucking point to the bridge}
-A guitar string can be modelled as two transmission lines in opposite directions with two reflection filters at the end points (see Fig. \ref{fig:dwg}), with the input being given at a certain fraction $\beta$ of the length. This model can be implemented easily with digital waveguides, as is done in most synthesis applications.  However, if the model is an LTI system, the various components can be commuted to obtain a single-delay loop (SDL), resulting in an increase in efficiency, which is a desirable feature in real time synthesis\cite{kar98}. When we use acceleration as a wave variable, the transfer function of the system is:
-
-\begin{align*}
-	H_{EB}(s) = &\frac{1}{2}\biggl[ 1 + H_{E2R1}(s) \biggr] \frac{H_{E1R1}(s)}{1 - H_{loop}(s)} Z(s) \frac{1}{s} \biggl[ 1 - R_b(s) \biggr] = \\[5pt] =~ &H_E (s) H_{E1R1}(s) S(s) H_B(s) 
-\end{align*}
-
-
 
 \begin{figure}[h]
 	\centering
@@ -154,6 +147,54 @@ A guitar string can be modelled as two transmission lines in opposite directions
 	\caption{Model of the bidirectional waveguide model coupled with the bridge impedance $Z(s)$.}
 	\label{fig:dwg}
 \end{figure}
+
+A guitar string can be modelled as two transmission lines in opposite directions with two reflection filters at the end points (see Fig. \ref{fig:dwg}), with the input being given at a certain fraction $\beta$ of the length. This model can be implemented easily with digital waveguides, as is done in most synthesis applications.  However, if the model is an LTI system, its components can be commuted to obtain a single-delay loop (SDL), resulting in an increase in efficiency, which is a desirable feature in real time synthesis\cite{kar98}. When we use acceleration as a wave variable, the transfer function of the system is:
+
+\begin{align*}
+	H_{EB}(s) = &\frac{1}{2}\biggl[ 1 + H_{E2R1}(s) \biggr] \frac{H_{E1R1}(s)}{1 - H_{loop}(s)} Z(s) \frac{1}{s} \biggl[ 1 - R_b(s) \biggr] = \\[5pt] =~ &H_E (s) H_{E1R1}(s) S(s) H_B(s) 
+\end{align*}
+
+Here $H_E(s)X(s)$ is the sum of the part of the input that is fed directly to one of the delay lines at E1 with the other half after it has travelled from the excitation point E2 to the nut, where it goes through the reflection filter, and back again along the first line to the excitation point E1. This lets us consider the excitation as if it were happening at a single point, with a lumped input filter. Fig. \ref{fig:he} shows our implementation of this filter, with a discrete delay that was computed as the product of the time delay with the sampling frequency and the losses being represented as a multiplying factor slightly less than 1.
+
+The filter $H_{E1R1}(s)$ represents the transmission of the excitation signal from E1 to the bridge, and here it is modeled by the series of a delay and a loss factor (see Fig. \ref{fig:he1r1}).
+
+We then have $S(s) = \frac{1}{1 - H_{loop}(s)}$, where $H_{loop}(s)$ is the transfer function of a single loop of the signal from the bridge to the nut and back to the bridge. This part is represented as a feedback loop, shown in Fig. \ref{fig:s}, and the feedback filter is the series of a loss factor, a delay (corresponding to twice the time necessary for the signal to travel the length of the string) and a lowpass. The lowpass was implemented with a 2-point moving average, like in the Karplus-Strong algorithm.
+
+Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \right]$. This represents the load due to the bridge (and body) of the guitar and therefore we will use the impedance we obtained earlier as $Z(s)$. The reflection filter of the bridge can be considered roughly constant and equal to -1, thus the gain factor of 2. The integrator is needed because, as mentioned earlier, we are using the acceleration as the wave variable.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{H_E.pdf}
+		\caption{}
+		\label{fig:he}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{H_E1R1.pdf}
+		\caption{}
+		\label{fig:he1r1}
+	\end{subfigure}
+
+	\begin{subfigure}{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{S.pdf}
+		\caption{}
+		\label{fig:s}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{H_B.pdf}
+		\caption{}
+		\label{fig:hb}
+	\end{subfigure}
+	\caption{Schematics of the filter components. See Section 3 for the sampling frequency.}
+\end{figure}
+
+
 
 
 
