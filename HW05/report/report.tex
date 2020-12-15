@@ -97,7 +97,7 @@ The bridge impedance is computed as the ratio between the pressure on the top pl
 	Z_h &= \mathrm{j}\omega M_h + R_h \quad &\text{where } M_h = \frac{m_h}{A_h^2}.
 \end{align*}
 
-The system can be thought of as composed of two coupled oscillators: one is the top plate, while the other is the  cavity/sound hole resonator. The resulting equivalent circuit can be seen in Fig. \ref{fig:2mass}.
+The system can be thought of as composed by two coupled oscillators: one is the top plate, while the other is the  cavity/sound hole resonator. The resulting equivalent circuit can be seen in Fig. \ref{fig:2mass}.
 
 
 \begin{wrapfigure}{R}{0.4\linewidth}
@@ -160,7 +160,7 @@ The filter $H_{E1R1}(s)$ represents the transmission of the excitation signal fr
 
 We then have $S(s) = \frac{1}{1 - H_{loop}(s)}$, where $H_{loop}(s)$ is the transfer function of a single loop of the signal from the bridge to the nut and back to the bridge. This part is represented as a feedback loop, shown in Fig. \ref{fig:s}, and the feedback filter is the series of a loss factor, a delay (corresponding to twice the time necessary for the signal to travel the length of the string) and a lowpass. The lowpass was implemented with a 2-point moving average, like in the Karplus-Strong algorithm.
 
-Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \right]$. This represents the load due to the bridge (and body) of the guitar and therefore we will use the impedance we obtained earlier as $Z(s)$. The reflection filter of the bridge can be considered roughly constant and equal to -1, thus the gain factor of 2. The integrator is needed because, as mentioned earlier, we are using the acceleration as the wave variable.
+Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \right]$, shown in Fig. \ref{fig:hb}. This represents the load due to the bridge (and body) of the guitar and therefore we will use the impedance we obtained earlier as $Z(s)$. Notice that we need to multiply $Z$ by $A_p^2$ because, since the output of the filter is a force and not a pressure, we need a mechanical impedance. The reflection filter of the bridge can be considered roughly constant and equal to -1, thus the gain factor of 2. The integrator is needed because, as mentioned earlier, we are using the acceleration as the wave variable.
 
 \begin{figure}[h]
 	\centering
@@ -208,6 +208,13 @@ The resulting $H_{EB}$ has been plotted as a function of the frequency in Fig. \
 
 \section{Making a sound: the time domain response}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{spatial.png}
+	\caption{Initial displacement, slope and curvature of the discretized string.}
+	\label{fig:space}
+\end{figure}
+
 We now turn to investigating the response of our model to a pluck with maximum displacement $d = \SI{3}{\milli\meter}$. We follow here \cite{smith92} to obtain a suitable input signal to model this situation. If $\beta L$ is the distance from the bridge to the plucking point, the initial configuration of the string will be:
 $$ 
 y(x, 0) = \left\{
@@ -221,9 +228,9 @@ We can recover the initial acceleration noting that, thanks to the wave equation
 $$
 \ddot y(x, 0) = c^2 \biggl( \frac{d}{\beta L} + \frac{d}{(1 - \beta) L} \biggr) \delta(x - \beta L).
 $$
-Now, when implementing a digital waveguide we need to sample both the time and the spatial variable. The sampling interval in time and the sampling interval in space must satisfy $X = cT$, where $c$ is the wave velocity in the string. Furthermore, the input needs to be bandlimited in the spatial frequency. If we use an ideal lowpass for antialiasing and convolve it with the impulse, we get $\ddot y (x, 0) \propto \mathrm{sinc}\left( \frac{x-\beta L}{X} \right)$. If $\beta L$ is an integer multiple of $X$, this becomes a discrete impulse, which allows us to lump the excitation on a single point of the waveguide and thus to commute the components of the filters like we saw in the previous section.
+Now, when implementing a digital waveguide we need to sample both the time and the spatial variable. The sampling interval in time and the sampling interval in space must satisfy $X = cT$, where $c$ is the wave velocity in the string. Furthermore, the input needs to be bandlimited in the spatial frequency. If we use an ideal lowpass for antialiasing and convolve it with the impulse, we get $\ddot y (x, 0) \propto \mathrm{sinc}\left( \frac{x-\beta L}{X} \right)$. If $\beta L$ is an integer multiple of $X$, after sampling this becomes a discrete impulse at the excitation point, which allows us to lump the excitation on a single point of the waveguide and thus to commute the components of the filter like we saw in the previous section.
 
-Fig. \ref{fig:dleng} shows the time history of the force on the bridge when using the input described above.
+Fig. \ref{fig:dleng} shows the time history of the force on the bridge when using the input described above. Here too $\beta = 1/5$. The sampling frequency is $f_S = \SI{16.4}{\kilo\hertz}$ and it was chosen based on the preceding discussion. The force has also been exported as a \texttt{.wav} file, and it can be heard at \href{https://polimi365-my.sharepoint.com/personal/10743504_polimi_it/_layouts/15/onedrive.aspx?id=%2Fpersonal%2F10743504%5Fpolimi%5Fit%2FDocuments%2Fout%5Frender%2Ewav&parent=%2Fpersonal%2F10743504%5Fpolimi%5Fit%2FDocuments&originalPath=aHR0cHM6Ly9wb2xpbWkzNjUtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvMTA3NDM1MDRfcG9saW1pX2l0L0Vka281U0p1a1RsQXQxeTd3WGgyWW1FQlo4UDFhYnIwSXNweUJNU2cyRWV5aWc_cnRpbWU9c0tjQy1UaWgyRWc}{this link}.
 
 
 \begin{figure}[h]
