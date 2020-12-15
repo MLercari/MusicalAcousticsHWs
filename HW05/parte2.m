@@ -141,19 +141,30 @@ figure(13);
 dx = c/(Fs);
 x = 0:dx:L;
 %disp
+subplot 311
 y_x = (disp/(beta*L)).*x.*(heaviside(x) - heaviside(x - beta*L)) +( disp - (disp/(L - beta*L)).*(x - beta*L)).*heaviside(x - beta*L);
-plot(x , y_x);
+plot(x , y_x, 'Color', 'k', 'LineWidth', 1);
 xlim([ 0 L])
+grid on;
+xlabel("x $[m]$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("s $[m]$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 %ylim([0 disp])
-hold on;
+subplot 312
 %vel
 v_x = diff(y_x)./diff(x);
 x(end) = [];
-plot(x , v_x);
+plot(x , v_x, 'Color', 'r', 'LineWidth', 1);
+grid on;
+xlabel("x $[m]$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("v $[\frac{m}{s}]$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
+subplot 313
 %curv
 a_x = diff(v_x)./diff(x);
 x(end) = [];
-plot(x , a_x);
+plot(x , a_x, 'Color', 'b', 'LineWidth', 1);
+grid on;
+xlabel("x [m]" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex');
+ylabel("a $[\frac{m}{s^2}]$" ,'FontSize',12,'FontWeight','bold','Color','k','interpreter','latex')
 
 %per donzo: nota che il valore della curvatura moltiplicato per dx epoi 
 % per c^2 è (molto) simile all'accelerazione in input (che è ipotizzata
