@@ -97,7 +97,7 @@ The bridge impedance is computed as the ratio between the pressure on the top pl
 	Z_h &= \mathrm{j}\omega M_h + R_h \quad &\text{where } M_h = \frac{m_h}{A_h^2}.
 \end{align*}
 
-The system can be thought of as composed of two coupled oscillators: one is the top plate, while the other is the  cavity/sound hole resonator. The resulting equivalent circuit can be seen in Fig. \ref{fig:2mass}.
+The system can be thought of as composed by two coupled oscillators: one is the top plate, while the other is the  cavity/sound hole resonator. The resulting equivalent circuit can be seen in Fig. \ref{fig:2mass}.
 
 
 \begin{wrapfigure}{R}{0.4\linewidth}
@@ -160,7 +160,7 @@ The filter $H_{E1R1}(s)$ represents the transmission of the excitation signal fr
 
 We then have $S(s) = \frac{1}{1 - H_{loop}(s)}$, where $H_{loop}(s)$ is the transfer function of a single loop of the signal from the bridge to the nut and back to the bridge. This part is represented as a feedback loop, shown in Fig. \ref{fig:s}, and the feedback filter is the series of a loss factor, a delay (corresponding to twice the time necessary for the signal to travel the length of the string) and a lowpass. The lowpass was implemented with a 2-point moving average, like in the Karplus-Strong algorithm.
 
-Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \right]$, shown in Fig. \ref{fig:hb}. This represents the load due to the bridge (and body) of the guitar and therefore we will use the impedance we obtained earlier as $Z(s)$. The reflection filter of the bridge can be considered roughly constant and equal to -1, thus the gain factor of 2. The integrator is needed because, as mentioned earlier, we are using the acceleration as the wave variable.
+Finally, we have the bridge filter $H_B(s) = Z(s)\frac{1}{s} \left[ 1 - R_b(s) \right]$, shown in Fig. \ref{fig:hb}. This represents the load due to the bridge (and body) of the guitar and therefore we will use the impedance we obtained earlier as $Z(s)$. Notice that we need to multiply $Z$ by $A_p^2$ because, since the output of the filter is a force and not a pressure, we need a mechanical impedance. The reflection filter of the bridge can be considered roughly constant and equal to -1, thus the gain factor of 2. The integrator is needed because, as mentioned earlier, we are using the acceleration as the wave variable.
 
 \begin{figure}[h]
 	\centering
