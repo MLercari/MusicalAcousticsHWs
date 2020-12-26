@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{csquotes}
 \usepackage{amsmath} % per ambienti tipo cases
 \usepackage{amssymb}
 \usepackage{mathtools}
@@ -99,17 +100,22 @@ Given the pressure difference $\Delta p$ between the player's mouth and the flue
 \]
 where $v_2 = U_j$ is the jet velocity in the channel, $v_1 = 0$ is the air velocity in the player's mouth (assumed negligible) and $p_1$ and $p_2$ are the corresponding pressures.
 
-Now, we know that the amplification of the jet perturbation is strongly dependent on the frequency of the acoustic field, and that it is strongest for frequencies around $0.3U_j / h$. This allows us to choose $h$ according to the desired spectral characteristics of the instrument: we can "tune" the channel thickness to maximize the perturbation amplification at a target spectral centroid $f_c$, choosing $ h = 0.3 U_j / f_c$.
+Now, we know that the amplification of the jet perturbation is strongly dependent on the frequency of the acoustic field, and that it is strongest for frequencies around $0.3U_j / h$. This allows us to choose $h$ according to the desired spectral characteristics of the instrument: we can \textquote{tune} the channel thickness to maximize the perturbation amplification at a target spectral centroid $f_c$, choosing $ h = 0.3 U_j / f_c$.
 
-Our specific situation is:
+In our particular case we can compute:
 \begin{align*}
-		&\Delta p = \SI{62}{\pascal},~ f_c = \SI{2}{\kilo\hertz},~ \rho_0 = \SI{1.2}{\kilogram\per\meter\cubed} &\longrightarrow \quad &h = \SI{1.5}{\milli\metre}\\
+		&\Delta p = \SI{62}{\pascal},~ f_c = \SI{2}{\kilo\hertz},~ \rho_0 = \SI{1.2}{\kilogram\per\meter\cubed} &\longrightarrow \quad &\boxed{h = \SI{1.5}{\milli\metre}}\\
 \end{align*}
 
-The structure of the jet can be characterized computing the Reynolds number:
+The structure of the jet can be characterized using the Reynolds number:
 
 $$ \mathrm{Re} = \frac{U_j h}{\nu} = 1033.3 $$
 
 where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air.
+
+\subsection{Boundary layer effects}
+Of course the result for the flow velocity we found above is only valid at the center of the flow. Indeed, even if the fluid can be safely assumed to be frictionless in open space, the boundary conditions in a channel make the viscosity effects significant near the walls. There will be a thin layer extending from the boundary into the fluid where the velocity increases rapidly from zero to the value $U_j$: this is the so-called \emph{boundary layer}. The thickness of the boundary layer at position x along the channel is:
+$$ \delta(x) \approx \sqrt{\frac{\nu x}{U_j}}. $$
+This means that for a channel length of 20 mm we get $\delta = \SI{0.54}{\milli\meter}$, with $\delta/h = 0.36$.
 
 \end{document} 
