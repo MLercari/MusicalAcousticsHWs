@@ -89,5 +89,27 @@
 	
 \end{titlepage}
 
+\section{Flue channel and mouth}
+\subsection{Channel thickness}
 
-\end{document}
+Given the pressure difference $\Delta p$ between the player's mouth and the flue channel entrance, the flow velocity $U_j$ in the flue channel can be easily recovered from the Bernoulli equation:
+\[
+	\frac{1}{2} \rho_0 \left( v_2^2 - v_1^2 \right) = p_2 - p_1 \quad \Rightarrow \quad
+	U_j = \sqrt{\frac{2\Delta p}{\rho_0}}
+\]
+where $v_2 = U_j$ is the jet velocity in the channel, $v_1 = 0$ is the air velocity in the player's mouth (assumed negligible) and $p_1$ and $p_2$ are the corresponding pressures.
+
+Now, we know that the amplification of the jet perturbation is strongly dependent on the frequency of the acoustic field, and that it is strongest for frequencies around $0.3U_j / h$. This allows us to choose $h$ according to the desired spectral characteristics of the instrument: we can "tune" the channel thickness to maximize the perturbation amplification at a target spectral centroid $f_c$, choosing $ h = 0.3 U_j / f_c$.
+
+Our specific situation is:
+\begin{align*}
+		&\Delta p = \SI{62}{\pascal},~ f_c = \SI{2}{\kilo\hertz},~ \rho_0 = \SI{1.2}{\kilogram\per\meter\cubed} &\longrightarrow \quad &h = \SI{1.5}{\milli\metre}\\
+\end{align*}
+
+The structure of the jet can be characterized computing the Reynolds number:
+
+$$ \mathrm{Re} = \frac{U_j h}{\nu} = 1033.3 $$
+
+where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air.
+
+\end{document} 

@@ -71,8 +71,15 @@ D2Value = double(SolD2);
 %third approach: conical shape and small finger hole (to be continued!)
 
 
+%% question 4
+dp = 62;    %[Pa] pressure difference btw player's mouth and exit of flue channel
+fc = 2e3;   %[Hz] target spectral centroid
+U = sqrt((2*dp)/rho);   %[m/s] flow velocity
+h = 0.3*(U/fc);     % [m] channel thickness
 
+nu = 1.5e-5;    %[m^2/s] kinematic viscosity of air
 
+Re = (U*h)/nu;  % Reynolds number
 
 
 
