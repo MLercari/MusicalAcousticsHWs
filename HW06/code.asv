@@ -26,7 +26,7 @@ x1value = subs(solx1, solk);
 x1value = double(x1value);
 
 % x1 = 4.7802 m
-
+Lcorr = L + 0.6*(x1value + L)*tan(theta);
 S1 = (x1value*tan(theta))^2*pi;
 a1 = x1value*tan(theta);
 %diameter of resonator head = 0.1252 m
@@ -53,12 +53,12 @@ S = S1;
 
 syms D
 assume(D > 0)
-Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta)) == 0;
-
+%Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta)) == 0;
+Zcy = 1i*Z0*tan(k2*(Lcorr - D - Delta^2/(D + 2*Delta))) == 0;
 %imposing Zcy equal to zero in order to find D
  solD = vpasolve(Zcy, D, [0 inf]);
  Dvalue = double(solD);
-%D is 0.4473 m -> no physical meaning 
+
 
 %SECOND APPROACH: conical bore impedance minus finger hole's impedance and 
 % cylindrical bore impedance
@@ -77,9 +77,9 @@ D2Value = double(SolD2);
 
 %THIRD APPROACH: conical shape and small finger hole
 
-%small finger hole: here the finger hole has the radius equal to L*12/2% = 0.054 (for a tone).
+%small finger hole: here the finger hole has the radius equal to L*12/4% .
 %In this way we are sure the finger hole is located within the recorder.
-S = (L*0.12)^2*pi; 
+S = (L*0.12/4)^2*pi; 
 %end correction for this model
 Delta = 0.6*a2;
 %the finger hole's acoustic length is not equal to Delta but proportional
@@ -101,9 +101,10 @@ D3Value = double(SolD3);
 
 %FOURTH APPROACH: small finger holes and cylindrical bore
 Delta = 0.6*a1; 
+
 syms D4
 assume (D3 > 0 )
-Zcy4 = 1i*Z0*tan(k2*L) - (-1i*(S/rho*c)*cot(k2*l))^(-1) -1i*(S1/(rho*c))*cot(k2*(Delta + D4))) == 0;
+Zcy4 = 1i*Z0*tan(k2*Lcorr) - (-1i*(S/rho*c)*cot(k2*l) -1i*(S1/(rho*c))*cot(k2*(Delta + D4)))^(-1) == 0;
 SolD4 = vpasolve(Zcy4, D4, [0 inf]);
 D4Value = double(SolD4);
 
