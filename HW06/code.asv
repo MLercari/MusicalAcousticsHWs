@@ -28,12 +28,13 @@ a1 = x1value*tan(theta);
 %diameter of resonator head = 0.1252 m
 d1 = a1*2; 
 a2 = (x1value + L)*tan(theta);
+S2 = (a2^2)*pi;
 %diameter of resonator foot =  0.1369 m
 d2 = a2*2;
 
 %% H6 Question Two and Three
 
-% first approach: simplify model because conical angle is very small: 
+% FIRST APPROACH: simplify model because conical angle is very small: 
 % cylindrical bore with section S1 and finger hole with area Sh = S1. 
 
 % characteristic impedance of a cylindrical horn
@@ -43,6 +44,7 @@ Delta = 0.6*a1;
 %new frequency
 G4 = 392; 
 k2 = G4*2*pi/c;
+%assume the finger hole has the same area as the cylinder so that l = Delta
 S = S1;
 
 syms D
@@ -52,24 +54,43 @@ Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta))== 0;
 %imposing Zcy equal to zero in order to find D
  solD = solve(Zcy, D);
  Dvalue = double(solD);
-%D is 0.4473 m
+%D is 0.4473 m -> no physical meaning 
 
-%second approach: conical bore with section from finger hole to 
-% foot constant and finger hole's section Sh = S1
+%SECOND APPROACH: conical bore impedance minus finger hole's impedance and 
+% cylindrical bore impedance
 
+%here we assume the finger hole area is the same as the head area S = S1
 syms D2
 assume (D2 > 0 )
-Zin2 = 1i*(rho*c)/(S1)*(sin(k2*(L - D2 - (Delta^2)/(D2 +  ...
-2*Delta)))*sin(atan(k2*x1value)))/sin(k2*(L - D2 - (Delta^2)/(D2 +  ...
-2*Delta) + (1/k2)*atan(k2*x1value))) == 0;
+Zin2 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*atan(k2*x1value)))) ...
+    - 1i*2*pi*G4*rho*(D2 + (Delta^2/(D2 + 2*Delta)))/S == 0;
 
 %imposing Zin2 equal to zero in order to find D2
 SolD2 = solve(Zin2, D2);
 D2Value = double(SolD2);
-%D is 0.4473 m -> very strange!
+%NO SOLUTION
 
-%third approach: conical shape and small finger hole (to be continued!)
 
+%THIRD APPROACH: conical shape and small finger hole
+
+%small finger hole: here the finger hole has the radius equal to L*12/2% = 0.054 (for a tone).
+%In this way we are sure the finger hole is located within the recorder.
+S = (L*0.12)^2*pi/2; 
+
+%the finger hole's acoustic length is not equal to Delta but proportional
+%to the finger hole area
+l = Delta*(S/S1);
+
+syms D3
+assume (D3 > 0 )
+Zin3 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*atan(k2*x1value)))) ...
+    - ( -1i*(S/(rho*c))*cot(k2*l) - ... %admittance of the hole and conical end correction
+    1i*(((x1value + L - D)*tan(theta))^2*pi)/(rho*c))*(sin(k2*(Delta + D3 + ... 
+    (1/k2)*atan(k2*x1value)))/(sin(k2*(Delta + D3))*sin(atan(k2*x1value)))))^(-1) == 0
+
+%imposing Zin3 equal to zero in order to find D2
+SolD3 = solve(Zin3, D3);
+D3Value = double(SolD3);
 
 %% question 4
 dp = 62;    %[Pa] pressure difference btw player's mouth and exit of flue channel
@@ -77,7 +98,11 @@ fc = 2e3;   %[Hz] target spectral centroid
 U = sqrt((2*dp)/rho);   %[m/s] flow velocity
 h = 0.3*(U/fc);     % [m] channel thickness
 
-Re
+nu = 1.5e-5;    %[m^2/s] kinematic viscosity of air
 
+Re = (U*h)/nu;  % Reynolds number
 
+%% question 5
+Lc = 0.2;   %[m] channel length
+delta = sqrt((nu*Lc)/U);    %[m] boundary layer thickness at the exit
 
