@@ -33,7 +33,7 @@ d2 = a2*2;
 
 %% H6 Question Two and Three
 
-% FIRST APPROACH: simplify model because conical angle is very small: 
+% first approach: simplify model because conical angle is very small: 
 % cylindrical bore with section S1 and finger hole with area Sh = S1. 
 
 % characteristic impedance of a cylindrical horn
@@ -54,7 +54,7 @@ Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta))== 0;
  Dvalue = double(solD);
 %D is 0.4473 m
 
-%SECOND APPROACH: conical bore with section from finger hole to 
+%second approach: conical bore with section from finger hole to 
 % foot constant and finger hole's section Sh = S1
 
 syms D2
@@ -77,11 +77,7 @@ fc = 2e3;   %[Hz] target spectral centroid
 U = sqrt((2*dp)/rho);   %[m/s] flow velocity
 h = 0.3*(U/fc);     % [m] channel thickness
 
-nu = 1.5e-5;    %[m^2/s] kinematic viscosity of air
+Re
 
-Re = (U*h)/nu;  % Reynolds number
 
-%% question 5
-Lc = 0.2;   %[m] channel length
-delta = sqrt((nu*Lc)/U);    %[m] boundary layer thickness at the exit
 

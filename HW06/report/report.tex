@@ -1,0 +1,121 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath} % per ambienti tipo cases
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{graphicx} % per includere figure
+%\usepackage{subfigure}
+\usepackage{booktabs} % per le tabelle
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[section]{placeins}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[subfigure]{labelfont=rm}
+\usepackage{verbatim} %multiline comments
+\usepackage{wrapfig}
+\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
+\addbibresource{source.bib}	% uncomment for bibliography
+
+
+
+%opening
+\title{}
+\author{}
+
+\pagestyle{fancy}
+\lhead{Musical Acoustics}
+\chead{H6}
+\rhead{10743504, 10751919}
+\newcommand{\Rarrow}{\mbox{\Large$\Rightarrow$}}
+
+\begin{document}
+
+\begin{titlepage}	
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center % Centre everything on the page
+	
+	%------------------------------------------------
+	%	Headings
+	%------------------------------------------------
+	
+	\includegraphics[width=.4\textwidth]{Logo_Politecnico_Milano.png}\\[0.4cm]
+	\textsc{\LARGE}\\[0.3cm] % Main heading such as the name of your university/college
+	
+	\textsc{\large MSc. Music and Acoustic Engineering}\\[1cm] % Minor heading such as course title
+	
+	\textsc{\Large Musical Acoustics - A.Y. 2020/2021}\\[0.5cm] % Major heading such as course name
+	
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries H6 - Design of a Recorder Flute }\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	
+	
+	
+	{\large\textit{Authors' IDs:}}\\
+	10743504, 10751919, % Your name
+	%\\ \textsc{Gruppo 11}
+	
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+	
+	\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large\today} % Date, change the \today to a set date if you want to be precise
+	
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	
+	\vfill\vfill
+	%\includegraphics[width=0.2\textwidth]{Politecnico_di_Milano.eps}\\[1cm] % Include a department/university logo - this will require the graphicx package
+	
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Push the date up 1/4 of the remaining page
+	
+	
+\end{titlepage}
+
+\section{Flue channel and mouth}
+\subsection{Channel thickness}
+
+Given the pressure difference $\Delta p$ between the player's mouth and the flue channel entrance, the flow velocity $U_j$ in the flue channel can be easily recovered from the Bernoulli equation:
+\[
+	\frac{1}{2} \rho_0 \left( v_2^2 - v_1^2 \right) = p_2 - p_1 \quad \Rightarrow \quad
+	U_j = \sqrt{\frac{2\Delta p}{\rho_0}}
+\]
+where $v_2 = U_j$ is the jet velocity in the channel, $v_1 = 0$ is the air velocity in the player's mouth (assumed negligible) and $p_1$ and $p_2$ are the corresponding pressures.
+
+Now, we know that the amplification of the jet perturbation is strongly dependent on the frequency of the acoustic field, and that it is strongest for frequencies around $0.3U_j / h$. This allows us to choose $h$ according to the desired spectral characteristics of the instrument: we can \textquote{tune} the channel thickness to maximize the perturbation amplification at a target spectral centroid $f_c$, choosing $ h = 0.3 U_j / f_c$.
+
+In our particular case we can compute:
+\begin{align*}
+		&\Delta p = \SI{62}{\pascal},~ f_c = \SI{2}{\kilo\hertz},~ \rho_0 = \SI{1.2}{\kilogram\per\meter\cubed} &\longrightarrow \quad &\boxed{h = \SI{1.5}{\milli\metre}}\\
+\end{align*}
+
+The structure of the jet can be characterized using the Reynolds number:
+
+$$ \mathrm{Re} = \frac{U_j h}{\nu} = 1033.3 $$
+
+where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air.
+
+\subsection{Boundary layer effects}
+Of course the result for the flow velocity we found above is only valid at the center of the flow. Indeed, even if the fluid can be safely assumed to be frictionless in open space, the boundary conditions in a channel make the viscosity effects significant near the walls. There will be a thin layer extending from the boundary into the fluid where the velocity increases rapidly from zero to the value $U_j$: this is the so-called \emph{boundary layer}. The thickness of the boundary layer increases along the length of the channel: at position x along the channel it is:
+$$ \delta(x) \approx \sqrt{\frac{\nu x}{U_j}}. $$
+This means that for a channel length of 20 mm we get $\delta = \SI{0.54}{\milli\meter}$, with $\delta/h = 0.36$.
+
+\end{document} 
