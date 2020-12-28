@@ -33,7 +33,7 @@ d2 = a2*2;
 
 %% H6 Question Two and Three
 
-% first approach: simplify model because conical angle is very small: 
+% FIRST APPROACH: simplify model because conical angle is very small: 
 % cylindrical bore with section S1 and finger hole with area Sh = S1. 
 
 % characteristic impedance of a cylindrical horn
@@ -54,7 +54,7 @@ Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta))== 0;
  Dvalue = double(solD);
 %D is 0.4473 m
 
-%second approach: conical bore with section from finger hole to 
+%SECOND APPROACH: conical bore with section from finger hole to 
 % foot constant and finger hole's section Sh = S1
 
 syms D2
