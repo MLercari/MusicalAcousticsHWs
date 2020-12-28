@@ -1,3 +1,7 @@
+clear all
+close all
+clc
+
 %% H6 Question One 
 
 %data 
@@ -49,7 +53,7 @@ S = S1;
 
 syms D
 assume(D > 0)
-Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta))== 0;
+Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta)) == 0;
 
 %imposing Zcy equal to zero in order to find D
  solD = vpasolve(Zcy, D, [0 inf]);
@@ -93,6 +97,15 @@ Zin3 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*a
 
 SolD3 = vpasolve(Zin3, D3, [0 inf]);
 D3Value = double(SolD3);
+%VALUE WITH NO PHYSICAL MEANING
+
+%FOURTH APPROACH: small finger holes and cylindrical bore
+Delta = 0.6*a1; 
+syms D4
+assume (D3 > 0 )
+Zcy4 = 1i*Z0*tan(k2*L) - (-1i*(S/rho*c)*cot(k2*l) -1i*(S1/(rho*c))*cot(k2*(Delta + D4)))^(-1) == 0;
+SolD4 = vpasolve(Zcy4, D4, [0 inf]);
+D4Value = double(SolD4);
 
 %% question 4
 dp = 62;    %[Pa] pressure difference btw player's mouth and exit of flue channel
