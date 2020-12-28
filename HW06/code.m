@@ -52,7 +52,7 @@ assume(D > 0)
 Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta))== 0;
 
 %imposing Zcy equal to zero in order to find D
- solD = solve(Zcy, D);
+ solD = vpasolve(Zcy, D, [0 inf]);
  Dvalue = double(solD);
 %D is 0.4473 m -> no physical meaning 
 
@@ -66,7 +66,7 @@ Zin2 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*a
     - 1i*2*pi*G4*rho*(D2 + (Delta^2/(D2 + 2*Delta)))/S == 0;
 
 %imposing Zin2 equal to zero in order to find D2
-SolD2 = solve(Zin2, D2);
+SolD2 = vpasolve(Zin2, D2, [0 inf]);
 D2Value = double(SolD2);
 %NO SOLUTION
 
@@ -75,21 +75,23 @@ D2Value = double(SolD2);
 
 %small finger hole: here the finger hole has the radius equal to L*12/2% = 0.054 (for a tone).
 %In this way we are sure the finger hole is located within the recorder.
-S = (L*0.12)^2*pi/2; 
-
+S = (L*0.12)^2*pi; 
+%end correction for this model
+Delta = 0.6*a2;
 %the finger hole's acoustic length is not equal to Delta but proportional
 %to the finger hole area
 l = Delta*(S/S1);
 
 syms D3
 assume (D3 > 0 )
-Zin3 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*atan(k2*x1value)))) ...
-    - ( -1i*(S/(rho*c))*cot(k2*l) - ... %admittance of the hole and conical end correction
+Zin3 = 1i*(rho*c)/(S1) * (sin(k2*L)*sin(atan(k2*x1value)))/(sin(k2*(L + (1/k2)*atan(k2*x1value)))) - ...
+     ( -1i*(S/(rho*c))*cot(k2*l) - ... %admittance of the hole and conical end correction
     1i*(((x1value + L - D3)*tan(theta))^2*pi)/(rho*c) *(sin(k2*(Delta + D3 + ... 
-    (1/k2)*atan(k2*(x1value + L - D3))))/(sin(k2*(Delta + D3))*sin(atan(k2*(x1value + L - D3))))))^(-1) == 0
+    (1/k2)*atan(k2*(x1value + L - D3))))/(sin(k2*(Delta + D3))*sin(atan(k2*(x1value + L - D3))))))^(-1) == 0;
 
 %imposing Zin3 equal to zero in order to find D2
-SolD3 = solve(Zin3, D3);
+
+SolD3 = vpasolve(Zin3, D3, [0 inf]);
 D3Value = double(SolD3);
 
 %% question 4
