@@ -54,13 +54,29 @@ S = S1;
 syms D
 assume(D > 0)
 %Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta)) == 0;
-Zcy = 1i*Z0*tan(k2*(Lcorr - D - Delta^2/(D + 2*Delta))) == 0;
+d = D + Delta^2/(D + 2*Delta);
+Zcy = 1i*Z0*tan(k2*(Lcorr - d)) == 0;
 %imposing Zcy equal to zero in order to find D
  solD = vpasolve(Zcy, D, [0 inf]);
  Dvalue = double(solD);
 
+%FOURTH APPROACH: small finger holes and cylindrical bore
+Delta = 0.6*a1; 
+S = (L*0.12/10)^2*pi; 
+%the finger hole's acoustic length is not equal to Delta chosen as 0.015
+l = 0.015;
 
-%SECOND APPROACH: conical bore impedance minus finger hole's impedance and 
+syms D4
+assume (D4 > 0 )
+% Yhole = -1i*(S/(rho*c))*cot(k2*l);
+% Ypipe = -1i*(S1/(rho*c))*cot(k2*(Delta + D4));
+d4 = S*(D4 + Delta)^2/(S*(D4 + Delta) + S1*l);
+Zcy4 = 1i*Z0*tan(k2*(Lcorr -d4)) == 0;
+SolD4 = vpasolve(Zcy4, D4, [0 inf]);
+D4Value = double(SolD4);
+
+%{
+%SECOND APPROACH: conical bore impedance minus finger hole's impedance and
 % cylindrical bore impedance
 
 %here we assume the finger hole area is the same as the head area S = S1
@@ -79,12 +95,11 @@ D2Value = double(SolD2);
 
 %small finger hole: here the finger hole has the radius equal to L*12/4% .
 %In this way we are sure the finger hole is located within the recorder.
-S = (L*0.12/4)^2*pi; 
+S = (L*0.12/10)^2*pi; 
 %end correction for this model
 Delta = 0.6*a2;
-%the finger hole's acoustic length is not equal to Delta but proportional
-%to the finger hole area
-l = Delta*(S/S1);
+%the finger hole's acoustic length is not equal to Delta chosen as 0.015
+l = 0.015;
 
 syms D3
 assume (D3 > 0 )
@@ -99,14 +114,20 @@ SolD3 = vpasolve(Zin3, D3, [0 inf]);
 D3Value = double(SolD3);
 %VALUE WITH NO PHYSICAL MEANING
 
-%FOURTH APPROACH: small finger holes and cylindrical bore
-Delta = 0.6*a1; 
 
-syms D4
-assume (D3 > 0 )
-Zcy4 = 1i*Z0*tan(k2*Lcorr) - (-1i*(S/rho*c)*cot(k2*l) -1i*(S1/(rho*c))*cot(k2*(Delta + D4)))^(-1) == 0;
-SolD4 = vpasolve(Zcy4, D4, [0 inf]);
-D4Value = double(SolD4);
+%} 
+%% question 3
+
+k3 = 440*2*pi/c;
+D = D4Value;
+syms dist
+assume (dist > 0 )
+Delta_prime = (S1*l*(D + Delta))/(S*(D + Delta) + S1*l);
+Delta_sec = l*(dist/S1 + Delta_prime/S1)/(dist/S1 + Delta_prime/S1 + l/S);
+d3 = D + dist + Delta - Delta_sec;
+Z3 = 1i*Z0*tan(k3*(Lcorr - d3)) == 0;
+Soldist = vpasolve(Z3, dist, [0 inf]);
+distValue = double(Soldist);
 
 %% question 4
 dp = 62;    %[Pa] pressure difference btw player's mouth and exit of flue channel
