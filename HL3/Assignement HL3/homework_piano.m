@@ -156,14 +156,11 @@ for n = 1:length(t)
         eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);
   end
   
-
-  
-
     
     for m = 1:length(x)
         
       %forcing term definition at any time step
-    if(eta(n+1) < y(n+1, m0)) %to be checked: if the hammer is no more in contact with the string
+    if(eta(n) < y(n, m0)) %to be checked: if the hammer is no more in contact with the string
         F(n,m) = 0;
     else
         F(n,m) = Fh(n)'*g(m); %windowed with the hanning
@@ -197,6 +194,15 @@ for n = 1:length(t)
 end
 
 %% Plot the displacement in time
+for i = 1:length(t)
+
+    time = i*ts;
+    figure(1);
+    plot(x, y(i,:));
+    title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('x-axis'); ylabel('y-axis');
+    %axis([0,L,-1,1]); 
+    
+end
 
 %% Plot the synthesized signal play it and save it on the disk
 
