@@ -19,7 +19,7 @@ clc
 % as C2.
 
 % Temporal sampling parameters
-fs = 16e3; %[Hz] sampling frequency
+fs = 4*44.1e3; %[Hz] sampling frequency
 %fs = 4*44.1e3; %[Hz] suggested by Saitis  -> it takes a lot of time
 ts = 1/fs;
 duration = 8; %[s] signal length
@@ -59,16 +59,16 @@ X_min = L/N_max;
 
 % Spatial sampling
 N = N_max - 1;
-%X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
+X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
 %X = X_max - 0.0005; %according to Saitis
-X = L/521; %suggested value by Saitis 
+%X = L(521; %suggested value by Saitis 
 
 if ( X > X_max )
     disp("WARNING: WRONG SPATIAL SAMPLING STEP");
 end
 
 
-x = linspace( 0 , L , L/X  ); %spatial coordinate vector 
+x = linspace( 1 , L , L/X  ); %spatial coordinate vector 
 
 % FD parameters
 lambda = c*ts/X; %Courant parameter
@@ -91,6 +91,7 @@ gloc = hann(2*w);
 g = zeros(1, length(x));
 g = [g(1:(m0 - w)-1) , gloc' , g(((m0 - w)+length(gloc)):end)];
 %g(m0-w:m0-w+length(gloc)-1)=gloc';
+
 %PDE Coefficients:
 
 % ai coefficients
@@ -153,18 +154,20 @@ for n = 1:length(t)
       Fh(n) = K*(abs(eta(n) - y(n, m0)))^p;
       
   else
+      
+        %hammer displacement - it is needed Fh(n) to compute eta(n+1)
+        eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);
+        
         %power law  - it needs to be before eta!
         Fh(n) = K*(abs(eta(n) - y(n, m0)))^p; 
   
-        %hammer displacement - it is needed Fh(n) to compute eta(n+1)
-        eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);
+
   end
   
     
     for m = 1:length(x)
         
     
-       
       %forcing term definition at any time step
     if(eta(n) < y(n, m0)) %to be checked: if the hammer is no more in contact with the string
         Fh(n) = 0;
@@ -175,7 +178,7 @@ for n = 1:length(t)
     
     %boundary conditions
     if(m==1) %if m = 0
-        y(n+1, m) = bl1*y(n, m) + bl2*y(n, m+1) + bl3*y(n, m +3) + ...
+        y(n+1, m) = bl1*y(n, m) + bl2*y(n, m+1) + bl3*y(n, m +2) + ...
             bl4*y(n-1, m) + blf*F(n,m);
     
     elseif (m== length(x)) % if m = M
@@ -193,7 +196,7 @@ for n = 1:length(t)
     else 
         %backward finite difference scheme "inside the domain"
         y(n+1,m) = a1*(y(n, m+2) + y(n, m-2)) + a2*(y(n, m+1) + y(n, m-1)) + ...
-            a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1, m+1) + y(n-1,m+1)) + af*F(n,m);
+            a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1, m+1) + y(n-1,m-1)) + af*F(n,m);
     
     end
     
