@@ -19,7 +19,8 @@ clc
 % as C2.
 
 % Temporal sampling parameters
-fs = 44.1e3; %[Hz] sampling frequency
+fs = 48e3; %[Hz] sampling frequency
+%fs = 4*44.1e3; %[Hz] suggested by Saitis  -> it takes a lot of time
 ts = 1/fs;
 duration = 8; %[s] signal length
 tSamples = duration*fs;
@@ -59,7 +60,8 @@ X_min = L/N_max;
 % Spatial sampling
 N = N_max - 1;
 %X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
-X = X_max; %according to Saitis
+%X = X_max - 0.0005; %according to Saitis
+X = L/521; %suggested value by Saitis 
 
 if ( X > X_max )
     disp("WARNING: WRONG SPATIAL SAMPLING STEP");
@@ -87,8 +89,8 @@ wh = 0.02; %[m] width of the hammer
 w = ceil(wh/X); %sample of the hammer's width
 gloc = hann(2*w);
 g = zeros(1, length(x));
-%g = [g(1:(m0 - w)-1) , gloc' , g(((m0 - w)+length(gloc)):end)];
-g(m0-w:m0-w+length(gloc)-1)=gloc';
+g = [g(1:(m0 - w)-1) , gloc' , g(((m0 - w)+length(gloc)):end)];
+%g(m0-w:m0-w+length(gloc)-1)=gloc';
 %PDE Coefficients:
 
 % ai coefficients
@@ -141,10 +143,10 @@ for n = 1:length(t)
   %initial conditions 
   if(n ==1) %at time t= 0 
       %the string is at rest position
-      y(1,:) = 0;
+      y(n,:) = 0;
       %hammer is set to be in contact with the string
       eta(n) = 0;
-      n = n + 1; %not sure about this
+      
       
   elseif(n ==2) %at time t = dt
       eta(n) = Vh0*ts;
@@ -161,9 +163,14 @@ for n = 1:length(t)
     
     for m = 1:length(x)
         
+       if(n==1)
+           n = n + 1; %not sure about this
+       end
+       
       %forcing term definition at any time step
     if(eta(n) < y(n, m0)) %to be checked: if the hammer is no more in contact with the string
-        F(n,m) = 0;
+        Fh(n) = 0;
+        
     else
         F(n,m) = Fh(n)'*g(m); %windowed with the hanning
     end
@@ -203,7 +210,7 @@ for i = 1:length(t)
     figure(1);
     plot(x, y(i,:));
     title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('x-axis'); ylabel('y-axis');
-    axis([0,L,-1e-5,1e-5]); 
+    %axis([0,L,-1e-5,1e-5]); 
     
 end
 
