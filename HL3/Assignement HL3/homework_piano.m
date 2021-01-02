@@ -19,7 +19,7 @@ clc
 % as C2.
 
 % Temporal sampling parameters
-fs = 4*44.1e3; %[Hz] sampling frequency
+fs = 16e3; %[Hz] sampling frequency
 ts = 1/fs;
 duration = 8; %[s] signal length
 tSamples = duration*fs;
@@ -58,8 +58,8 @@ X_min = L/N_max;
 
 % Spatial sampling
 N = N_max - 1;
-X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
-%X = X_max;
+%X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
+X = X_max; %according to Saitis
 
 if ( X > X_max )
     disp("WARNING: WRONG SPATIAL SAMPLING STEP");
@@ -148,6 +148,8 @@ for n = 1:length(t)
       
   elseif(n ==2) %at time t = dt
       eta(n) = Vh0*ts;
+      Fh(n) = K*(abs(eta(n) - y(n, m0)))^p;
+      
   else
         %power law  - it needs to be before eta!
         Fh(n) = K*(abs(eta(n) - y(n, m0)))^p; 
@@ -165,6 +167,7 @@ for n = 1:length(t)
     else
         F(n,m) = Fh(n)'*g(m); %windowed with the hanning
     end
+    
     %boundary conditions
     if(m==1) %if m = 0
         y(n+1, m) = bl1*y(n, m) + bl2*y(n, m+1) + bl3*y(n, m +3) + ...
@@ -200,7 +203,7 @@ for i = 1:length(t)
     figure(1);
     plot(x, y(i,:));
     title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('x-axis'); ylabel('y-axis');
-    %axis([0,L,-1,1]); 
+    axis([0,L,-1e-5,1e-5]); 
     
 end
 
