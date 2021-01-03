@@ -46,10 +46,12 @@ syms x1;
 th1 = atan(k*x1);
 eqn = sin(k*L)*sin(k*th1) + k*c*M*sin(k*(L+th1));   % condition Zp + Zm = 0
 
+%{
 figure(33); % check zeros to set the initial condition
 fplot(eqn);
 hold on;
 fplot(0, 'LineStyle', '--');
+%}
 
 solQ1 = vpasolve(eqn==0, x1, -1.09);
 
@@ -98,7 +100,8 @@ Zcy = 1i*Z0*tan(k2*(Lcorr - d)) == 0;
 
 %FOURTH APPROACH: small finger holes and cylindrical bore
 Delta = 0.6*a1; 
-S = (L*0.12/10)^2*pi; 
+%S = (L*0.12/29)^2*pi;
+S = pi*(0.003)^2;
 %the finger hole's acoustic length is not equal to Delta chosen as 0.015
 %btw 15 mm was def too much for the thickness of the walls so i set it to 3 mm -Mattia
 
