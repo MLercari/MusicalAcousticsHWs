@@ -139,7 +139,7 @@ y = zeros(length(t), length(x));
 F = zeros(length(t), length(x));
 
 % Computation loop
-for n = 1:length(t)
+for n = 1:length(t)-1
     
   %initial conditions 
   if(n ==1) %at time t= 0 
@@ -147,29 +147,26 @@ for n = 1:length(t)
       y(n,:) = 0;
       %hammer is set to be in contact with the string
       eta(n) = 0;
-      n = n + 1; %not sure about this
+      n = n + 1; %in order to prevent error in the space loop
       
   elseif(n ==2) %at time t = dt
       eta(n) = Vh0*ts;
       Fh(n) = K*(abs(eta(n) - y(n, m0)))^p;
       
   else
-      
-        %hammer displacement - it is needed Fh(n) to compute eta(n+1)
+        % hammer displacement approximation
         eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);
         
-        %power law  - it needs to be before eta!
+        %relative stricking force
         Fh(n) = K*(abs(eta(n) - y(n, m0)))^p; 
   
 
   end
-  
     
     for m = 1:length(x)
-        
     
       %forcing term definition at any time step
-    if(eta(n) < y(n, m0)) %to be checked: if the hammer is no more in contact with the string
+    if(eta(n) < y(n, m0)) %if the hammer is no more in contact with the string
         Fh(n) = 0;
         
     else
@@ -205,24 +202,37 @@ for n = 1:length(t)
 end
 
 %% Plot the displacement in time
-for i = 1:length(t)
-
+for i = 1:50:length(t)
+    
+    %50 step per iteration gives a nice result 
     time = i*ts;
     figure(1);
     plot(x, y(i,:));
     title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('x-axis'); ylabel('y-axis');
-    %axis([0,L,-1e-5,1e-5]); 
+    ylim([-6e-11,6e-11])
     
+  
 end
 
 %% Plot the synthesized signal play it and save it on the disk
 
 % Play the sound
-
+ r0 = ceil((L-x0)/X); %coordinate of the striking specular point
+ yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; y(:,r0+5)'; y(:,r0+6)'; ...
+     y(:,r0-1)'; y(:,r0-2)'; y(:,r0-3)'; y(:,r0-4)'; y(:,r0-5)'; y(:,r0-6)'];
+ yaudio = mean(yspec);
+ 
+ plot(t, yaudio); %Plot the estimated sound signal
+ 
+ %sound(yaudio, fs); %Play the sound
+ 
+ filename = 'strike.wav';
+ audiowrite(filename, 1e10.*yaudio,fs);
 
 
 % Save on disk
 
+%EXTRA: plot the time domain of the force in the striking point
 
 
 
