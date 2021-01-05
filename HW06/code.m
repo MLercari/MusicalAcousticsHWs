@@ -46,8 +46,7 @@ d2 = a2*2;
 syms x1;
 th1 = atan(k*x1);
 
-DL = M*pi*(x1*sin(theta))^2; %mouth end correction
-
+%URGENTE PER MATTI: controllare questa formula non sembra giusta
 eqn = sin(k*L)*sin(k*th1) + k*c*M*sin(k*(L+th1));   % condition Zp + Zm = 0
 
 
