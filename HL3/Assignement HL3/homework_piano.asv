@@ -88,7 +88,7 @@ Fh = zeros(1 , length(t)); %hammer force vector
 
 % Hammer contact window definition
 m0 = ceil(x0/X); %number of sampling of hammer striking coordinate
-wh = 0.1; %[m] half width of the hammer
+wh = 0.01; %[m] half width of the hammer
 w = ceil(wh/X); %sample of the hammer's width
 gloc = hann(2*w); %local hanning window
 g = zeros(length(x), 1 );
@@ -226,12 +226,7 @@ end
      y(:,r0-1)'; y(:,r0-2)'; y(:,r0-3)'; y(:,r0-4)'; y(:,r0-5)'; y(:,r0-6)'];
  yaudio = mean(yspec);
  
- figure(2)
  plot(t, yaudio); %Plot the estimated sound signal
- title('Estimated sound signal'); 
- xlabel('time [s]'); ylabel('String displacement [mm]');
- ylim([ -1e-3 1e-3]) %mm
- xlim([0 0.5]) %half second oscillation
  
  %sound(yaudio, fs); %Play the sound
  
@@ -242,10 +237,9 @@ end
 
 
 
-%% EXTRA: plot the time domain of the force in the striking point
-figure(3)
+%EXTRA: plot the time domain of the force in the striking point
+figure
 plot(t, F(:, m0))
-xlim([0 0.003]) %3 ms
 
 
 
