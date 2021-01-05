@@ -15,6 +15,7 @@ l = 0.003;  % [m] wall thickness
 S = 4e-5;   % [m^2] mouth cross section - arbitrary
 M = (rho*l)/S;  %[kg m^-4] mouth inertance
 
+
 %{
 %the input impedance as a function of x1
 syms x1 
@@ -44,7 +45,11 @@ d2 = a2*2;
 % WITH THE MOUTH IMPEDANCE
 syms x1;
 th1 = atan(k*x1);
+
+DL = M*pi*(x1*sin(theta))^2; %mouth end correction
+
 eqn = sin(k*L)*sin(k*th1) + k*c*M*sin(k*(L+th1));   % condition Zp + Zm = 0
+
 
 %{
 figure(33); % check zeros to set the initial condition
