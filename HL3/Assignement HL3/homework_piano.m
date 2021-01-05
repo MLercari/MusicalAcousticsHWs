@@ -61,7 +61,7 @@ X_min = L/N_max;
 N = N_max - 1;
 X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
 %X = X_max - 0.0005; %according to Saitis
-%X = L(521; %suggested value by Saitis 
+%X = L/521; %suggested value by Saitis 
 
 if ( X > X_max )
     disp("WARNING: WRONG SPATIAL SAMPLING STEP");
@@ -226,11 +226,12 @@ end
  
  %sound(yaudio, fs); %Play the sound
  
+% Save on disk
+
  filename = 'strike.wav';
  audiowrite(filename, 1e10.*yaudio,fs);
 
 
-% Save on disk
 
 %EXTRA: plot the time domain of the force in the striking point
 
