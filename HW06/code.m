@@ -88,14 +88,14 @@ Lcorr = L + 0.6*a2;
 % cylindrical bore with section S1 and finger hole with area Sh = S1. 
 
 % characteristic impedance of a cylindrical horn
-Z0 = rho*c/S1; 
+Z0 = rho*c/S2; 
 %end correction for this model
 Delta = 0.6*a2; % 2 refers to the foot
 %new frequency
 G4 = 392; 
 k2 = G4*2*pi/c;
 %assume the finger hole has the same area as the cylinder so that l = Delta
-S = S1;
+S = S2;
 
 syms D
 assume(D > 0)
@@ -107,7 +107,7 @@ Zcy = 1i*Z0*tan(k2*(Lcorr - d)) == 0;
  Dvalue = double(solD);
 
 %FOURTH APPROACH: small finger holes and cylindrical bore
-Delta = 0.6*a1; 
+Delta = 0.6*a2; 
 %S = (L*0.12/29)^2*pi;
 S = pi*(0.003)^2;
 %the finger hole's acoustic length is not equal to Delta chosen as 0.015
