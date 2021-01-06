@@ -48,6 +48,8 @@ if (fs < 2*f1)
     disp("WARNING: SAMPLING FREQUENCY BELOW NYQUIST");
 end
 
+% Spatial sampling parameters
+X_max = sqrt( 0.5*((c*ts)^2 + 4*b2*ts + sqrt( ((c*ts)^2 + 4*b2*ts)^2 + 16*(eps*ts)^2 )) ); %stability condition (see Saitis)
 
 % Number of maximum spatial steps
 gamma = fs/(2*f1);
@@ -60,9 +62,13 @@ X_min = L/N_max;
 N = N_max -1 ;
 X = L/N;    %as close as possible to Xmin (see Chaigne et al.)
 
+%X = X_max - 0.0005; %according to Saitis' stability condition
+%X = L/521; %suggested value by Saitis 
+
 if ( X < X_min )
     disp("WARNING: WRONG SPATIAL SAMPLING STEP: Chaigne's condition not met")
 end
+
 
 x = linspace( 1 , L , L/X  ); %spatial coordinate vector 
 
@@ -201,15 +207,14 @@ for n = 3:length(t)-1
 end
 
 %% Plot the displacement in time
-
 for i = 1:50:length(t)
     
     %50 step per iteration gives a nice result 
     time = i*ts;
     figure(1);
     plot(x, y(i,:));
-    title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('String length [m]'); ylabel('String displacement [m]');
-    ylim([-1e-3,1e-3])  
+    title(['y(x,t) at time : ', num2str(time), ' s']); xlabel('String length [m]'); ylabel('String displacement [mm]');
+    ylim([-1e-3,1e-3])
     
   
 end
@@ -220,21 +225,20 @@ end
  r0 = ceil((L-x0)/X); %coordinate of the striking specular point
  yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; y(:,r0+5)'; y(:,r0+6)'; ...
      y(:,r0-1)'; y(:,r0-2)'; y(:,r0-3)'; y(:,r0-4)'; y(:,r0-5)'; y(:,r0-6)'];
- 
  yaudio = mean(yspec);
  
  figure(2)
  plot(t, yaudio); %Plot the estimated sound signal
  title('Estimated sound signal'); 
- xlabel('time [s]'); ylabel('String displacement [m]');
+ xlabel('time [s]'); ylabel('String displacement [mm]');
  ylim([ -1e-3 1e-3]) %mm
  xlim([0 0.5]) %half second oscillation
  
- sound(100*yaudio, fs); %Play the sound
+ %sound(yaudio, fs); %Play the sound
  
 % Save on disk
 
- filename = '10751919_Lercari_10743504_Lampis_piano.wav';
+ filename = 'strike3.wav';
  audiowrite(filename, 100*yaudio,fs); %with x100 gain
 
 
@@ -243,7 +247,6 @@ end
 figure(3)
 plot(t, F(:, m0))
 xlim([0 0.003]) %3 ms
-xlabel('time [s]'); ylabel('Hammer force [N]');
 
 
 
