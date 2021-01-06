@@ -101,9 +101,9 @@ syms D
 assume(D > 0)
 %Zcy = (1i*rho*G4*2*pi/S)*(L -  D - Delta^2/(D + 2*Delta)) == 0;
 d = D + Delta^2/(D + 2*Delta);
-Zcy = 1i*Z0*tan(k2*(Lcorr - d)) == 0;
+Zcy = 1i*Z0*tan(k2*(Lcorr - d + DL)) == 0;
 %imposing Zcy equal to zero in order to find D
- solD = vpasolve(Zcy, D, [0 inf]);
+ solD = vpasolve(Zcy, D, 0.05);
  Dvalue = double(solD);
 
 %FOURTH APPROACH: small finger holes and cylindrical bore
@@ -113,13 +113,16 @@ S = pi*(0.003)^2;
 %the finger hole's acoustic length is not equal to Delta chosen as 0.015
 %btw 15 mm was def too much for the thickness of the walls so i set it to 3 mm -Mattia
 
-syms D4
+syms D4;
 assume (D4 > 0 )
 % Yhole = -1i*(S/(rho*c))*cot(k2*l);
 % Ypipe = -1i*(S1/(rho*c))*cot(k2*(Delta + D4));
 d4 = S*(D4 + Delta)^2/(S*(D4 + Delta) + S1*l);
-Zcy4 = 1i*Z0*tan(k2*(Lcorr -d4)) == 0;
-SolD4 = vpasolve(Zcy4, D4, [0 inf]);
+%Zcy4 = 1i*Z0*tan(k2*(Lcorr -d4 + DL));
+eqq = k2*(Lcorr -d4 + DL);
+figure(77);
+fplot(eqq);
+SolD4 = vpasolve(eqq==pi, D4, 0.05);
 D4Value = double(SolD4);
 
 %{
