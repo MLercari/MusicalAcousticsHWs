@@ -90,6 +90,41 @@
 	
 \end{titlepage}
 
+\section{Resonator}
+\subsection{Fixing the shape of the bore}
+The resonances of the instrument occur at the zeros of the series $Z_m + Z_p$ of the impedances of the mouth and the resonator pipe. The pipe is a finite cone tapering towards the foot; we can write its input impedance neglecting the radiation load:
+$$ Z_p = \frac{\mathrm{j} \rho c }{S_1} \frac{\sin kL \sin k\theta_1}{\sin k(L+\theta_1)} $$
+where $L = 0.45~\si{\meter}$ is the length of the bore, $S_1$ is the bore cross section at the mouth, $x_1$ is the distance between the apex of the cone and $S_1$, and $k\theta_1 = \arctan kx_1 $.
+The mouth impedance can be written as a pure inertance term $\mathrm{j} \omega M$, where $M = \rho l / S_m$ is determined by fixing arbitrarily the surface area and the depth of the mouth opening. Here we choose $S = 0.65~\si{\centi\meter\squared}$ and $l = 3~\si{\milli\meter}$. 
+The resonance condition becomes:
+$$ \frac{\rho}{S_1} \sin kL \sin k\theta_1 + kM\sin k(L+\theta_1) = 0 .$$ 
+Fixing $k = 2\pi f_0 /c$, with $f_0 = 392~\si{\hertz}$, and solving this for $x_1$, we find $x_1 = 99.9~\si{\centi\meter}$, which corresponds to a diameter at the resonator head $d_1 = 26.2~\si{\milli\meter}$. The corresponding values at the foot are $x_2 = 54.9~\si{\centi\meter}$ and $d_2 = 14.4~\si{\milli\meter}$.
+
+\subsection{Finger holes}
+If we ignore the tapering of the bore, we can model it as a cylinder with impedance $Z = jZ_0\tan kL'$, where $L'$ is the acoustic length of the pipe, i. e. its gemoetrical length plus the end correction at the foot.
+When adding a finger hole, it can be shown that the acoustic length of the bore is reduced by an amount:
+\begin{align*}
+	\delta \simeq D + \Delta - \Delta' 
+\end{align*}
+where $D$ is the distance from the foot to the finger hole, $\Delta = 0.3d_2$ is the end correction at the foot opening and $\Delta'$ is the end correction relative to the parallel between the finger hole and the terminating segment of length $D$. The latter correction can be written as:
+$$ \Delta' \simeq \frac{S_2 l(D+\Delta)}{S_h(D+\Delta) + S_2 l} $$
+where $S_2$ is the cross section of the bore at the foot and $S_h$ is the cross section of the finger hole.
+
+In this picture, we can also include an end correction at the mouth in the total acoustic length of the instrument: in this way, the resonances will occur at the zeros of $Z_1 = jZ_0 \tan k(L' + \Delta L - \delta)$. The end correction at the mouth can be recovered by imposing $$j \frac{\rho c}{S_1} \tan k\Delta L \approx j \frac{\rho c}{S_1} k\Delta L = jkcM. $$
+
+By choosing $k = 2\pi f_1/c$, with $f_1 = 392~\si{\hertz}$, we can solve the equation $k(L' + \Delta L - \delta) = \pi$, recovering $D = 6.95~\si{\centi\meter}.$
+
+An alternative and simpler approach could be choosing $S_h = S_2$. This yields $$ \delta \approx D + \frac{\Delta^2}{D +2\Delta}$$. The resulting position of the hole is $D = 4.12~\si{\centi\meter}$. This decrease in the distance from the foot reflects the increase in impedance of the finger hole.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{twoholes.pdf}
+	\caption{Electrical analog of the load impedance with two open holes. The subscripts $h_1$ and $p_1$ refer to the first hole and the section of the bore between the open holes, while $h_2$ and $p_2$ refer to the second hole and the terminating section of the pipe. The reference is the atmospheric pressure, while $P_in$ is the pressure at the end of the closed section of the tube.}
+	\label{fig:holes}
+\end{figure}
+
+The situation is analogous when there are mutiple finger holes, albeit a little more complex. The radiation load will at the end of the closed section of the tube will now include four components, arranged as in Fig. \ref{fig:holes}. The resulting load impedance will be $Z_r = Z_{h_1}\parallel\left(Z_{p_1} + Z_{h_2}\parallel Z_{p_2} \right)$.
+
 \section{Flue channel and mouth}
 \subsection{Channel thickness}
 
