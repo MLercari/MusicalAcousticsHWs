@@ -112,18 +112,24 @@ where $S_2$ is the cross section of the bore at the foot and $S_h$ is the cross 
 
 In this picture, we can also include an end correction at the mouth in the total acoustic length of the instrument: in this way, the resonances will occur at the zeros of $Z_1 = jZ_0 \tan k(L' + \Delta L - \delta)$. The end correction at the mouth can be recovered by imposing $$j \frac{\rho c}{S_1} \tan k\Delta L \approx j \frac{\rho c}{S_1} k\Delta L = jkcM. $$
 
-By choosing $k = 2\pi f_1/c$, with $f_1 = 392~\si{\hertz}$, we can solve the equation $k(L' + \Delta L - \delta) = \pi$, recovering $D = 6.95~\si{\centi\meter}.$
+By choosing $k = 2\pi f_1/c$, with $f_1 = 392~\si{\hertz}$, and $r_h = 3~\si{\milli\meter}$ for the radius of the finger hole, we can solve the equation $k(L' + \Delta L - \delta) = \pi$, recovering $D = 5.04~\si{\centi\meter}.$
 
-An alternative and simpler approach could be choosing $S_h = S_2$. This yields $$ \delta \approx D + \frac{\Delta^2}{D +2\Delta}$$. The resulting position of the hole is $D = 4.12~\si{\centi\meter}$. This decrease in the distance from the foot reflects the increase in impedance of the finger hole.
+An alternative and simpler approach could be choosing $S_h = S_2$. This yields $$ \delta \approx D + \frac{\Delta^2}{D +2\Delta}$$. The resulting position of the hole is $D = 4.12~\si{\centi\meter}$. This decrease in the distance from the foot reflects the increase in impedance of the finger hole. However, notice that a common rule of thumb for the positioning of the finger holes when the pitch is to be increased by a whole tone is to place the hole at a distance from the foot (or the lower hole) equal to 12\% of the length of the bore. For us, this value is $\sim 5.4~\si{\centi\meter}$, which is quite similar to our first result. Thus, in the following discussion, we will consider the finger holes to have a radius $r_h$.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{twoholes.pdf}
-	\caption{Electrical analog of the load impedance with two open holes. The subscripts $h_1$ and $p_1$ refer to the first hole and the section of the bore between the open holes, while $h_2$ and $p_2$ refer to the second hole and the terminating section of the pipe. The reference is the atmospheric pressure, while $P_in$ is the pressure at the end of the closed section of the tube.}
+	\caption{Electrical analog of the load impedance with two open holes. The subscripts $h_1$ and $p_1$ refer to the first hole and the section of the bore between the open holes, while $h_2$ and $p_2$ refer to the second hole and the terminating section of the pipe. The reference is the atmospheric pressure, while $P_{in}$ is the pressure at the end of the closed section of the tube.}
 	\label{fig:holes}
 \end{figure}
 
-The situation is analogous when there are mutiple finger holes, albeit a little more complex. The radiation load will at the end of the closed section of the tube will now include four components, arranged as in Fig. \ref{fig:holes}. The resulting load impedance will be $Z_r = Z_{h_1}\parallel\left(Z_{p_1} + Z_{h_2}\parallel Z_{p_2} \right)$.
+The situation is analogous when there are mutiple finger holes, albeit a little more complex. The radiation load at the end of the closed section of the tube will now include four components, arranged as in Fig. \ref{fig:holes}. The resulting load impedance will be $Z_r = Z_{h_1}\parallel\left(Z_{p_1} + Z_{h_2}\parallel Z_{p_2} \right)$. This gives us a new expression for the decrease in acoustic length of the bore:
+\begin{align*}
+	\delta &\approx D + D' + \Delta - \Delta'', \\
+	\text{where } \Delta'' &= \frac{l(D+\Delta') }{(D'+\Delta') + \frac{lS_2}{S_h}} \\
+\end{align*} 
+
+The result for the distance between the two holes, solving for the frequency $f_2 = 440~\si{\hertz}$, is $D'= 3.69~\si{\centi\meter}$.
 
 \section{Flue channel and mouth}
 \subsection{Channel thickness}
@@ -146,7 +152,7 @@ The structure of the jet can be characterized using the Reynolds number:
 
 $$ \mathrm{Re} = \frac{U_j h}{\nu} = 1033.3 $$
 
-where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air.
+where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air. Typically, the transition between laminar and turbulent flow is considered to occur for values of Re in the range 2000-4000, so it is safe to say that we are dealing with a laminar flow at the channel exit, and it is expected to remain laminar for a short distance. Therefore, as long as $W$ isn't much larger than $h$, we expect the flow in the mouth to be laminar. 
 
 \subsection{Boundary layer effects}
 Of course the result for the flow velocity we found above is only valid at the center of the flow. Indeed, even if the fluid can be safely assumed to be frictionless in open space, the boundary conditions in a channel make the viscosity effects significant near the walls. There will be a thin layer extending from the boundary into the fluid where the velocity increases rapidly from zero to the value $U_j$: this is the so-called \emph{boundary layer}. The thickness of the boundary layer increases along the length of the channel: at position x along the channel it is:

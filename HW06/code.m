@@ -117,11 +117,9 @@ syms D4;
 assume (D4 > 0 )
 % Yhole = -1i*(S/(rho*c))*cot(k2*l);
 % Ypipe = -1i*(S1/(rho*c))*cot(k2*(Delta + D4));
-d4 = S*(D4 + Delta)^2/(S*(D4 + Delta) + S1*l);
+d4 = S*(D4 + Delta)^2/(S*(D4 + Delta) + S2*l);
 %Zcy4 = 1i*Z0*tan(k2*(Lcorr -d4 + DL));
 eqq = k2*(Lcorr -d4 + DL);
-figure(77);
-fplot(eqq);
 SolD4 = vpasolve(eqq==pi, D4, 0.05);
 D4Value = double(SolD4);
 
@@ -169,15 +167,21 @@ D3Value = double(SolD3);
 %% question 3
 
 k3 = 440*2*pi/c;
-D = D4Value;
+D = D4Value(2);
 syms dist
 assume (dist > 0 )
-Delta_prime = (S1*l*(D + Delta))/(S*(D + Delta) + S1*l);
-Delta_sec = l*(dist/S1 + Delta_prime/S1)/(dist/S1 + Delta_prime/S1 + l/S);
+Delta_prime = (S2*l*(D + Delta))/(S*(D + Delta) + S2*l);
+Delta_sec = l*(dist/S2 + Delta_prime/S2)/(dist/S2 + Delta_prime/S2 + l/S);
 d3 = D + dist + Delta - Delta_sec;
-Z3 = 1i*Z0*tan(k3*(Lcorr - d3)) == 0;
-Soldist = vpasolve(Z3, dist, [0 inf]);
+Z3 = 1i*Z0*tan(k3*(Lcorr - d3 + DL));
+Soldist = vpasolve(Z3 == 0, dist, 0.12*(L-D));
 distValue = double(Soldist);
+
+expr = k3*(Lcorr - d3 + DL) - pi;
+figure(77);
+fplot(expr);
+hold on;
+fplot(0);
 
 %% question 4
 dp = 62;    %[Pa] pressure difference btw player's mouth and exit of flue channel
