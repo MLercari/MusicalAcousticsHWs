@@ -12,7 +12,7 @@ k = (F4*2*pi)/c;
 theta = deg2rad(0.75);
 L = 0.45;   % [m] length of the resonator
 l = 0.003;  % [m] wall thickness
-S = 4e-5;   % [m^2] mouth cross section - arbitrary
+S = 6.5e-5;   % [m^2] mouth cross section - arbitrary
 M = (rho*l)/S;  %[kg m^-4] mouth inertance
 
 
@@ -45,30 +45,34 @@ d2 = a2*2;
 % WITH THE MOUTH IMPEDANCE
 syms x1;
 th1 = atan(k*x1);
+r1 = x1*tan(theta);
 
 %URGENTE PER MATTI: controllare questa formula non sembra giusta
-eqn = sin(k*L)*sin(k*th1) + k*c*M*sin(k*(L+th1));   % condition Zp + Zm = 0
+eqn = ((rho*c)/(pi*r1^2))*sin(k*L)*sin(k*th1) + k*c*M*sin(k*(L+th1));   % condition Zp + Zm = 0
 
 
-%{
+
 figure(33); % check zeros to set the initial condition
 fplot(eqn);
 hold on;
 fplot(0, 'LineStyle', '--');
-%}
 
-solQ1 = vpasolve(eqn==0, x1, -1.09);
+
+solQ1 = vpasolve(eqn==0, x1, 0.8);
 
 x1 = double(solQ1);
-x2 = x1 + L;
+x2 = x1 - L;
 
 x1 = abs(x1);
 x2 = abs(x2);   % take absolute values
 
-a1 = x1*sin(theta);
-a2 = x2*sin(theta);
+
+a1 = x1*tan(theta);
+a2 = x2*tan(theta);
 S1 = pi*(a1)^2;
 S2 = pi*(a2)^2;
+
+DL = (M/rho)*S1;
 
 d1 = 2*a1;
 d2 = 2*a2;
