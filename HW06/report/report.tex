@@ -92,7 +92,7 @@
 
 \section{Resonator}
 \subsection{Fixing the shape of the bore}
-The resonances of the instrument occur at the zeros of the series $Z_m + Z_p$ of the impedances of the mouth and the resonator pipe. The pipe is a finite cone tapering towards the foot; we can write its input impedance neglecting the radiation load:
+The resonances of the instrument occur at the zeros of the series $Z_m + Z_p$ of the impedances of the mouth and the resonator pipe. The pipe is a finite cone tapering towards the foot; we can write its input impedance, neglecting the radiation load, as:
 $$ Z_p = \frac{\mathrm{j} \rho c }{S_1} \frac{\sin kL \sin k\theta_1}{\sin k(L+\theta_1)} $$
 where $L = 0.45~\si{\meter}$ is the length of the bore, $S_1$ is the bore cross section at the mouth, $x_1$ is the distance between the apex of the cone and $S_1$, and $k\theta_1 = \arctan kx_1 $.
 The mouth impedance can be written as a pure inertance term $\mathrm{j} \omega M$, where $M = \rho l / S_m$ is determined by fixing arbitrarily the surface area and the depth of the mouth opening. Here we choose $S = 0.65~\si{\centi\meter\squared}$ and $l = 3~\si{\milli\meter}$. 
@@ -114,7 +114,7 @@ In this picture, we can also include an end correction at the mouth in the total
 
 By choosing $k = 2\pi f_1/c$, with $f_1 = 392~\si{\hertz}$, and $r_h = 3~\si{\milli\meter}$ for the radius of the finger hole, we can solve the equation $k(L' + \Delta L - \delta) = \pi$, recovering $D = 5.04~\si{\centi\meter}.$
 
-An alternative and simpler approach could be choosing $S_h = S_2$. This yields $$ \delta \approx D + \frac{\Delta^2}{D +2\Delta}$$. The resulting position of the hole is $D = 4.12~\si{\centi\meter}$. This decrease in the distance from the foot reflects the increase in impedance of the finger hole. However, notice that a common rule of thumb for the positioning of the finger holes when the pitch is to be increased by a whole tone is to place the hole at a distance from the foot (or the lower hole) equal to 12\% of the length of the bore. For us, this value is $\sim 5.4~\si{\centi\meter}$, which is quite similar to our first result. Thus, in the following discussion, we will consider the finger holes to have a radius $r_h$.
+An alternative and simpler approach could be choosing $S_h = S_2$. This yields $$ \delta \approx D + \frac{\Delta^2}{D +2\Delta}.$$ The resulting position of the hole is $D = 4.12~\si{\centi\meter}$. This decrease in the distance from the foot reflects the increase in impedance of the finger hole. However, notice that a common rule of thumb for the positioning of the finger holes when the pitch is to be increased by a whole tone is to place the hole at a distance from the foot (or the lower hole) equal to 12\% of the length of the bore. For us, this value is $\sim 5.4~\si{\centi\meter}$, which is quite similar to our first result. Thus, in the following discussion, we will consider the finger holes to have a radius $r_h$.
 
 \begin{figure}
 	\centering
@@ -157,6 +157,6 @@ where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic
 \subsection{Boundary layer effects}
 Of course the result for the flow velocity we found above is only valid at the center of the flow. Indeed, even if the fluid can be safely assumed to be frictionless in open space, the boundary conditions in a channel make the viscosity effects significant near the walls. There will be a thin layer extending from the boundary into the fluid where the velocity increases rapidly from zero to the value $U_j$: this is the so-called \emph{boundary layer}. The thickness of the boundary layer increases along the length of the channel: at position x along the channel it is:
 $$ \delta(x) \approx \sqrt{\frac{\nu x}{U_j}}. $$
-This means that for a channel length of 20 mm we get $\delta = \SI{0.54}{\milli\meter}$. Notice that $\delta/h = 0.36 < \frac{1}{2}$, so we can expect the Bernoulli approximation to hold reasonably well in the center of the channel.
+This means that for a channel length of 20 mm we get $\delta = \SI{0.17}{\milli\meter}$. Notice that $\delta/h = 0.11 < \frac{1}{2}$, so we can expect the Bernoulli approximation to hold reasonably well in the center of the channel.
 
 \end{document} 

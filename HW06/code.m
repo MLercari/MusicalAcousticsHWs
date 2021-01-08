@@ -194,6 +194,6 @@ nu = 1.5e-5;    %[m^2/s] kinematic viscosity of air
 Re = (U*h)/nu;  % Reynolds number
 
 %% question 5
-Lc = 0.2;   %[m] channel length
+Lc = 20e-3;   %[m] channel length
 delta = sqrt((nu*Lc)/U);    %[m] boundary layer thickness at the exit
 
