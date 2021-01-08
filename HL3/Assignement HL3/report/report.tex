@@ -87,10 +87,12 @@
 	
 	
 \end{titlepage}
-\section{Comments on the FD implementation}
-\subsection{Simulation data}
 
-The code contains an implementation of a backward finite difference scheme which is used to simulate a piano string struck with a felt hammer. The string under consideration is tuned to C2 ($f_0 = \SI{52.8221}{\hertz}$). We chose a sampling frequency of $f_s = \SI{176.4}{\kilo\hertz}$ as suggested in \cite{saitis} and it's well above the Nyquist frequency so we don't expect aliasing in the time domain. Other dimensions that are not suggested in the assignment, such as string mass, hammer mass, string length etc. have been taken from \cite{saitis} and can be found listed in Tab. \ref{tab:vals} . The string has a linear mass $\mu = M_s / L$ and the tension applied on it at rest has been computed as $T_0 = 4L^2f_0^2\mu$ which determines that the speed of sound along the string is $c = \sqrt{T_0/\mu}$. The spatial sampling has been chosen under the limit imposed by the stability condition \cite{chaigne} $$ N_{max} = \sqrt{\frac{-1 + \sqrt{1 + 16 \epsilon \gamma ^2}}{8 \epsilon}} $$ where $\gamma = f_s / 2 f_0 $. The number of spatial steps has been set as $N = N_{max} -1 = 537$ and the relative spatial resolution is $X = \SI{0.0036}{\meter}$. 
+\section{Comments on the FD implementation}
+The MATLAB code \verb|homework_piano.m| is able to perform a backward finite difference (FD) scheme which is used to simulate a piano string struck with a felt hammer. In the first part of the following report the numerical values chosen are illustrated while the second part describes briefly the actual FD algorithm.
+
+\subsection{Simulation data}
+  The string under consideration is tuned to C2 ($f_0 = \SI{52.8221}{\hertz}$). We chose a sampling frequency of $f_s = \SI{176.4}{\kilo\hertz}$ as suggested in \cite{saitis} and it's well above the Nyquist frequency so we don't expect aliasing in the time domain. Other dimensions that are not suggested in the assignment, such as string mass, hammer mass, string length etc. have been taken from \cite{saitis} and can be found listed in Tab. \ref{tab:vals} . The string has a linear mass $\mu = M_s / L$ and the tension applied on it at rest has been computed as $T_0 = 4L^2f_0^2\mu$ which determines that the speed of sound along the string is $c = \sqrt{T_0/\mu}$. The spatial sampling has been chosen under the limit imposed by the stability condition \cite{chaigne} $$ N_{max} = \sqrt{\frac{-1 + \sqrt{1 + 16 \epsilon \gamma ^2}}{8 \epsilon}} $$ where $\gamma = f_s / 2 f_0 $. The number of spatial steps has been set as $N = N_{max} -1 = 537$ and the relative spatial resolution is $X = \SI{0.0036}{\meter}$. 
 
  \begin{table}[h]
 	\centering
@@ -115,6 +117,40 @@ The code contains an implementation of a backward finite difference scheme which
 	\label{tab:vals}
 \end{table}
 
+\subsection{FD algorithm}
+The definition of temporal and spatial coordinate is the very first step of the FD implementation  
+\begin{verbatim}
+t = linspace(0, duration, tSamples); %temporal vector 
+x = linspace( 1 , L , L/X  ); %spatial coordinate vector
+\end{verbatim}
+
+followed by the initialization of the string displacement $y(n,m)$, the hammer displacement (with respect to the contact point) $\eta(n)$, the hammer force $F(n)$ and the Hanning window $g(m)$, where $n \in t$ and $m \in x$. 
+
+\begin{verbatim}
+y = zeros(length(t), length(x)); %string displacement vector
+eta = zeros(1 , length(t)); %hammer displacement vector
+Fh = zeros(1 , length(t)); %hammer force vector
+g = zeros(length(x), 1 ); %Hanning window vector
+\end{verbatim}
+
+At this point the Hanning window must be defined centred in the striking point $m_0$ and with a width of $2w$
+
+\begin{verbatim}
+m0 = ceil(x0/X); % hammer striking coordinate
+wh = 0.1; %[m] half width of the hammer
+w = ceil(wh/X); %sample of the hammer's width
+gloc = hann(2*w); %local hanning window
+g(m0-w:m0-w+length(gloc)-1)=gloc;
+\end{verbatim}
+
+and used to filter the force that is acting on the string $F(n,m) = F(n)g(m)$. At time $t=0$ ($n=1$) the string and the hammer are supposed to be still $y(1,m) = \eta(1) = 0$ and therefore the force $F(1) = 0$, since it is defined by the non-linear relation $F(n) = K|\eta(n) - y(n,m0)|^p$. The hammer displacement and the force at time $t= dt$ ($n=2$) is given by the velocity at time $t=0$, which is $Vh_0 = \SI{2.5}{\meter\per\second}$
+
+\begin{verbatim}
+eta(2) = Vh0*ts;
+Fh(2) = K*(abs(eta(2) - y(2, m0)))^p;
+\end{verbatim}
+
+where $y(2,m_0)$ is assumed to be zero. After having defined the initial conditions, the backward FD loop can start by computing the displacement at time sample $n+1$ by knowing the displacement at $n$ and $n-1$ 
 \printbibliography
 
 

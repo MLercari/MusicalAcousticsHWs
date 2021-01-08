@@ -1,4 +1,4 @@
-amat%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modeling of musical instruments homework.                               %
 % Numerical simulation of piano strings                                   %
 % Physical model for a struck string using finite difference.             %
@@ -142,17 +142,19 @@ F = zeros(length(t), length(x));
 eta(2) = Vh0*ts;
 Fh(2) = K*(abs(eta(2) - y(2, m0)))^p;
 
+%{
 %at n = 3 string displacement approximation and hammer displacement approx.
 for j = 2:N-1
 y(3, j) = y(2, j-1)+y(2,j+1)-y(1,j)+(ts^2*N*Fh(2)*g(j))/M_s;% (Chaigne pg.5)
 end
 
 eta(3) = 2*eta(2)-eta(1)-(ts^2*Fh(2))/Mh;% ( Chaigne pg.5 )
-  
+%}
+
 
 % Computation loop
 
-for n = 3:length(t)-1
+for n = 2:length(t)-1
    
    % stricking force
    Fh(n) = K*(abs(eta(n) - y(n, m0)))^p; 
