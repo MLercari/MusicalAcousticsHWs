@@ -142,16 +142,6 @@ F = zeros(length(t), length(x));
 eta(2) = Vh0*ts;
 Fh(2) = K*(abs(eta(2) - y(2, m0)))^p;
 
-%{
-%at n = 3 string displacement approximation and hammer displacement approx.
-for j = 2:N-1
-y(3, j) = y(2, j-1)+y(2,j+1)-y(1,j)+(ts^2*N*Fh(2)*g(j))/M_s;% (Chaigne pg.5)
-end
-
-eta(3) = 2*eta(2)-eta(1)-(ts^2*Fh(2))/Mh;% ( Chaigne pg.5 )
-%}
-
-
 % Computation loop
 
 for n = 2:length(t)-1
@@ -169,21 +159,20 @@ for n = 2:length(t)-1
         F(n,m) = Fh(n)'*g(m); %windowed with the hanning
     end
     
-
     %boundary conditions
-    if(m==1) %if m = 0
+    if(m==1) %if x = 0
         y(n+1, m) = bl1*y(n, m) + bl2*y(n, m+1) + bl3*y(n, m +2) + ...
             bl4*y(n-1, m) + blf*F(n,m);
     
-    elseif (m== length(x)) % if m = M
+    elseif (m== length(x)) % if x = L
         y(n+1, m) = br1*y(n, m) + br2*y(n, m-1) + br3*y(n, m -2) + ...
             br4*y(n-1, m) + brf*F(n,m);
         
-    elseif( m ==length(x)-1 ) % if m = M -1
+    elseif( m ==length(x)-1 ) % if x = L - dx
         y(n+1,m) = a1*(2*y(n, m+1) - y(n,m) + y(n,m-2)) + a2*(y(n,m+1) + y(n,m-1)) + ...
             a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1,m+1) + y(n-1,m-1)) + af*F(n,m);
         
-    elseif( m == 2) %if m = 1
+    elseif( m == 2) %if x = dx
         y(n+1,m) = a1*(y(n, m +2) - y(n,m) + 2*y(n,m-1)) + a2*(y(n, m+1) + y(n,m-1)) + ...
             a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1,m+1) + y(n-1,m-1)) + af*F(n,m);
         
@@ -192,13 +181,11 @@ for n = 2:length(t)-1
         y(n+1,m) = a1*(y(n, m+2) + y(n, m-2)) + a2*(y(n, m+1) + y(n, m-1)) + ...
             a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1, m+1) + y(n-1,m-1)) + af*F(n,m);
     
-    end
-    
+    end  
     end
     
     %hammer displacement approximation
-    eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);
-    
+    eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);   
 end
 
 %% Plot the displacement in time

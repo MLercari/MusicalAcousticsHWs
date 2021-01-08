@@ -89,7 +89,7 @@
 \end{titlepage}
 
 \section{Comments on the FD implementation}
-The MATLAB code \verb|homework_piano.m| is able to perform a backward finite difference (FD) scheme which is used to simulate a piano string struck with a felt hammer. In the first part of the following report the numerical values chosen are illustrated while the second part describes briefly the actual FD algorithm.
+The MATLAB code \verb|homework_piano.m| is able to perform a backward finite difference (FD) scheme which is used to simulate a piano string struck with a felt hammer. In the first part of the following report the numerical values chosen are illustrated while the second part describes briefly the actual FD algorithm. Finally the last section shows some results of such implementation.
 
 \subsection{Simulation data}
   The string under consideration is tuned to C2 ($f_0 = \SI{52.8221}{\hertz}$). We chose a sampling frequency of $f_s = \SI{176.4}{\kilo\hertz}$ as suggested in \cite{saitis} and it's well above the Nyquist frequency so we don't expect aliasing in the time domain. Other dimensions that are not suggested in the assignment, such as string mass, hammer mass, string length etc. have been taken from \cite{saitis} and can be found listed in Tab. \ref{tab:vals} . The string has a linear mass $\mu = M_s / L$ and the tension applied on it at rest has been computed as $T_0 = 4L^2f_0^2\mu$ which determines that the speed of sound along the string is $c = \sqrt{T_0/\mu}$. The spatial sampling has been chosen under the limit imposed by the stability condition \cite{chaigne} $$ N_{max} = \sqrt{\frac{-1 + \sqrt{1 + 16 \epsilon \gamma ^2}}{8 \epsilon}} $$ where $\gamma = f_s / 2 f_0 $. The number of spatial steps has been set as $N = N_{max} -1 = 537$ and the relative spatial resolution is $X = \SI{0.0036}{\meter}$. 
@@ -150,7 +150,65 @@ eta(2) = Vh0*ts;
 Fh(2) = K*(abs(eta(2) - y(2, m0)))^p;
 \end{verbatim}
 
-where $y(2,m_0)$ is assumed to be zero. After having defined the initial conditions, the backward FD loop can start by computing the displacement at time sample $n+1$ by knowing the displacement at $n$ and $n-1$ 
+where $y(2,m_0)$ is assumed to be zero. After having defined the initial conditions, the backward FD loop can start by computing the displacement at time sample $n+1$ by knowing the displacement at $n$ and $n-1$.
+
+ The scheme proposed below represents an implementation of the algorithm described in \cite{saitis}, where boundary conditions take into account the force transmission at the hinge and at the bridge, the displacement approximation at points just inside the domain ($x = dx$ and $x = L- dx$) and the hammer displacement at any time step. The FD formulas contain constant and convenient parameters which have not been mentioned before but can be found in \cite{saitis}.
+ 
+ \begin{verbatim}
+for n = 2:length(t)-1
+
+Fh(n) = K*(abs(eta(n) - y(n, m0)))^p; % stricking force
+
+for m = 1:length(x) %along the string
+
+%forcing term definition at any time step
+
+%if the hammer is no more in contact with the string
+if(eta(n) < y(n, m0)) 
+Fh(n) = 0;
+
+else
+F(n,m) = Fh(n)'*g(m); %windowed with the hanning
+end
+
+%boundary conditions
+if(m==1) %if x = 0
+y(n+1, m) = bl1*y(n, m) + bl2*y(n, m+1) + bl3*y(n, m +2) + ...
+bl4*y(n-1, m) + blf*F(n,m);
+
+elseif (m== length(x)) % if x = L
+y(n+1, m) = br1*y(n, m) + br2*y(n, m-1) + br3*y(n, m -2) + ...
+br4*y(n-1, m) + brf*F(n,m);
+
+elseif( m ==length(x)-1 ) % if x = L - dx
+y(n+1,m) = a1*(2*y(n, m+1) - y(n,m) + y(n,m-2)) + a2*(y(n,m+1) + ...
+y(n,m-1)) + a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1,m+1) + y(n-1,m-1)) + ...
+af*F(n,m);
+
+elseif( m == 2) %if x = dx
+y(n+1,m) = a1*(y(n, m +2) - y(n,m) + 2*y(n,m-1)) + a2*(y(n, m+1) ...
++ y(n,m-1)) + a3*y(n,m) + a4*y(n-1,m) + a5*(y(n-1,m+1) + ...
+ y(n-1,m-1)) + af*F(n,m);
+
+else 
+%backward finite difference scheme "inside the domain"
+y(n+1,m) = a1*(y(n, m+2) + y(n, m-2)) + a2*(y(n, m+1) +...
+ y(n, m-1)) + ... a3*y(n,m) + a4*y(n-1,m) + ...
+  a5*(y(n-1, m+1) + y(n-1,m-1)) + af*F(n,m);
+
+end  
+end
+
+%hammer displacement approximation
+eta(n+1) = d1*eta(n) + d2*eta(n-1) + df*Fh(n);   
+end
+ \end{verbatim}
+ 
+ It can be noticed that the force $F(n)$ becomes zero when the hammer is no longer in contact with the string, so when $\eta(n) < y(n,m_0)$.
+ 
+ \subsection{Time history and audio file}
+ After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by looping 
+ 
 \printbibliography
 
 
