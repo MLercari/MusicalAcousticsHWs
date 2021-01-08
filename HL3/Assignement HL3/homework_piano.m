@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+amat%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modeling of musical instruments homework.                               %
 % Numerical simulation of piano strings                                   %
 % Physical model for a struck string using finite difference.             %
@@ -47,7 +47,6 @@ x0 = 0.12*L; %[m] stricking position (see d/L from Fletcher)
 if (fs < 2*f1)
     disp("WARNING: SAMPLING FREQUENCY BELOW NYQUIST");
 end
-
 
 % Number of maximum spatial steps
 gamma = fs/(2*f1);

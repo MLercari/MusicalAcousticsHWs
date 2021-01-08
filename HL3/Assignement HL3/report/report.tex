@@ -17,8 +17,8 @@
 \usepackage{subcaption}
 \captionsetup[subfigure]{labelfont=rm}
 \usepackage{verbatim} %multiline comments
-%\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
-%\addbibresource{source.bib}	% uncomment for bibliography
+\usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
+\addbibresource{source.bib}	% uncomment for bibliography
 
 
 
@@ -89,7 +89,9 @@
 \end{titlepage}
 \section{Comments on the FD implementation}
 \subsection{Simulation data}
+
 The code contains an implementation of a backward finite difference scheme which is used to simulate a piano string struck with a felt hammer. The string under consideration is tuned to C2 ($f_0 = \SI{52.8221}{\hertz}$). We chose a sampling frequency of $f_s = \SI{176.4}{\kilo\hertz}$ as suggested in ... and it's well above the Nyquist frequency so we don't expect aliasing in the time domain. Other dimensions that are not suggested in the assignment, such as string mass, hammer mass, string length etc. have been taken from ... and can be found listed in Tab. \ref{tab:vals} . The string has a linear mass $\mu = M_s / L$ and the tension applied on it at rest has been computed as $T_0 = 4L^2f_0^2\mu$ which determines that the speed of sound along the string is $c = \sqrt{T_0/\mu}$. The spatial sampling has been chosen under the limit imposed by the stability condition ... $$ N_{max} = \sqrt{\frac{-1 + \sqrt{1 + 16 \epsilon \gamma ^2}}{8 \epsilon}} $$ where $\gamma = f_s / 2 f_0 $. The number of spatial steps has been set as $N = N_{max} -1 = 537$ and the relative spatial resolution is $X = \SI{0.0036}{\meter}$. 
+
  \begin{table}[h]
 	\centering
 	$\begin{array}{llc}
@@ -112,4 +114,8 @@ The code contains an implementation of a backward finite difference scheme which
 	\caption{Values considered in the simulation.}
 	\label{tab:vals}
 \end{table}
+
+\printbibliography
+
+
 \end{document}
