@@ -19,7 +19,7 @@
 \usepackage{verbatim} %multiline comments
 \usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
 \addbibresource{source.bib}	% uncomment for bibliography
-
+\usepackage{movie15} %to include gif animations
 
 
 %opening
@@ -207,7 +207,9 @@ end
  It can be noticed that the force $F(n)$ becomes zero when the hammer is no longer in contact with the string, so when $\eta(n) < y(n,m_0)$.
  
  \subsection{Time history and audio file}
- After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by looping 
+ After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by plotting the displacement along $x$ for each time step. Actually, since in this way the animation would be too slow, it has been decided to plot $y(n,m)$ each $50$ time steps. A snapshot 
+ 
+ \includemovie{1cm}{1cm}{string_displacement.gif}
  
 \printbibliography
 
