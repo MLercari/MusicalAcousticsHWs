@@ -15,11 +15,11 @@
 \usepackage{microtype}
 \usepackage{caption}
 \usepackage{subcaption}
-\captionsetup[subfigure]{labelfont=rm}
+%\captionsetup[subfigure]{labelfont=rm}
 \usepackage{verbatim} %multiline comments
 \usepackage[backend=biber, style=numeric, safeinputenc, sorting=none]{biblatex}
 \addbibresource{source.bib}	% uncomment for bibliography
-\usepackage{movie15} %to include gif animations
+
 
 
 %opening
@@ -207,10 +207,48 @@ end
  It can be noticed that the force $F(n)$ becomes zero when the hammer is no longer in contact with the string, so when $\eta(n) < y(n,m_0)$.
  
  \subsection{Time history and audio file}
- After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by plotting the displacement along $x$ for each time step. Actually, since in this way the animation would be too slow, it has been decided to plot $y(n,m)$ each $50$ time steps. A snapshot 
- 
- \includemovie{1cm}{1cm}{string_displacement.gif}
- 
+ After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by plotting the displacement along $x$ for each time step. Actually, since in this way the animation would be too slow, it has been decided to plot $y(n,m)$ each $50$ time steps. A snapshot is shown in Fig. \ref{fig:displ} and an animation called \verb|string_displacement.gif| can be found attached to this report. 
+
+Moreover, it has been computed a mean value of the displacement around the point $r_0 = L - m0$ (see Fig. and Fig. ) by taking averaging 12 spatial samples: 6 on the left of $r_0$ and 6 on the right of $r_0$
+
+\begin{verbatim}
+r0 = ceil((L-x0)/X); %coordinate of the striking specular point
+yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; ...
+ y(:,r0+5)'; y(:,r0+6)'; y(:,r0-1)'; y(:,r0-2)'; ...
+ y(:,r0-3)'; y(:,r0-4)'; y(:,r0-5)'; y(:,r0-6)'];
+yaudio = mean(yspec);
+\end{verbatim}
+
+from which the vector \verb|yaudio| has been gained by a factor of $\times 100$ in order to make it audible, then converted into a sound and stored it.
+
+\begin{verbatim}
+sound(100*yaudio, fs); %Play the sound
+ filename = '10751919_Lercari_10743504_Lampis_piano.wav';
+audiowrite(filename, 100*yaudio,fs); 
+\end{verbatim}
+
+ \begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{displacement.png}
+	\caption{Snapshot from string displacement animation.}
+	\label{fig:displ}
+\end{figure}
+
+ \begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{sound_two.png}
+	\caption{Time history of the mean of the string displacement.}
+	\label{fig:historyone}
+\end{figure}
+
+ \begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{sound_one.png}
+	\caption{Time history of the mean of the string displacement during the first 500 ms.}
+	\label{fig:historytwo}
+\end{figure}
+
+
 \printbibliography
 
 

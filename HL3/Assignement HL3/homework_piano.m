@@ -208,7 +208,6 @@ end
  r0 = ceil((L-x0)/X); %coordinate of the striking specular point
  yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; y(:,r0+5)'; y(:,r0+6)'; ...
      y(:,r0-1)'; y(:,r0-2)'; y(:,r0-3)'; y(:,r0-4)'; y(:,r0-5)'; y(:,r0-6)'];
- 
  yaudio = mean(yspec);
  
  figure(2)
@@ -223,7 +222,7 @@ end
 % Save on disk
 
  filename = '10751919_Lercari_10743504_Lampis_piano.wav';
- audiowrite(filename, 100*yaudio,fs); %with x100 gain
+ audiowrite(filename, 100*yaudio,fs); 
 
 
 
