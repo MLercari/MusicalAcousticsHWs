@@ -101,7 +101,7 @@ $$ \frac{\rho}{S_1} \sin kL \sin k\theta_1 + kM\sin k(L+\theta_1) = 0 .$$
 Fixing $k = 2\pi f_0 /c$, with $f_0 = 392~\si{\hertz}$, and solving this for $x_1$, we find $x_1 = 99.9~\si{\centi\meter}$, which corresponds to a diameter at the resonator head $d_1 = 26.2~\si{\milli\meter}$. The corresponding values at the foot are $x_2 = 54.9~\si{\centi\meter}$ and $d_2 = 14.4~\si{\milli\meter}$.
 
 \subsection{Finger holes}
-If we ignore the tapering of the bore, we can model it as a cylinder with constant cross section $S_2$ and impedance $Z = jZ_0\tan kL'$, where $L'$ is the acoustic length of the pipe, i. e. its gemoetrical length plus the end correction at the foot.
+If we ignore the tapering of the bore, we can model it as a cylinder with constant cross section $S_2$ and impedance $Z = jZ_0\tan kL'$, where $L'$ is the acoustic length of the pipe, i. e. its geometrical length plus the end correction at the foot.
 When adding a finger hole, it can be shown that the acoustic length of the bore is reduced by an amount:
 \begin{align*}
 	\delta \simeq D + \Delta - \Delta' 
@@ -152,7 +152,7 @@ The structure of the jet can be characterized using the Reynolds number:
 
 $$ \mathrm{Re} = \frac{U_j h}{\nu} = 1033.3 $$
 
-where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air. Typically, the transition between laminar and turbulent flow is considered to occur for values of Re in the range 2000-4000, so it is safe to say that we are dealing with a laminar flow at the channel exit, and it is expected to remain laminar for a short distance. Therefore, as long as $W$ isn't much larger than $h$, we expect the flow in the mouth to be laminar. 
+where $\nu = 1.5 \cdot 10^{-5}~ \si{\meter\squared\per\second}$ is the kinematic viscosity of the air. Typically, the transition between laminar and turbulent flow is considered to occur for values of Re in the range 2000-4000, so it is safe to say that we are dealing with a laminar flow at the channel exit, and it is expected to remain laminar for a short distance. Since in a recorder typically the mouth length $W$ is of the same order of magnitude of $h$ ($W/h \sim 4$), we expect the flow in the mouth to be laminar.
 
 \subsection{Boundary layer effects}
 Of course the result for the flow velocity we found above is only valid at the center of the flow. Indeed, even if the fluid can be safely assumed to be frictionless in open space, the boundary conditions in a channel make the viscosity effects significant near the walls. There will be a thin layer extending from the boundary into the fluid where the velocity increases rapidly from zero to the value $U_j$: this is the so-called \emph{boundary layer}. The thickness of the boundary layer increases along the length of the channel: at position x along the channel it is:
@@ -160,8 +160,20 @@ $$ \delta(x) \approx \sqrt{\frac{\nu x}{U_j}}. $$
 This means that for a channel length of 20 mm we get $\delta = \SI{0.17}{\milli\meter}$. Notice that $\delta/h = 0.11 < \frac{1}{2}$, so we can expect the Bernoulli approximation to hold reasonably well in the center of the channel.
 
 \subsection{Dimensioning the length of the mouth}
-We want to dimension the length of the mouth so that, under the blowing conditions described above, with all holes closed, we get a sound pressure level of 90 dB at the resonator foot.
+We want to dimension the length $W$ of the mouth so that, under the blowing conditions described above, with all holes closed, we get a sound pressure level of 90 dB at the resonator foot.
 
-To tackle this problem we are going to make a series of assumptions. The first one is that we can consider the bore as a lossless transmission line of length $L' = L + 0.3d_2$, so that at steady state the pressures at the foot and at the head differ only in phase. In this way, we can assume that the pressure at the head is equal in magnitude to the pressure at the foot, which gives us $p_{in} = 1.2017~\si{\pascal}$. This assumption allows us as well to compute the desired value of the flow injected into the resonator 
+To tackle this problem we are going to make a series of assumptions. The first one is that we can consider the bore as a lossless transmission line of length $L' = L + 0.3d_2$, so that at steady state the pressures at the foot and at the head differ only in phase. In this way, we can assume that the pressure at the head is equal in magnitude to the pressure at the foot, which gives us $p_{in} = 1.2017~\si{\pascal}$. This assumption allows us as well to compute the desired amplitude of the flow injected into the resonator, which is $Q_{in} = \left|p_{in}/Z_{in}\right| = \SI{6.54}{\centi\meter\cubed\per\second}$.
+
+Studying the jet receptivity, we can derive an expression of $Q_{in}$ as a function of $W$, giving us directly a condition on $W$. Following \cite{cuadra} we write:
+$$ Q_{in} = bHU_j \left(1 + \tanh{\frac{\eta}{b}}\right) $$
+where $b$ is the local semithickness of the jet ($\sim 0.5 h$), $H$ is the jet width and $\eta$ is the transverse displacement of the jet at the labium. We can obtain this by considering the following empirical model for the jet receptivity, in which we write the displacement at $x$ as:
+$$ \eta(x, t) \approx \eta_0 e^{\alpha_i x}e^{\mathrm{j}\omega (t - x/c_p)} $$
+where $c_p$ is the constant convection velocity. The growth factor $\alpha_i$ has been taken from measurements in \cite{cuadra}. For the initial jet displacement we have:
+$$ \eta_0 \approx \frac{V_{ac}h\delta_j}{U_j\delta_{ac}} $$
+where $V_{ac}$ is the velocity of the acoustic field ($\sim 0.1U_j$), $\delta_j$ is the thickness of the shear layer in the jet and $\delta_{ac}$ is the thickness of the acoustic boundary layer.
+
+An attempt to recover the value of $W$ numerically showed that there seem to be no solutions within a range of values that makes sense from a practical perspective. This suggests that our approach is either entirely wrong, or some of the assumptions we made on the values of the parameters we used are off.
+
+\printbibliography
 
 \end{document} 
