@@ -209,14 +209,14 @@ b = 0.45*h;
 syms W;
 eta = eta0*exp(alfa*W)
 Qin = b*H*U*(1 + tanh(eta/b));
-pippo = Qin - Pout/((1i*(rho*c)/S1)*tan(k*Lcorr));
+pippo = Qin - Pout/(1i*((rho*c)/S1)*tan(k*Lcorr));
 
 figure(77);
 fplot(abs(pippo));
 %hold on;
 %fplot(0);
 
-solutionz = vpasolve(pippo==0, W, 0);
+%solutionz = vpasolve(pippo==0, W, )
 
 
 
