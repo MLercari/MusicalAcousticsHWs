@@ -207,14 +207,14 @@ eta0 = (Vac*h*delj)/(U*delAc);
 H = 0.015;  %[m] jet width = mouth width (CORRECT Q1!!)
 b = 0.45*h;
 syms W;
-eta = eta0*exp(alfa*W)
-Qin = b*H*U*(1 + tanh(eta/b));
+eta = eta0*exp(alfa*W);
+Qin = b*H*U*(1 + tanh((eta)/b));
 pippo = Qin - Pout/((1i*(rho*c)/S1)*tan(k*Lcorr));
 
 figure(77);
 fplot(abs(pippo));
-%hold on;
-%fplot(0);
+hold on;
+fplot(0);
 
 solutionz = vpasolve(pippo==0, W, 0);
 
