@@ -32,20 +32,26 @@ sim('exercise_6');
 % The variable I contains non constant time intervals between samples.
 % Resample the data using resample function in order to obtain an equally
 % sampled signal I1
-
+I = resample(out.I, t);
 
 % Plot the resampled signal in time
-figure(1)
+figure(1);
+plot(I.time, I.data);
 
 
 % Normalize the signal
-soundWave = I1.data;
+soundWave = I.data;
 soundWave = soundWave./max(abs(soundWave));
 
 %% Plot and play
 % Plot the signal frequency content as magnitude and phase
+[S, magS, angleS, f, df] = myFFT(soundWave, fs);
 
-% Play the sound
+figure(3);
+plot(t, soundWave);
+title('Signal in time'), xlabel('Time [s]')
+
+sound(soundWave, fs);                           % Play the sound
 
 disp('Save file on disk...')                    % Save on disk
-
+audiowrite(fileName, soundWave, fs);
