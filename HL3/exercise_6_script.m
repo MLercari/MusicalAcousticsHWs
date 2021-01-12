@@ -40,7 +40,7 @@ plot(I1.time, I1.data);
 
 
 % Normalize the signal
-soundWave = diff(I1.data)*fs;
+soundWave = I1.data;
 soundWave = soundWave./max(abs(soundWave));
 
 %% Plot and play

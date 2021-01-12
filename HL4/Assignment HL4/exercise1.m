@@ -21,11 +21,9 @@ typeOfSignal = ["noise", "sweep"];       % Noise or sweep
 dirRec = ["Recordings/sweep", "Recordings/noise" ];  % Recordings directory
 
 angles = zeros(1,24);
-
-for i=2:length(angles)
+for i=2:length(angles) %compute the vector that contains the angles (in degree)
     angles(i) = 15 + angles(i-1);
 end
-
 
 StructMis = struct(... %struct object that contain any measurement info
     'fileName', {}, ...
