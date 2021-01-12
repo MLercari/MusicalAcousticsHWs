@@ -47,6 +47,9 @@ soundWave = soundWave./max(abs(soundWave));
 % Plot the signal frequency content as magnitude and phase
 [S, magS, angleS, f, df] = myFFT(soundWave, fs);
 
+h = figure(2);
+plotFFT_linearFreqScale(magS, angleS, f, df, fs, 2000, h);
+
 figure(3);
 plot(t, soundWave);
 title('Signal in time'), xlabel('Time [s]')
