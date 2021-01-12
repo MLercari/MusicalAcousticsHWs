@@ -38,35 +38,34 @@ signalEnergy = zeros(2, 24);     % Vector of energy
 for j = 1:length(dirRec)
     
     if(dirRec(j) == "Recordings/sweep")
-        cont = dir(dirRec(j)); %struct with content of the directory
-        cont = cont(4:end); %remove non useful components
+        Scont = dir(dirRec(j)); %struct with content of the directory
+        Scont = Scont(4:end); %remove non useful components
         
         %sort the struct directory in ascendent order
-        T = struct2table(cont); % convert the struct array to a table
+        ST = struct2table(Scont); % convert the struct array to a table
         
-        for k = 1:length(cont)
-          T.name{k} = erase(T.name{k},'.wav'); %erase the last string part .wav  
+        for k = 1:length(Scont)
+          ST.name{k} = erase(ST.name{k},'.wav'); %erase the last string part .wav  
+          ST.name{k} = str2double(ST.name{k}); %convert the remaining into a number
         end
-        
-        
-        %T.name = str2double(T.name); %convert the remaining into a number
-        sortedT = sortrows(T, 'name'); %sort the name field of the table
-        sortedCont = table2struct(sortedT); % change it back to struct array
+
+        sortedST = sortrows(ST, 'name'); %sort the name field of the table
+        sortedSCont = table2struct(sortedST); % change it back to struct array
    
     elseif(dirRec(j) == "Recordings/noise")
-        cont = dir(dirRec(j)); %content of the directory
-        cont = cont(4:end); %remove non useful components
+        Ncont = dir(dirRec(j)); %content of the directory
+        Ncont = Ncont(4:end); %remove non useful components
         
         %sort the struct directory in ascendent order
-        T = struct2table(cont); % convert the struct array to a table
+        NT = struct2table(Ncont); % convert the struct array to a table
         
-        for k = 1:length(cont)
-          T.name{k} = erase(T.name{k},'.wav'); %erase the last string part .wav  
+        for k = 1:length(Ncont)
+          NT.name{k} = erase(NT.name{k},'.wav'); %erase the last string part .wav  
+          NT.name{k} = str2double(NT.name{k}); %convert the remaining into a number
         end
         
-        %T.name = str2double(T.name); %convert the remaining into a number
-        sortedT = sortrows(T, 'name'); %sort the name field of the table
-        sortedCont = table2struct(sortedT); % change it back to struct array   
+        sortedNT = sortrows(NT, 'name'); %sort the name field of the table
+        sortedConNt = table2struct(sortedNT); % change it back to struct array   
 
     end
     
