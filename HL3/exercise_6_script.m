@@ -40,7 +40,7 @@ plot(I1.time, I1.data);
 
 
 % Normalize the signal
-soundWave = I1.data;
+soundWave = diff(I1.data)*fs;
 soundWave = soundWave./max(abs(soundWave));
 
 %% Plot and play
@@ -51,6 +51,7 @@ h = figure(2);
 plotFFT_linearFreqScale(magS, angleS, f, df, fs, 2000, h);
 
 figure(3);
+t(1) = [];
 plot(t, soundWave);
 title('Signal in time'), xlabel('Time [s]')
 
