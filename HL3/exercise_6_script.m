@@ -27,20 +27,20 @@ fileName = 'complete_guitar.wav';     % Audio file path
 
 %% Simulation
 % run the simulink simulation using the command sim (see doc sim).
-sim('exercise_6'); 
+out = sim('exercise_6'); 
 
 % The variable I contains non constant time intervals between samples.
 % Resample the data using resample function in order to obtain an equally
 % sampled signal I1
-I = resample(out.I, t);
+I1 = resample(out.I, t);
 
 % Plot the resampled signal in time
 figure(1);
-plot(I.time, I.data);
+plot(I1.time, I1.data);
 
 
 % Normalize the signal
-soundWave = I.data;
+soundWave = I1.data;
 soundWave = soundWave./max(abs(soundWave));
 
 %% Plot and play
