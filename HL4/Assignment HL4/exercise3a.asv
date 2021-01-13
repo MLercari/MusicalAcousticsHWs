@@ -72,8 +72,7 @@ fprintf(sprintf('Direct path length %f m\n', directPathLength));
 
 % Inspecting the impulse responses determine the delay of the first
 % reflection
-  delay = directPathTimeOfArrival; %[s]
-  
+  delay = directPathTimeOfArrival ; %[s]
 % Compute the distance from the reflectors
 %distance = 
 

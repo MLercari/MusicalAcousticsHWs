@@ -51,7 +51,7 @@ for n = 1:nMic
     xc = xc(lags >= 0);
     
     %Save a portion of autocorrelation to compute First reflection
-    select = round(fs*0.002):round(fs*0.01);
+    select = round(fs*0.002):round(fs*0.0044);
     corr(n,select) = xc(select);
     
     % Plot the autocorrelation
@@ -71,7 +71,7 @@ delay = zeros(1, 24);
 for n = 1:nMic
     %select the portion of autocorrelation that contains the first
     %reflection peak
-    select = corr(n,round(fs*0.002):round(fs*0.01));
+    select = corr(n,round(fs*0.002):round(fs*0.044));
     %find the maximum index of the maximum
     [~,I] = max(select);
     %compute the delay (remembering to offset by 2 ms)
