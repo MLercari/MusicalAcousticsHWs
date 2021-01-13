@@ -55,13 +55,11 @@ for n = 1:nMic
 end
 
 %% MIC TO REFLECTORS DISTANCE COMPUTATION
-
 % Put here the difference between first reflection 
 
 nMes = 24; %number of measurements
 
 delay = zeros(nMes, 1); %every first reflection delay is stored here
-ampPeak = zeros(nMes, 1); %the relative first peak amplitude
 
 for jj = 1:nMes %compute the delay for every single measurement
     
@@ -73,28 +71,30 @@ for jj = 1:nMes %compute the delay for every single measurement
     trunc_xc(1:tsamples-1) = [];
     
     %remove initial spike and signal after 10 milli seconds
-    offset = 0.001;
-    trunc_xc(1:offset*Fs) = [];  
+    trunc_xc(1:0.002*Fs) = [];  
     trunc_xc(0.01*Fs:end) = [];
     
     %search for the maxima
-    [maxVal,maxIndex] = max(trunc_xc);
+    [~ìvs,maxIndex] = max(trunc_xc);
     
     %store the delay in a matrix
     delay(jj) = maxIndex/Fs; % [s] 
-    ampPeak(jj) = maxVal;
+    
     
     %print them for inspection 
-    time = linspace(0, length(trunc_xc)/Fs, length(trunc_xc));
+    time = linspace(0.001, length(xc)/Fs, length(xc));
     figure(jj)
-    plot(time, trunc_xc)
+    plot(t, xc)
     hold on
-    xline(delay(jj) + offset) 
+    xline(delay(jj)) 
     title(strcat("Mes n." , num2str(jj)))
-    axis([offset 0.01 -0.05 0.05]);    % Limit the axis
+    axis([0 0.1 -0.04 0.1]);    % Limit the axis
     
+    
+   
 end
 
-distance = mean(delay)*c; %[m]
+
+distance = delay(1)*c; %[m]
 
 fprintf(sprintf('Average distance between mic and first reflection %f m\n', distance));
