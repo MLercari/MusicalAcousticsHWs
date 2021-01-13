@@ -41,8 +41,8 @@ TOA_firstReflection =
 % This is the input signal. The following function computes 1/FFT(sweep). 
 % We will thus need to MULTIPLY this signal for FFT(output) in order to 
 % apply deconvolution
-% Use the provided synthSweep function.
-
+% Use the provided synthSweep function with frequency interval between 50Hz
+% and 22kHz
 figure;
 tiledlayout('flow');
 sig = zeros(fs, nMic);
