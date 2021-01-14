@@ -28,6 +28,8 @@ fileName = 'complete_guitar.wav';     % Audio file path
 %% Simulation
 % run the simulink simulation using the command sim (see doc sim).
 out = sim('exercise_6');
+%dt = diff(out.I.time);
+%force = timeseries((diff(out.I.data)).*dt, out.I.time(1:end-1));
 
 % The variable I contains non constant time intervals between samples.
 % Resample the data using resample function in order to obtain an equally
@@ -41,15 +43,18 @@ plot(I1.time, I1.data);
 
 % Normalize the signal
 soundWave = I1.data;
+soundWave = diff(soundWave)*fs;
 soundWave = soundWave./max(abs(soundWave));
 
 
 %% Plot and play
 % Plot the signal frequency content as magnitude and phase
+
 [S, magS, angleS, f, df] = myFFT(soundWave, fs);
 
 h = figure(2);
 plotFFT_linearFreqScale(magS, angleS, f, df, fs, 2000, h);
+
 
 figure(3);
 t(end) = [];
