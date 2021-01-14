@@ -250,7 +250,15 @@ audiowrite(filename, 100*yaudio,fs);
 
 \section{Modeling a guitar with an electrical analog}
 \subsection{Circuit for the body}
-The simplest model of the body of a guitar is the two-mass model, which corresponds to the circuit in Fig. \ref{fig:body} when only the first of the many RLC series is present. This is a lumped parameter model which accounts well for the lowest modes of the guitar body. If we want to include higher modes in the model using theoretical arguments, we are going to need some kind of distibuted-parameter component, at least for the top plate. Alternatively, we can follow an empirical approach such as the one presented in \cite{leefrench}. Here, 20 additional resonances of the top plate are modelled as RLC series in parallel with the first one, expanding on the two-mass model. The components are then tuned to make the circuit reponse resemble that of an actual instrument (as measured by the authors). This approach allows us to use a representation based only on discrete, passive components, simplifying the implementation significantly and granting us the possibility of using one of the many tools commonly used for the simulation of analog electrical networks. In particular, the implementation we present in this section has been done with Simscape.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{guitar_body.jpg}
+	\caption{Network analog of the guitar body, constructed by expanding on the two-mass model.}
+	\label{fig:body}
+\end{figure}
+
+The simplest model of the body of a guitar is the two-mass model, which corresponds to the circuit in Fig. \ref{fig:body} when only the first of the many RLC series is present. This is a lumped parameter model which accounts well for the lowest modes of the guitar body. If we want to include higher modes in the model using theoretical arguments, we are going to need some kind of distibuted-parameter component, at least for the top plate. Alternatively, we can follow an empirical approach such as the one presented in \cite{leefrench}. Here, 20 additional resonances of the top plate are modelled as RLC series in parallel with the first one, expanding on the two-mass model. The components are then tuned to make the circuit reponse resemble that of an actual instrument (as measured by the authors). This approach allows us to use a representation based only on discrete, passive components, simplifying the implementation significantly and granting us the possibility of using one of the many available tools for the simulation of analog electrical networks. In particular, the implementation we present in this section has been done with Simscape.
 
 
 
