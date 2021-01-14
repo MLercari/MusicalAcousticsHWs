@@ -17,7 +17,6 @@ clc
 fs = 48000;         % Sampling frequency
 nfft = fs;          % Number of fft points
 nMic = 24;          % Number of microphones
-duration = 10;                               %[s] duration of sweep signal
 
 R =   2.67;          % Distance between source and microphones
 
@@ -28,7 +27,7 @@ dir = strcat("Recordings/", typeOfSignal);% Signals directory
 % Window the signals according to the reflection time and estimate the
 % radiance pattern. 
 
-sig = zeros(fs*duration, nMic);   % Signal structure
+sig = zeros(nMic , fs*duration);   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 ns = 150; % Ideal ns should be on the direct path
@@ -72,12 +71,10 @@ for n = 1:nMic            % For each microphone signal
     y_toa1 = y(round(TOA_directSignal*fs));
     stem([TOA_directSignal], [y_toa1]);
     
-    % Plot the first reflection TOA using stem (see doc stem)
-    y_toa2 = y(round(TOA_firstReflection*fs));
-    stem([TOA_firstReflection], [y_toa2]);
+%     % Plot the first reflection TOA using stem (see doc stem)
     
     % Plot the windowed signal with thicker line
-    plot(t, y_w, 'LineWidth' , 0.5)
+    
     hold off
     % Add a legend
     legend('signal', 'window', 'direct TOA', 'First reflection TOA', ...
@@ -85,12 +82,12 @@ for n = 1:nMic            % For each microphone signal
     xlim([0 0.05]);             % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
     title(['Mic: ', num2str(n)]);
-    sig(:, n) = y_w; % Add current signal to the structure sig
+    sig = % Add current signal to the structure sig
 end
 
 %% Radiance estimation
 
-SIG = fft(sig);% FFT of the windowed signal
+SIG = % FFT of the windowed signal
 
 rad_patt = % Compute the radiance pattern magnitude
 
