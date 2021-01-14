@@ -14,23 +14,21 @@ close all
 clc
 
 %% Setup
-
 fs = 48000;         % Sampling frequency
 nfft = fs;          % Number of fft points
-nMic = 1;          % Number of microphones
+nMic = 24;          % Number of microphones
 duration = 10;                               %[s] duration of sweep signal
 c = 343.8;                     %[m]/[s]      
 R =  2.67;          % Distance between source and microphones
-
+[sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
 typeOfSignal = "sweep";      % Sweep
-
 dir = 'Recordings/sweep/';      % Signals directory
 
 %% RADIANCE COMPUTATION THROUGH THE USE OF THE DIRECT RECORDED SIGNAL
 % Window the signals according to the reflection time and estimate the
 % radiance pattern. 
 
-sig = zeros(nMic , fs*duration);   % Signal structure (a cell)
+sig = zeros( fs*duration, nMic);   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 %ns = 350;
@@ -60,7 +58,6 @@ for n = 1:nMic            % For each microphone signal
     y_w = y.*w;
     
     nexttile    % Plot the estimate impulse response
-    [sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
     [ir] = extractirsweep(y_w, invsweepfft);
     time = t(1:length(ir));
     plot(time, ir);
@@ -88,20 +85,33 @@ for n = 1:nMic            % For each microphone signal
     hold off
     
     % Add a legend
-    legend(['signal'; 'window'; 'windowed signal'])
+%    legend(['signal'; 'window'; 'windowed signal'])
     xlim([0 0.05]);  % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
     
-    sig(n,:) =  y_w;           % Add current signal to the structure sig
+    sig(:,n) =  y_w;           % Add current signal to the structure sig
 end
 
 %% Radiance estimation
 
-SIG = fft(sig); % FFT of the windowed signal
-S = fft(sweep);
+SIG = fft(sig, nfft); % FFT of the windowed signal
+%SIG = SIG(1: nfft/2);
 
-rad_patt = zeros(nMic, length(y)); % Compute the radiance pattern magnitude
-rad_patt = SIG./S;
+S = fft(sweep , nfft); % input fft
+%S = S(1: nfft/2);
+
+f = 0:fs; 
+f = f(1:end -1);
+omega = f.*(2*pi);
+
+G = exp(-1i*(omega./c)*R)./(4*pi*R); %green function
+rad_patt = zeros(fs, nMic);
+
+for i = 1:nMic
+    
+rad_patt(:,i) = SIG(:,i)./(S'.*G'); % Compute the radiance pattern magnitude
+
+end
 
 
 %% Radiance pattern plot
@@ -109,7 +119,11 @@ rad_patt = SIG./S;
 ctr_freqs = [150 250 500 750 1000 1500 2000 5000 7500 10000];
 
 % Microphone angle wrt the speaker frontal face
-angs = 
+angs = zeros(1,nMic);
+
+for ii = 2:nMic
+    angs(1,ii) = angs(1,ii-1) + 15;
+end
 
 % Plot the estimated radiance pattern using the provided function
 % radianceplot
