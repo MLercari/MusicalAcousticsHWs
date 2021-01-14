@@ -21,7 +21,7 @@ addpath('Functions')
 addpath('input signals')
 
 nMic = 1;              % Number of microphones
-speed_of_sound = 343.8; % [m]/[s]
+c = 343.8; % [m]/[s]
 
 typeOfSignal = "noise"; % Noise
 dir = "Recordings/noise/" ; % File directory
@@ -46,6 +46,7 @@ for n = 1:nMic            % For each microphone signal
     y = y(1:length(x));
     % Compute the impulse response using the function extractirnoise
     [ir] = extractirnoise(x, y, nfft);
+    
     % Find the first (and highest) impulse of the impulse response
     %by visual inspection
     % Double check if we are finding back the correct direct path length
@@ -64,18 +65,20 @@ end
 
 %% SPEAKER TO MIC DISTANCE (DIRECT PATH LENGTH)
 % Print on screen the estimated distance from the source
+
 fprintf(sprintf('Direct path length %f m\n', directPathLength));
 
 %% MIC TO REFLECTORS DISTANCE COMPUTATION
+
 % Put here the difference between first reflection and direct sound time of
 % arrivals (TOA)
 
 % Inspecting the impulse responses determine the delay of the first
 % reflection
-  delay = directPathTimeOfArrival; %[s]
+  delay = 0.010983 - directPathTimeOfArrival; %[s]
   
 % Compute the distance from the reflectors
-%distance = 
+  distance = delay*c; 
 
 % Print on screen the estimated distance from the reflectors
-%fprintf(sprintf('Average distance between first path and reflector %f m\n', distance));
+fprintf(sprintf('Average distance between first path and reflector %f m\n', distance));

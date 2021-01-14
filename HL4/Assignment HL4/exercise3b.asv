@@ -65,11 +65,11 @@ end
 %% SPEAKER TO MIC DISTANCE (DIRECT PATH LENGTH)
 % Print on screen the estimated distance from the source
 
- figure(2);
+ figure;
  plot(1:nMic, directPathLength)
- xlabel('Measurement'), ylabel('Distance highest peak')
+% xlabel('Measurement'), ylabel('Distance highest peak')
 % 
- fprintf(sprintf('Direct path length %f m\n', directPathLength));
+% fprintf(sprintf('Direct path length %f m\n', directPathLength));
 
 %% MIC TO WALLS DISTANCE COMPUTATION (ROOM SIZE)
 % Put here the difference between first reflection and direct sound time of
@@ -77,10 +77,10 @@ end
 
 % Inspecting the impulse responses determine the delay of the first
 % reflection
-delay = 0.011- directPathTimeOfArrival; %[s]
+%delay = ; %[s]
 % Compute the distance from the reflectors
-distance = delay*c;
+%distance = ;
 
 % Print on screen the estimated distance from the walls
- fprintf(sprintf('Average distance between first path and reflector %f m\n', ...
-     distance));
+% fprintf(sprintf('Average distance between first path and reflector %f m\n', ...
+%     distance));
