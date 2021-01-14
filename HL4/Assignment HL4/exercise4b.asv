@@ -14,7 +14,6 @@ close all
 clc
 
 %% Setup
-
 fs = 48000;         % Sampling frequency
 nfft = fs;          % Number of fft points
 nMic = 1;          % Number of microphones
@@ -32,8 +31,7 @@ dir = 'Recordings/sweep/';      % Signals directory
 sig = [];   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
-%ns = 350;
-ns = 300; % Ideal ns should be on the direct path
+ns = 100; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
@@ -55,12 +53,11 @@ for n = 1:nMic            % For each microphone signal
     y = y(1:duration*fs);
     % The window is applied to the signal from the 0 time instant.
     % Check the effect of differen window sizes.
-    w = w.*0.025;
     y_w = y.*w;
     
     nexttile    % Plot the estimate impulse response
     [sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
-    [ir] = extractirsweep(y_w, invsweepfft);
+    [ir] = extractirsweep(y, invsweepfft);
     time = t(1:length(ir));
     plot(time, ir);
     xlim([0 0.5])
@@ -69,7 +66,6 @@ for n = 1:nMic            % For each microphone signal
     % Plot the mic signal
     hold on
     plot(t,y)             % Plot the window over the signal
-    plot(t, w)
     % Plot the TOA using stem (see doc stem)
     x_stem = y;
     y_stem1 = zeros(length(t),1);

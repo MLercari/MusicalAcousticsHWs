@@ -33,10 +33,10 @@ duration = 10;                               %[s] duration of sweep signal
 % Use the provided synthSweep function.
 [sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
 figure;
-
+tiledlayout('flow');
 for n = 1:nMic    % For each microphone signal
     % Load the signal
-     x = audioread(strcat(dir, num2str(1), '.wav'));
+     x = audioread(strcat(dir, num2str(n), '.wav'));
      x = x(1:duration*fs);
      
     % Compute the impulse response using the function extractirsweep

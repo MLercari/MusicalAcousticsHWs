@@ -37,7 +37,7 @@ nfft = fs;              % Number of fft points
 t = (0:1/fs:nfft/fs);   % Time axis
 t = t(1:end-1);         
 figure;
-
+tiledlayout('flow');
 for n = 1:nMic            % For each microphone signal
     
     % Load the signal

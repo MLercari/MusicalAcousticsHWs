@@ -26,7 +26,8 @@ dir =  "Recordings";     % Recordings directory
 c = 343.8; % [m]/[s]
 
 %% Plot the signal autocorrelation
-
+figure;
+tiledlayout('flow');
 for n = 1:nMic
     
     % Load the signal
@@ -47,7 +48,7 @@ for n = 1:nMic
     % Plot the autocorrelations
     
     %{
-    figure(n)
+    nexttile
     plot(t, xc);
     title(['Mic: ', num2str(n)]);
     axis([0 0.05 -1 1]);    % Limit the axis
