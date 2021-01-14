@@ -99,14 +99,19 @@ for n = 1:nMic            % For each microphone signal
     plot(t, y_w, 'LineWidth' , 0.5)
     hold off
     
-    % Add a legend
-%    legend(['signal'; 'window'; 'windowed signal'])
+
+    
     xlim([0 0.05]);  % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
-    
+    title(['Mic: ', num2str(n)]);
     sig(:,n) =  y_w;           % Add current signal to the structure sig
 end
 
+    % Add a legend
+    lgd = legend('signal', 'window', 'direct TOA', 'First reflection TOA', ...
+        'windowed signal');
+
+    lgd.Layout.Tile = "east";
 %% Radiance estimation
 
 SIG = fft(sig, nfft); % FFT of the windowed signal (important to set nfft)

@@ -36,7 +36,7 @@ dir = strcat("Recordings/", typeOfSignal , "/" ); % Signals directory
 sig = zeros(fs*duration, nMic);   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
-ns = 350; % Ideal ns should be on the direct path
+ns = 150; % Ideal ns should be on the direct path
 t = 0:1/fs:duration ;
 t = t(1:end-1);
 
@@ -67,11 +67,7 @@ for n = 1:nMic            % For each microphone signal
     [ir] = extractirnoise(x, y, nfft);
     time = 0:fs;
     time(end) = [];
-    %{
-    nexttile
     plot(time, ir);
-    xlim([0 0.5])
-    %}
     
     nexttile
     % Plot the mic signal
