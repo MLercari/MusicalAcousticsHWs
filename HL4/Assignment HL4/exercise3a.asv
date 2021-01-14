@@ -69,13 +69,12 @@ end
 fprintf(sprintf('Direct path length %f m\n', directPathLength));
 
 %% MIC TO REFLECTORS DISTANCE COMPUTATION
-
 % Put here the difference between first reflection and direct sound time of
 % arrivals (TOA)
 
 % Inspecting the impulse responses determine the delay of the first
 % reflection
-  delay = 0.010983 - directPathTimeOfArrival; %[s]
+  delay = directPathTimeOfArrival; %[s]
   
 % Compute the distance from the reflectors
   distance = delay*c; 

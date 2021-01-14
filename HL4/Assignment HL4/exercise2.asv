@@ -67,8 +67,8 @@ delay = zeros(nMic, 1); %every first reflection delay is stored here
 %reflection peak lies down around 3.5 ms, we find it by looking around a
 %time interval [25 ms, 40 ms]
 
-
-for jj = 1:nMic %compute the delay for every single measurement
+%{
+for jj = 1:nMes %compute the delay for every single measurement
     
     [x, Fs] = audioread(strcat(dir,'/', typeOfSignal(2), '/', num2str(jj) , '.wav' ));
     
@@ -78,11 +78,11 @@ for jj = 1:nMic %compute the delay for every single measurement
     trunc_xc(1:tsamples-1) = [];
     
     %after having found peaks position by visual inspection, we search
-    %their excact values 
+    their excact values 
 
     leftoffset = 0.0025; %[s]
-    rightoffset = 0.0040; %[s]
-    trunc_xc(1:leftoffset*Fs) = [];  
+    rightoffset = 0.0040 %[s]
+    trunc_xc(1:offset*Fs) = [];  
     trunc_xc(rightoffset*Fs:end) = [];
     
     %search for the maxima
@@ -98,10 +98,10 @@ for jj = 1:nMic %compute the delay for every single measurement
     hold on
     xline(delay(jj)) 
     title(strcat("Mes n." , num2str(jj)))
-    xlim([leftoffset rightoffset]);    % Limit the axis
+    axis([offset 0.01 -0.05 0.05]);    % Limit the axis
     
 end
-
+%}
 
 distance = mean(delay)*c; %[m]
 
