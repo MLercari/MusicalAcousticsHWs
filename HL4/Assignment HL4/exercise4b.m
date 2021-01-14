@@ -25,7 +25,6 @@ nMic = 24;          % Number of microphones
 duration = 10;                               %[s] duration of sweep signal
 c = 343.8;                     %[m]/[s]      
 R =  2.67;          % Distance between source and microphones
-[sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
 typeOfSignal = "sweep";      % Sweep
 dir = 'Recordings/sweep/';      % Signals directory
 
@@ -37,13 +36,15 @@ sig = zeros( fs*duration, nMic);   % Signal structure: a matrix in which store w
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 %ns = 350; this window includes first reflection time
-
 ns = 150; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
 TOA_directSignal = 0.0078;  % TOA
 TOA_firstReflection =  0.011 ;% First reflection TOA
+
+%source signal
+[sweep, invsweepfft ,sweepRate] = synthSweep(duration,fs,50,22e3,0);
 
 hann_win =  hann(2*ns +1);     % Window (hanning)
 w = zeros(length(t),1);

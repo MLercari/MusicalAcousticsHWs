@@ -43,17 +43,13 @@ ns = 50;        % We need a small window
 t = 0:fs ;
 t = t(1:end-1);
 
-%create a hanning window of 2*ns +1 length
-hann_win =  hann(2*ns +1);     % Window
-w = zeros(length(ir),1);
-wind_size = (round(TOA_directSignal*fs) - ns):(round(TOA_directSignal*fs) + ns);
-w(wind_size) = hann_win;
-    
 TOA_directSignal = 0.00777;     % TOA
 TOA_firstReflection =  0.010983;% First reflection TOA
 
 % Source signal must be known. Load the source signal.
 x = audioread( strcat(inputSignalDir, inputSignalFileName));   %input signal
+
+
 
 figure;
 tiledlayout('flow')
@@ -71,6 +67,7 @@ for n = 1:nMic              % For each microphone signal
     % length, the ir is circularly shifted until the first peak is at the
     % middle of the array. This prevents the left boundary of the windows
     % to be out of the vector. See function circshift.
+
     
     % Use the TOA information in order to find the correct poisition of the
     % first path in the shifted signal.

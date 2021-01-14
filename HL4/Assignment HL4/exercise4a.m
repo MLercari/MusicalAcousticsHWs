@@ -37,6 +37,7 @@ sig = zeros(fs*duration, nMic);   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 ns = 350; % Ideal ns should be on the direct path
+%time vector
 t = 0:1/fs:duration ;
 t = t(1:end-1);
 
@@ -51,6 +52,7 @@ w(wind_size) = hann_win;
 figure;
 tiledlayout('flow');
 
+%source signal
 x = audioread("input signals/noise.wav");   %input signal
 
 for n = 1:nMic            % For each microphone signal
