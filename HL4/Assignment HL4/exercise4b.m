@@ -29,11 +29,12 @@ dir = 'Recordings/sweep/';      % Signals directory
 %% RADIANCE COMPUTATION THROUGH THE USE OF THE DIRECT RECORDED SIGNAL
 % Window the signals according to the reflection time and estimate the
 % radiance pattern. 
-sig = [];   % Signal structure
+
+sig = zeros(nMic , fs*duration);   % Signal structure (a cell)
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 %ns = 350;
-ns = 300; % Ideal ns should be on the direct path
+ns = 150; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
@@ -55,7 +56,7 @@ for n = 1:nMic            % For each microphone signal
     y = y(1:duration*fs);
     % The window is applied to the signal from the 0 time instant.
     % Check the effect of differen window sizes.
-    w = w.*0.025;
+    % with ns = 350 we include the reflection time instant, so we chose 150
     y_w = y.*w;
     
     nexttile    % Plot the estimate impulse response
@@ -69,29 +70,39 @@ for n = 1:nMic            % For each microphone signal
     % Plot the mic signal
     hold on
     plot(t,y)             % Plot the window over the signal
-    plot(t, w)
+    plot(t, w*0.025)      % Scale the window for better visualize it
+    
     % Plot the TOA using stem (see doc stem)
-    x_stem = y;
+    x_stem = t;
     y_stem1 = zeros(length(t),1);
-    y_stem1(round(TOA_directSignal*fs)) = ir(round(TOA_directSignal*fs));
+    y_stem1(round(TOA_directSignal*fs)) = y(round(TOA_directSignal*fs));
+    stem(x_stem, y_stem1);
+    
     % Plot the first reflection TOA using stem (see doc stem)
     y_stem2 = zeros(length(t),1);
-    y_stem2(round(TOA_firstReflection*fs)) = ir(round(TOA_firstReflection*fs));
+    y_stem2(round(TOA_firstReflection*fs)) = y(round(TOA_firstReflection*fs));
+    stem(x_stem, y_stem2);
+    
     % Plot the windowed signal with thicker line
     plot(t, y_w, 'LineWidth' , 0.5)
     hold off
-    % Add a legend
     
-    xlim([0 0.05]);             % Limit the plot btw 0 and 0.05s
+    % Add a legend
+    legend(['signal'; 'window'; 'windowed signal'])
+    xlim([0 0.05]);  % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
     
-    sig =  y_w;           % Add current signal to the structure sig
+    sig(n,:) =  y_w;           % Add current signal to the structure sig
 end
-%% Radiance estimation
-%{
-SIG = % FFT of the windowed signal
 
-rad_patt = % Compute the radiance pattern magnitude
+%% Radiance estimation
+
+SIG = fft(sig); % FFT of the windowed signal
+S = fft(sweep);
+
+rad_patt = zeros(nMic, length(y)); % Compute the radiance pattern magnitude
+rad_patt = SIG./S;
+
 
 %% Radiance pattern plot
 % Frequencies must be centered at a frequency bins
@@ -103,4 +114,4 @@ angs =
 % Plot the estimated radiance pattern using the provided function
 % radianceplot
 radianceplot(ctr_freqs, rad_patt, angs, 'sweep direct: '); 
-%}
+
