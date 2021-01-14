@@ -96,7 +96,6 @@ for n = 1:nMic            % For each microphone signal
     plot(t, y_w, 'LineWidth' , 0.5)
     hold off
     
-    
     xlim([0 0.05]);             % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
     title(['Mic: ', num2str(n)]);
@@ -119,7 +118,7 @@ S = fft(x , nfft); % input fft: important to set nfft
 
 f = 0:fs; 
 f = f(1:end -1);
-omega = f.*(2*pi); %coordinate for the green function
+omega = f.*(2*pi); %coordinate for the green function - use this? or f?
 
 G = exp(-1i*(f./c)*R)./(4*pi*R); %green function 
 rad_patt = zeros(fs, nMic);

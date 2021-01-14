@@ -28,29 +28,27 @@ R =   2.67;     % Distance between source and microphones
 
 typeOfSignal =  "noise"; % Noise
 dir = "Recordings/noise/"; % File directory
-
+duration = 3; %[s] duration of input signal
 inputSignalDir =    "input signals/";      % Source signal directory
 inputSignalFileName =  "noise.wav";  % Source signal name
 
 %% Radiance estimation using the impulse response
 
-sig = zeros(fs*duration, nMic);   % Signal structure
-
 % First reflections attenuation. We consider a small opart of the ir
 % windowing the impulse response
 ns = 50;        % We need a small window
 %time vector
-t = 0:fs ;
+t = 0:1/fs:1 ;
 t = t(1:end-1);
-
-%create a hanning window of 2*ns +1 length
-hann_win =  hann(2*ns +1);     % Window
-w = zeros(length(ir),1);
-wind_size = (round(TOA_directSignal*fs) - ns):(round(TOA_directSignal*fs) + ns);
-w(wind_size) = hann_win;
     
 TOA_directSignal = 0.00777;     % TOA
 TOA_firstReflection =  0.010983;% First reflection TOA
+
+%create a hanning window of 2*ns +1 length
+hann_win =  hann(2*ns +1);     % Window
+w = zeros(length(t),1);
+wind_size = (round(TOA_directSignal*fs) - ns):(round(TOA_directSignal*fs) + ns);
+w(wind_size) = hann_win;
 
 % Source signal must be known. Load the source signal.
 x = audioread( strcat(inputSignalDir, inputSignalFileName));   %input signal
@@ -74,7 +72,7 @@ for n = 1:nMic              % For each microphone signal
     
     % Use the TOA information in order to find the correct poisition of the
     % first path in the shifted signal.
-    shiftAmount = round(duration*fs/2 - TOA_directSignal*fs);
+    shiftAmount = round(fs/2 - TOA_directSignal*fs);
     irCircular = circshift(ir, shiftAmount);  
 
     % Impulse response windowing
@@ -85,34 +83,55 @@ for n = 1:nMic              % For each microphone signal
     % response timing.
     
     irCircular_w = zeros(1,length(ir));% Initialize the vector
-    w = circshift(w, shiftAmount);
-    irCircular_w =  irCircular_w.*w;% Window the ir 
-    ir_w = circshift(irCircular_w , -shiftAmount); % Shift ir back
+    wCircular = circshift(w, shiftAmount);
+    irCircular_w =  irCircular.*wCircular; % Window the ir 
+    ir_w = circshift(irCircular_w , - shiftAmount); % Shift ir back
     
     % Plot the estimated impulse response
- 
-     hold on
-    % Plot the TOA and TOA First over the IR
-
-    % Plot the windowed IR over with thicker line
     nexttile
+    hold on
+    plot(t, ir)
 
+    % Plot the TOA and TOA First over the IR
+    x_stem = t;
+    y_stem1 = NaN(length(t),1);
+    y_stem1(round(TOA_directSignal*fs)) = ir(round(TOA_directSignal*fs));
+    stem(x_stem, y_stem1 );
+    y_stem2 = NaN(length(t),1);
+    y_stem2(round(TOA_firstReflection*fs)) = ir(round(TOA_firstReflection*fs));
+    stem(x_stem, y_stem2 );
+    
+    % Plot the windowed IR over with thicker line
+    plot(t, ir_w, 'LineWidth' , 0.5)
+    
+    %plot the window
+    plot(t, w.*0.025);
+    
     hold off
-    legend('windowed ir');
-
-    legend('original ir', 'direct TOA', 'First reflection TOA', 'windowed ir');
+    
     xlim([0 0.05]);
     xlabel('Time (sec)');
     title(['Mic: ', num2str(n)]);
     
-    sig(:,n) = 
+    sig(:,n) = ir_w;
 end
 
 %% Radiance estimation
 
-SIG =      % FFT of the windowed signal
+SIG =   fft(sig, nfft); % FFT of the windowed ir (important to set nfft)
 
-rad_patt =    % Compute the radiance pattern magnitude
+f = 0:fs; 
+f = f(1:end -1);
+
+G = exp(-1i*(f./c)*R)./(4*pi*R); %green function 
+rad_patt = zeros(fs, nMic);
+
+for i = 1:nMic
+    
+rad_patt(:,i) = SIG(:,i)./G'; % Compute the radiance pattern magnitude
+
+end
+
 
 %% Radiance pattern plot
 
@@ -120,8 +139,13 @@ rad_patt =    % Compute the radiance pattern magnitude
 ctr_freqs = [150 250 500 750 1000 1500 2000 5000 7500 10000];
 
 % Microphone angle wrt the speaker frontal face
-angs = 
+angs = zeros(1,nMic);
+
+for ii = 2:nMic
+    angs(1,ii) = angs(1,ii-1) + 15;
+end
+
 % Plot the estimated radiance pattern using the provided function
 % radianceplot
-radianceplot(ctr_freqs, rad_patt, angs, 'noise IR: ');
+radianceplot(ctr_freqs, rad_patt, angs, 'sweep direct: '); 
 
