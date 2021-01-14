@@ -14,6 +14,11 @@ close all
 clc
 
 %% Setup
+
+addpath('Functions')
+addpath('Recordings')
+addpath('input signals')
+
 fs = 48000;         % Sampling frequency
 nfft = fs;          % Number of fft points
 nMic = 24;          % Number of microphones
@@ -28,10 +33,11 @@ dir = 'Recordings/sweep/';      % Signals directory
 % Window the signals according to the reflection time and estimate the
 % radiance pattern. 
 
-sig = zeros( fs*duration, nMic);   % Signal structure
+sig = zeros( fs*duration, nMic);   % Signal structure: a matrix in which store windowed signals
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
-%ns = 350;
+%ns = 350; this window includes first reflection time
+
 ns = 150; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
@@ -39,7 +45,7 @@ t = t(1:end-1);
 TOA_directSignal = 0.0078;  % TOA
 TOA_firstReflection =  0.011 ;% First reflection TOA
 
-hann_win =  hann(2*ns +1);     % Window
+hann_win =  hann(2*ns +1);     % Window (hanning)
 w = zeros(length(t),1);
 wind_size = (round(TOA_directSignal*fs) - ns):(round(TOA_directSignal*fs) + ns);
 w(wind_size) = hann_win;
@@ -48,20 +54,29 @@ figure;
 tiledlayout('flow');
 
 for n = 1:nMic            % For each microphone signal
-    % Load the signal
     
+    % Load the signal
     y = audioread(strcat(dir, num2str(n), '.wav'));
-    y = y(1:duration*fs);
+    y = y(1:duration*fs); %set the right signal length
+    
     % The window is applied to the signal from the 0 time instant.
     % Check the effect of differen window sizes.
     % with ns = 350 we include the reflection time instant, so we chose 150
-    y_w = y.*w;
     
-    nexttile    % Plot the estimate impulse response
+    y_w = y.*w; %apply the windowing to the signal
+    
+    
+    % Plot the estimate impulse response (now hidden becuase make the graph
+    % too confused! 
+    
     [ir] = extractirsweep(y_w, invsweepfft);
     time = t(1:length(ir));
+    
+    %{
+    nexttile 
     plot(time, ir);
     xlim([0 0.5])
+    %}
     
     nexttile
     % Plot the mic signal
@@ -71,14 +86,14 @@ for n = 1:nMic            % For each microphone signal
     
     % Plot the TOA using stem (see doc stem)
     x_stem = t;
-    y_stem1 = zeros(length(t),1);
+    y_stem1 = NaN(length(t),1);
     y_stem1(round(TOA_directSignal*fs)) = y(round(TOA_directSignal*fs));
-    stem(x_stem, y_stem1);
+    stem(x_stem, y_stem1 );
     
     % Plot the first reflection TOA using stem (see doc stem)
-    y_stem2 = zeros(length(t),1);
+    y_stem2 = NaN(length(t),1);
     y_stem2(round(TOA_firstReflection*fs)) = y(round(TOA_firstReflection*fs));
-    stem(x_stem, y_stem2);
+    stem(x_stem, y_stem2,  '_' );
     
     % Plot the windowed signal with thicker line
     plot(t, y_w, 'LineWidth' , 0.5)
@@ -94,21 +109,22 @@ end
 
 %% Radiance estimation
 
-SIG = fft(sig); % FFT of the windowed signal
-%SIG = SIG(1: nfft/2);
+SIG = fft(sig, nfft); % FFT of the windowed signal (important to set nfft)
 
-S = fft(sweep); % input fft
-%S = S(1: nfft/2);
 
-f = 0:fs*duration; 
+S = fft(sweep , nfft); % input fft: important to set nfft
+
+
+f = 0:fs; 
 f = f(1:end -1);
-omega = f.*(2*pi);
+omega = f.*(2*pi); %coordinate for the green function
 
-G = exp(-1i*(omega./c)*R)./(4*pi*R); %green function
-rad_patt = zeros(fs*duration, nMic);
+G = exp(-1i*(f./c)*R)./(4*pi*R); %green function 
+rad_patt = zeros(fs, nMic);
+
 for i = 1:nMic
     
-rad_patt = SIG./(S.*G); % Compute the radiance pattern magnitude
+rad_patt(:,i) = SIG(:,i)./(S'.*G'); % Compute the radiance pattern magnitude
 
 end
 
