@@ -123,7 +123,6 @@ S = fft(sweep , nfft); % input fft: important to set nfft
 
 f = 0:fs; 
 f = f(1:end -1);
-omega = f.*(2*pi); %coordinate for the green function
 
 G = exp(-1i*(f./c)*R)./(4*pi*R); %green function 
 rad_patt = zeros(fs, nMic);
