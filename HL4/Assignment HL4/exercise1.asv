@@ -28,7 +28,7 @@ for i=2:length(angles) %compute the vector that contains the angles (in degree)
     angles(i) = 15 + angles(i-1);
 end
 
-nMic = 24;                        % Number of microphones
+nMic = 1;                        % Number of microphones
 signalEnergy = zeros(2, 24);     % Vector of energy
 
 % Labels will be the angle: store important information of each measument
@@ -80,9 +80,6 @@ for j = 1:length(dirRec)
     end
     
 end
-
-%in order to find the information for each signal, including the label,
-%look into the structure structMis
 
 %% Load the signals and compute the energy - compute_energy a function added in "Functions"
 

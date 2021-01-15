@@ -108,11 +108,6 @@ for jj = 1:nMic %compute the delay for every single measurement
     trunc_xc(1:leftoffset*Fs) = [];
     trunc_xc(rightoffset*Fs:end) = [];
     
-    %time axis of the truncated vector
-    trunc_t = t;
-    trunc_t(1:leftoffset*Fs) = [];
-    trunc_t(rightoffset*Fs:end) = [];
-    
     %search for the maxima
     %[pks, locs] = findpeaks(trunc_xc, (leftoffset*Fs:rightoffset*Fs) , 'NPeaks', 1);
     
@@ -121,6 +116,9 @@ for jj = 1:nMic %compute the delay for every single measurement
     
     %print them for inspection 
     nexttile
+    
+    %time axis of the truncated vector
+    
     plot(trunc_t, trunc_xc)
     title(strcat("Mes n." , num2str(jj) , typeOfSignal(ii)))
     xlim([leftoffset rightoffset]);    % Limit the axis
