@@ -37,7 +37,7 @@ inputSignalFileName =  "noise.wav";  % Source signal name
 % First reflections attenuation. We consider a small opart of the ir
 % windowing the impulse response
 ns = 50;        % We need a small window
-%ns = 350; this includes the first reflection TOA -> less accurate radiance
+%ns = 350; this includes the first reflection TOA -> more noisy radiance
 %pattern
 
 %time vector
