@@ -60,10 +60,8 @@ for m = 1:length(typeOfSignal)
         
     end
 end
-   % Add a legend
-    lgd = legend('autocorrelation signal');
 
-    lgd.Layout.Tile = "east";
+    
 %% MIC TO REFLECTORS DISTANCE COMPUTATION
 
 % Put here the difference between first reflection
@@ -73,10 +71,12 @@ delay = zeros(nMic, 2); %every first reflection delay is stored here
 %by visual inspection of the autocorrelations graphs we found that first
 %reflection peak lies around 3.5 ms (corresponding to the first reflection time),
 
-figure(2);
-tiledlayout('flow');
+
 
 for ii = 1:length(typeOfSignal)
+    figure(ii+1);
+    
+    tiledlayout('flow');
     
     for jj = 1:nMic %compute the delay for every single measurement
         
@@ -110,9 +110,10 @@ for ii = 1:length(typeOfSignal)
             'descend' , 'MinPeakHeight' , -1);
         
         %sometimes the peak detector doesn't work and it returns an empty
-        %vector: to avoid this we set 0.0035
-        if (isempty(locs) ==1)
-            locs = 0.0035;
+        %vector: to avoid this we set 0.003146
+        
+        if (isempty(locs) == 1)
+            locs = 0.003146;
         end
         
         %store the delay in a matrix
