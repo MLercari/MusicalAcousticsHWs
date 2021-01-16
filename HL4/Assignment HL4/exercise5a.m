@@ -37,6 +37,9 @@ inputSignalFileName =  "noise.wav";  % Source signal name
 % First reflections attenuation. We consider a small opart of the ir
 % windowing the impulse response
 ns = 50;        % We need a small window
+%ns = 350; this includes the first reflection TOA -> less accurate radiance
+%pattern
+
 %time vector
 t = 0:1/fs:1 ;
 t = t(1:end-1);
@@ -148,5 +151,5 @@ end
 
 % Plot the estimated radiance pattern using the provided function
 % radianceplot
-radianceplot(ctr_freqs, rad_patt, angs, 'sweep direct: '); 
+radianceplot(ctr_freqs, rad_patt, angs, 'noise direct: '); 
 

@@ -36,7 +36,10 @@ sig = zeros( fs*duration, nMic);   % Signal structure: a matrix in which store w
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 
-ns = 350; % Ideal ns should be on the direct path
+ns = 350; % even this window, which is the largest possible, remove all the frequency 
+%information of the recorded signal: therefore the relative radiance is not
+%accurate
+
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
