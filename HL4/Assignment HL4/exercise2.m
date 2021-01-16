@@ -65,7 +65,7 @@ end
 
 % Put here the difference between first reflection 
 
-delay = zeros(nMic, 1); %every first reflection delay is stored here
+delay = zeros(nMic, 2); %every first reflection delay is stored here
 
 %by visual inspection of the autocorrelations graphs we found that first
 %reflection peak lies around 3.5 ms (corresponding to the first reflection time),
@@ -113,7 +113,7 @@ for jj = 1:nMic %compute the delay for every single measurement
     end
     
     %store the delay in a matrix
-    delay(jj) = locs; % [s] 
+    delay(jj , ii) = locs; % [s] 
     
     %print them for inspection 
     nexttile
@@ -133,6 +133,7 @@ end
 
 end
 
+%AGGIORNARE LA MEDIA DEL DELAY!
 
 distance = mean(delay)*c; %[m]
 
