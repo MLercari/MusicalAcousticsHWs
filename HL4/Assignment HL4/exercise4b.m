@@ -35,8 +35,8 @@ dir = 'Recordings/sweep/';      % Signals directory
 sig = zeros( fs*duration, nMic);   % Signal structure: a matrix in which store windowed signals
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
-%ns = 350; this window includes first reflection time
-ns = 250; % Ideal ns should be on the direct path
+
+ns = 350; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
@@ -101,7 +101,7 @@ end
     lgd = legend('signal', 'window', 'direct TOA', 'First reflection TOA', ...
         'windowed signal');
 
-    lgd.Layout.Tile = "east";
+    lgd.Layout.Tile = "south";
 %% Radiance estimation
 
 SIG = fft(sig, nfft); % FFT of the windowed signal (important to set nfft)

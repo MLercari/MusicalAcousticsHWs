@@ -36,7 +36,7 @@ dir = strcat("Recordings/", typeOfSignal , "/" ); % Signals directory
 sig = zeros(fs*duration, nMic);   % Signal structure
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
-ns = 350; % Ideal ns should be on the direct path
+ns = 120; % Ideal ns should be on the direct path
 
 %time vector
 t = 0:1/fs:duration ;
@@ -45,7 +45,7 @@ t = t(1:end-1);
 %from previous excercise 3a we know that the mean values are
 
 TOA_directSignal = 0.008;  % direct signal TOA
-TOA_firstReflection =  0.010983; % First reflection TOA
+TOA_firstReflection =  0.008 + 0.0032; % First reflection TOA
 
 hann_win =  hann(2*ns +1);     % Window
 w = zeros(length(t),1);
@@ -91,7 +91,7 @@ for n = 1:nMic            % For each microphone signal
     plot(t, y_w, 'LineWidth' , 0.5)
     hold off
     
-    xlim([0 0.05]);             % Limit the plot btw 0 and 0.05s
+    xlim([0 0.02]);             % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
     title(['Mic: ', num2str(n)]);
     sig(:, n) = y_w; % Add current signal to the structure sig
@@ -101,7 +101,7 @@ end
     lgd = legend('signal', 'window', 'direct TOA', 'First reflection TOA', ...
         'windowed signal');
 
-    lgd.Layout.Tile = "east";
+    lgd.Layout.Tile = "south";
     
 %% Radiance estimation
 
@@ -137,5 +137,5 @@ end
 
 % Plot the estimated radiance pattern using the provided function
 % radianceplot
-radianceplot(ctr_freqs, rad_patt, angs, 'sweep direct: '); 
+radianceplot(ctr_freqs, rad_patt, angs, 'noise direct: '); 
 
