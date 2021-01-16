@@ -37,8 +37,9 @@ signalEnergy = zeros(2, 24);     % Vector of energy
 for j = 1:length(dirRec) 
     
     if(dirRec(j) == "Recordings/sweep")
+        
         Scont = dir(dirRec(j)); %struct with content of the directory
-        Scont = Scont(4:end); %remove non useful components
+        Scont = Scont(4:end); %remove useless components
         
         %sort the struct directory in ascendent order
         ST = struct2table(Scont); % convert the struct array to a table to perform the sorting
@@ -81,12 +82,17 @@ for j = 1:length(dirRec)
     
 end
 
+%%
 %in order to find the information for each signal, including the label,
 %look into the structure structMis. To access one measurement information
 %use:
 
-MesNum = 4;
-fprintf(sprintf('The file %f \n', distance));
+MesNum = 27; %Sweep measurements are from 1 to 24 and and noise ones from 25 to 48
+fn = structMis.fileName(MesNum);
+fa = structMis.angle(MesNum);
+ft = structMis.type(MesNum);
+disp(strcat("the file " , num2str(fn{1}) , ".wav" , " is a " , ft{1} , ...
+    " signal with an angle of " , num2str(fa{1}) , " degrees."));
 
 %% Load the signals and compute the energy - compute_energy a function added in "Functions"
 
