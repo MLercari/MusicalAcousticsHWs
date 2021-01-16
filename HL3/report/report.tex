@@ -210,7 +210,7 @@ end
  \subsection{Time history and audio file}
  After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by plotting the displacement along $x$ for each time step. Actually, since in this way the animation would be too slow, it has been decided to plot $y(n,m)$ each $50$ time steps. A snapshot is shown in Fig. \ref{fig:displ} and an animation called \verb|string_displacement.gif| can be found attached to this report. 
 
-Moreover, it has been computed a mean value of the displacement around the point $r_0 = L - m0$ (see Fig.\ref{fig:historyone} and Fig.\ref{fig:historytwo} ) by taking averaging 12 spatial samples: 6 on the left of $r_0$ and 6 on the right of $r_0$
+Moreover, a mean value of the displacement around the point $r_0 = L - m0$ (see Fig.\ref{fig:historyone} and Fig.\ref{fig:historytwo} ) has been computed by averaging 12 spatial samples: 6 on the left of $r_0$ and 6 on the right of $r_0$
 
 \begin{verbatim}
 r0 = ceil((L-x0)/X); %coordinate of the striking specular point
@@ -220,7 +220,7 @@ yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; ...
 yaudio = mean(yspec);
 \end{verbatim}
 
-from which the vector \verb|yaudio| has been gained by a factor of $\times 100$ in order to make it audible, then converted into a sound and stored it.
+from which the vector \verb|yaudio| has been amplified by a factor of $\times 100$ in order to make it audible, then converted into a sound and stored it.
 
 \begin{verbatim}
 sound(100*yaudio, fs); %Play the sound
