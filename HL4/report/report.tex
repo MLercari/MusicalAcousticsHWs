@@ -235,7 +235,7 @@ The values of the direct TOAs obtained in this way are multiplied by $c$ to obta
 \section{Radiance estimation directly from the signals}
 The scripts for this section are \verb|exercise4a.m| (noise) and \verb|exercise4b.m| (sweep). We want to estimate the radiance pattern of the source: to do so, we window the recorded signal so that it only includes the direct sound. Then we can use the windowed signal to compute the impulse response of the free field (anechoic), which, knowing the distance $R$ from the source, can be used to derive the directivity function, i. e. the radiation pattern's absolute value.
 
-We begin from the noise signals. We performed these operations using a Hanning window centered at the previously computed direct TOA. The suggested value for the length of the window (701 samples = 14.6 ms) leaves the first reflection inside; therefore we tried a shorter window as well (241 samples = 5 ms). The resulting radiance plots can be seen in Fig. \ref{fig:noiseradiance}.
+We begin from the noise signals. We performed these operations using a Hanning window centered at the previously computed direct TOA. The suggested value for the length of the window (701 samples = 14.6 ms) leaves the first reflection inside; therefore we tried a shorter window as well (241 samples = 5 ms). The resulting radiance plots can be seen in Fig. \ref{fig:noiserad4}.
 
 \begin{figure}[h]
 	\centering
@@ -251,12 +251,12 @@ We begin from the noise signals. We performed these operations using a Hanning w
 		\caption{}
 	\end{subfigure}
 	\caption{Radiance plots for the \textbf{noise signals}. In (a) we used a 701 samples window, while in (b) we used a 241 samples window.}
-	\label{fig:noiseradiance}
+	\label{fig:noiserad4}
 \end{figure}
 
 In both cases the resulting pattern appears rather noisy, which is to be expected since this technique involves quite literally ignoring most of the information collected with the recordings. This suggests why the patterns obtained from the shorter window appear to be worse. Notice however that the noisiest patterns are those in the lower frequency range with the shorter window. This makes perfect sense if we notice that 5 ms is the length of the period of a sinusoid at 200 Hz.
 
-Things get even worse when we move to the sweep signals. Here too we have the same issue with the length of the window. We chose therefore to use the same windows we used before. The radiance plots can be seen in Fig. \ref{fig:sweepradiance}. The main problem here is that, even with the largest window, we are keeping only the first 14 ms of the signal, which doesn't even cover one period of the 50 Hz sinusoid we are starting with. We are therefore losing all of the spectral information, rendering the subsequent computation of the impulse response completely meaningless.
+Things get even worse when we move to the sweep signals. Here too we have the same issue with the length of the window. We chose therefore to use the same windows we used before. The radiance plots can be seen in Fig. \ref{fig:sweeprad4}. The main problem here is that, even with the largest window, we are keeping only the first 14 ms of the signal, which doesn't even cover one period of the 50 Hz sinusoid we are starting with. We are therefore losing all of the spectral information, rendering the subsequent computation of the impulse response practically meaningless.
 
 \begin{figure}[h]
 	\centering
@@ -272,12 +272,46 @@ Things get even worse when we move to the sweep signals. Here too we have the sa
 		\caption{}
 	\end{subfigure}
 	\caption{Radiance plots for the \textbf{sweep signals}. In (a) we used a 701 samples window, while in (b) we used a 241 samples window.}
-	\label{fig:sweepradiance}
+	\label{fig:sweeprad4}
 \end{figure}
 
 \section{Radiance estimation from the impulse responses}
+The scripts we refer to in this section are \verb|exercise5a.m| and \verb|exercise5b.m|. The aim of this section is the same of the previous one, but we set out to use a different (and admittedly more clever) approach, which consists of obtaining the anechoic impulse response by windowing the impulse response itself.
+For both kinds of signals, we first used a very short window (101 samples = 2.3 ms), then a larger one that includes the first reflection as well (701 samples = 14.6 ms). The resulting radiation patterns are plotted in Figs. \ref{fig:noiserad5} and \ref{fig:sweeprad5}. We can notice how, when including the first reflection in the window, the radiance around 180° increases: this is because we get the reflected sound from the front of the speaker reflecting off the back wall and reaching the microphone. Furthermore, we also point out that, while with both types of source signal we have a clear  pattern in the higher frequency range, at low frequencies the patterns obtained from the sine sweep appear to be less noisy.
 
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.85\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{5a_radiance_50.png}
+		\caption{}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.85\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{5a_radiance_350.png}
+		\caption{}
+	\end{subfigure}
+	\caption{Radiance plots for the \textbf{noise signals}. In (a) we used a 101 samples window, while in (b) we used a 701 samples window.}
+	\label{fig:noiserad5}
+\end{figure}
 
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.85\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{5b_radiance_50.png}
+		\caption{}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.85\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{5b_radiance_350.png}
+		\caption{}
+	\end{subfigure}
+	\caption{Radiance plots for the \textbf{sweep signals}. In (a) we used a 101 samples window, while in (b) we used a 701 samples window.}
+	\label{fig:sweeprad5}
+\end{figure}
 
 
 
