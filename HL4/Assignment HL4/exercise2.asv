@@ -133,7 +133,6 @@ end
 
 end
 
-%AGGIORNARE LA MEDIA DEL DELAY!
 
 distance = mean(delay)*c; %[m]
 
