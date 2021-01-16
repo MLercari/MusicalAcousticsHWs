@@ -42,6 +42,7 @@ tiledlayout('flow');
 
 direct = zeros(1, nMic); %store the direct path length here
 reflect = zeros(1, nMic); %store the first reflection length here
+
 for n = 1:nMic            % For each microphone signal
     
     % Load the signal
@@ -53,7 +54,7 @@ for n = 1:nMic            % For each microphone signal
     % Compute the impulse response using the function extractirnoise
     [ir] = extractirnoise(x, y, nfft);
     
-    % Find the first (and highest) impulse of the impulse response around
+    % Find the first (and highest)peak of the impulse response around
     % the peak position (0.0077 s)
     [pks, locs] = findpeaks(ir(0.005*fs:0.01*fs), t(0.005*fs:0.01*fs) , 'NPeaks', 1 , 'SortStr' , ...
         'descend' , 'MinPeakHeight' , 0);
@@ -63,7 +64,9 @@ for n = 1:nMic            % For each microphone signal
     directPathTimeOfArrival = locs; %[s]
     
     directPathLength = directPathTimeOfArrival*c;
-    
+  
+    % Find the second peak of the impulse response around
+    % the peak position (0.01 s)
     [pks2, locs2] = findpeaks(ir(0.009*fs:0.012*fs), t(0.009*fs:0.012*fs) , 'NPeaks', 1 , 'SortStr' , ...
         'descend' , 'MinPeakHeight' , 0);
     
