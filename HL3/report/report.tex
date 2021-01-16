@@ -210,7 +210,7 @@ end
  \subsection{Time history and audio file}
  After the vector $y(n,m)$ has been computed for every value of $n$ and $m$ with the previous scheme, a visual representation can be obtained by plotting the displacement along $x$ for each time step. Actually, since in this way the animation would be too slow, it has been decided to plot $y(n,m)$ each $50$ time steps. A snapshot is shown in Fig. \ref{fig:displ} and an animation called \verb|string_displacement.gif| can be found attached to this report. 
 
-Moreover, it has been computed a mean value of the displacement around the point $r_0 = L - m0$ (see Fig.\ref{fig:historyone} and Fig.\ref{fig:historytwo} ) by taking averaging 12 spatial samples: 6 on the left of $r_0$ and 6 on the right of $r_0$
+Moreover, a mean value of the displacement around the point $r_0 = L - m0$ (see Fig.\ref{fig:historyone} and Fig.\ref{fig:historytwo} ) has been computed by averaging 12 spatial samples: 6 on the left of $r_0$ and 6 on the right of $r_0$
 
 \begin{verbatim}
 r0 = ceil((L-x0)/X); %coordinate of the striking specular point
@@ -220,7 +220,7 @@ yspec = [y(:,r0+1)' ; y(:,r0+2)'; y(:,r0+3)'; y(:,r0+4)'; ...
 yaudio = mean(yspec);
 \end{verbatim}
 
-from which the vector \verb|yaudio| has been gained by a factor of $\times 100$ in order to make it audible, then converted into a sound and stored it.
+from which the vector \verb|yaudio| has been amplified by a factor of $\times 100$ in order to make it audible, then converted into a sound and stored it.
 
 \begin{verbatim}
 sound(100*yaudio, fs); %Play the sound
@@ -295,11 +295,24 @@ In the first part of the implementation we are concerned with designing the body
 	\label{fig:guitarstring}
 \end{figure}
 
-The second part of the implementation involves instead the modeling of the string. The string itself can be represented by a transmission line, with the ideal reflections at the ends corresponding to short circuits. In parallel with the short circuits, we can see at both ends a generator with a load impedance, used to model the plucking of the string. The generators provide the initial conditions by feeding triangular inputs to the transmission line. After half a period of the fundamental, the generator switches open and the short-circuit switches close, leaving the signal to reflect back and forth on the transmission line.
+The second part of the implementation involves instead the modeling of the string. The string itself can be represented by a transmission line, with the ideal reflections at the ends corresponding to short circuits. In parallel with the short circuits, we can see at both ends a current generator with a load impedance, used to model the plucking of the string. The generators provide the initial conditions by feeding triangular inputs to the transmission line. After half a period of the fundamental, the generator switches open and the short-circuit switches close, leaving the signal to reflect back and forth on the transmission line.
 
-The string circuit is connected to the body circuit at the U2 switch (Fig. \ref{fig:guitarstring}. The sound is recovered by taking the time derivative (approximated with finite differences) of the current at this point, which can be shown to be proportional to the vertical force at the bridge.  The resulting signal can be seen in Fig. \ref{fff} and it has been saved as an audio file in \texttt{completeGuitar.wav}.
+The string circuit is connected to the body circuit at the U2 switch (Fig. \ref{fig:guitarstring}. The sound is recovered by taking the time derivative (approximated with finite differences) of the current at this point, which can be shown to be proportional to the vertical force at the bridge.  The resulting signal can be seen in Fig. \ref{fig:complete} and it has been saved as an audio file in \texttt{completeGuitar.wav}. The MATLAB script that executes the simulation is \texttt{exercise6\_script.m}, while the complete circuit model can be found in \texttt{exercise\_6.slx}. The result is a much better approximation of the sound of a guitar than the two-mass system, and this is especially apparent in how the fast plucking transient sounds, as a consequence of the more realistic response in the higher frequency range.
 
-
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{pluck.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{guitSpectrum.png}
+	\end{subfigure}
+	\caption{Time history and FFT of the (normalized) sound produced by the complete guitar simulation.}
+	\label{fig:complete}
+\end{figure}
 
 
 \printbibliography
