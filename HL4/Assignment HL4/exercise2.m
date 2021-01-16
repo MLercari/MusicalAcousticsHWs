@@ -131,18 +131,14 @@ for ii = 1:length(typeOfSignal)
         stem( trunc_t , y_stem)
         
         hold off
-        
-        
+            
     end
     
 end
 
-
-distance = mean(delay)*c; %[m]
-distance = mean(distance');
-
-mean_delay = mean(delay);
-sd_delay = std(delay);
+distance = mean([delay(:,1) ; delay(:,2)])*c; %[m]
+mean_delay = mean([delay(:,1) ; delay(:,2)]); %[s]
+sd_delay = std([delay(:,1) ; delay(:,2)]); %[s]
 
 fprintf(sprintf('Average distance between mic and first reflection %f m\n', distance));
 fprintf(sprintf('with a mean time of first reflection %f s\n', mean_delay));
