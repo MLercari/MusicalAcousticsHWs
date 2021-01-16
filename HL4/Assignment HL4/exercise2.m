@@ -71,8 +71,6 @@ delay = zeros(nMic, 2); %every first reflection delay is stored here
 %by visual inspection of the autocorrelations graphs we found that first
 %reflection peak lies around 3.5 ms (corresponding to the first reflection time),
 
-
-
 for ii = 1:length(typeOfSignal)
     figure(ii+1);
     
@@ -136,9 +134,9 @@ for ii = 1:length(typeOfSignal)
     
 end
 
-distance = mean([delay(:,1) ; delay(:,2)])*c; %[m]
-mean_delay = mean([delay(:,1) ; delay(:,2)]); %[s]
-sd_delay = std([delay(:,1) ; delay(:,2)]); %[s]
+distance = mean([delay(:,1) ; delay(:,2)])*c; %[m] mean value wrt to measurements and type of signals
+mean_delay = mean([delay(:,1) ; delay(:,2)]); %[s] mean value wrt to measurements and type of signals
+sd_delay = std([delay(:,1) ; delay(:,2)]); %[s] wrt all measurements
 
 fprintf(sprintf('Average distance between mic and first reflection %f m\n', distance));
 fprintf(sprintf('with a mean time of first reflection %f s\n', mean_delay));
