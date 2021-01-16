@@ -18,10 +18,10 @@ clc
 % Collecting autocorrelations and plotting them in order to analyze
 % reflections. Try different takes and input signals
 
-nMic = 1; % Number of microphones: assumed to be equal to the number of measurements
+nMic = 24; % Number of microphones: assumed to be equal to the number of measurements
 
 typeOfSignal = ["sweep" , "noise"]; % Noise or sweep
-duration = [10 , 4];
+duration = [10 , 3];
 dir =  "Recordings";     % Recordings directory
 Fs = 48000; %[Hz] Sampling frequency
 
@@ -31,11 +31,6 @@ c = 343.8; % [m]/[s]
 
 figure(1);
 tiledlayout('flow');
-
-%initialize the correlation vector
-corr_sweep = zeros(nMic, Fs*10);
-corr_noise = zeros(nMic, Fs*4);
-corr = [{corr_sweep} ; {corr_noise}];
 
 for m = 1:length(typeOfSignal)
     
@@ -63,11 +58,6 @@ for m = 1:length(typeOfSignal)
     xlim([ 0.0025 0.004])
     xlabel('Time (sec)');
   
-    
-    %store the autocorrelations
-    current_corr = corr{m};
-    current_corr(n , :) = xc;
-    corr{m} = current_corr;
     end
 end
 
@@ -105,19 +95,25 @@ for jj = 1:nMic %compute the delay for every single measurement
     %inspect the signal around 3.5 ms and find the peak position
     leftoffset = 0.0025; %[s]
     rightoffset = 0.0040; %[s]
-    trunc_xc(1:leftoffset*Fs) = [];
-    trunc_xc(rightoffset*Fs:end) = [];
-    
+
+    trunc_xc = trunc_xc(leftoffset*Fs:rightoffset*Fs);   
+      
     %time axis of the truncated vector
     trunc_t = t;
-    trunc_t(1:leftoffset*Fs) = [];
-    trunc_t(rightoffset*Fs:end) = [];
-    
+
+    trunc_t = trunc_t(leftoffset*Fs:rightoffset*Fs); 
     %search for the maxima
-    %[pks, locs] = findpeaks(trunc_xc, (leftoffset*Fs:rightoffset*Fs) , 'NPeaks', 1);
+    [pks, locs] = findpeaks(trunc_xc, trunc_t , 'NPeaks', 1 , 'SortStr' , ...
+        'descend' , 'MinPeakHeight' , -1);
+    
+    %sometimes the peak detector doesn't work and it returns an empty
+    %vector: to avoid this we set 0.0035 
+    if (isempty(locs) ==1)
+        locs = 0.0035;
+    end
     
     %store the delay in a matrix
-    %delay(jj) = locs/Fs; % [s] 
+    delay(jj) = locs; % [s] 
     
     %print them for inspection 
     nexttile
@@ -125,16 +121,13 @@ for jj = 1:nMic %compute the delay for every single measurement
     title(strcat("Mes n." , num2str(jj) , typeOfSignal(ii)))
     xlim([leftoffset rightoffset]);    % Limit the axis
     %plot the peak 
-    %{
     hold on
-    y_stem = NaN(1,length(trunc_xc));
-    y_stem(locs) = trunc_xc(locs);
-    stem( time , y_stem)
-    %plot(locs./Fs, pks, "LineStyle", "none", "Marker", "x", "Color", "m");
+    y_stem = NaN(1,length(trunc_t));
+    y_stem( round((locs - leftoffset)*Fs)) = trunc_xc( round((locs - leftoffset)*Fs));
+    stem( trunc_t , y_stem)
     
-
     hold off
-    %}
+
     
 end
 
@@ -143,4 +136,9 @@ end
 
 distance = mean(delay)*c; %[m]
 
+mean_delay = mean(delay);
+variance_delay = var(delay);
+
 fprintf(sprintf('Average distance between mic and first reflection %f m\n', distance));
+fprintf(sprintf('with a mean time of first reflection %f s\n', mean_delay));
+fprintf(sprintf('and relative variance %f s\n' , variance_delay ));
