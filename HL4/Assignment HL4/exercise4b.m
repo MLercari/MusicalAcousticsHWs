@@ -36,11 +36,13 @@ sig = zeros( fs*duration, nMic);   % Signal structure: a matrix in which store w
 
 % Early reflections attenuation. We consider only 2*ns+1 samples of the signal
 %ns = 350; this window includes first reflection time
-ns = 150; % Ideal ns should be on the direct path
+ns = 250; % Ideal ns should be on the direct path
 t = (0:1/fs:duration); 
 t = t(1:end-1);
 
-TOA_directSignal = 0.0078;  % TOA
+%from previous excercise 3b we know that the mean values are
+
+TOA_directSignal = 0.008;  % TOA
 TOA_firstReflection =  0.011 ;% First reflection TOA
 
 %source signal
@@ -67,17 +69,6 @@ for n = 1:nMic            % For each microphone signal
     y_w = y.*w; %apply the windowing to the signal
     
     
-    % Plot the estimate impulse response (now hidden becuase make the graph
-    % too confused! 
-    
-    [ir] = extractirsweep(y_w, invsweepfft);
-    time = t(1:length(ir));
-    
-    %{
-    nexttile 
-    plot(time, ir);
-    xlim([0 0.5])
-    %}
     
     nexttile
     % Plot the mic signal
@@ -99,8 +90,6 @@ for n = 1:nMic            % For each microphone signal
     % Plot the windowed signal with thicker line
     plot(t, y_w, 'LineWidth' , 0.5)
     hold off
-    
-
     
     xlim([0 0.05]);  % Limit the plot btw 0 and 0.05s
     xlabel('Time (sec)');
@@ -125,6 +114,7 @@ f = 0:fs;
 f = f(1:end -1);
 
 G = exp(-1i*(f./c)*R)./(4*pi*R); %green function 
+
 rad_patt = zeros(fs, nMic);
 
 for i = 1:nMic

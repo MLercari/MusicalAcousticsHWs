@@ -133,9 +133,9 @@ end
 
 end
 
-%AGGIORNARE LA MEDIA DEL DELAY!
 
 distance = mean(delay)*c; %[m]
+distance = mean(distance'); 
 
 mean_delay = mean(delay);
 variance_delay = var(delay);

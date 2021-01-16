@@ -82,7 +82,11 @@ for j = 1:length(dirRec)
 end
 
 %in order to find the information for each signal, including the label,
-%look into the structure structMis
+%look into the structure structMis. To access one measurement information
+%use:
+
+MesNum = 4;
+ structMis.fileName(MesNum)
 
 %% Load the signals and compute the energy - compute_energy a function added in "Functions"
 

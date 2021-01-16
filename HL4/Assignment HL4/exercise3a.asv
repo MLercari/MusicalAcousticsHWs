@@ -20,7 +20,7 @@ clc
 addpath('Functions')
 addpath('input signals')
 
-nMic = 1;              % Number of microphones
+nMic = 24;              % Number of microphones
 c = 343.8; % [m]/[s]
 
 typeOfSignal = "noise"; % Noise
@@ -40,6 +40,9 @@ t = t(1:end-1);
 
 figure;
 tiledlayout('flow');
+
+direct = zeros(1, nMic); %store the direct path here
+
 for n = 1:nMic            % For each microphone signal
     
     % Load the signal
@@ -53,26 +56,32 @@ for n = 1:nMic            % For each microphone signal
     
     % Find the first (and highest) impulse of the impulse response
     [pks, locs] = findpeaks(ir, t , 'NPeaks', 1 , 'SortStr' , ...
-        'descend' , 'MinPeakHeight' , -1);
+        'descend' , 'MinPeakHeight' , 0);
     
     % Double check if we are finding back the correct direct path length
     
     directPathTimeOfArrival = locs; %[s]
+    
     directPathLength = directPathTimeOfArrival*c;
     
     % Plot the estimate impulse response
     nexttile
-    
+    hold on
     plot(t, ir);
+    y_stem = NaN(1,length(t));
+    y_stem( round(locs*fs) ) = ir( round(locs*fs) );
+    stem( t , y_stem)
     xlim([0 0.05]);
     xlabel('Time (sec)');
     title(['Mic: ',num2str(n)]);
+    
+    direct(n) = directPathLength;
     
 end
 
 %% SPEAKER TO MIC DISTANCE (DIRECT PATH LENGTH)
 % Print on screen the estimated distance from the source
-
+me
 fprintf(sprintf('Direct path length %f m\n', directPathLength));
 
 %% MIC TO REFLECTORS DISTANCE COMPUTATION

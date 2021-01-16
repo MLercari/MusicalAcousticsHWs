@@ -20,7 +20,7 @@ clc
 addpath('Functions')
 addpath('input signals')
 
-nMic = 1;              % Number of microphones
+nMic = 24;              % Number of microphones
 c = 343.8; % [m]/[s]
 
 typeOfSignal = "noise"; % Noise
@@ -40,6 +40,9 @@ t = t(1:end-1);
 
 figure;
 tiledlayout('flow');
+
+direct = zeros(1, nMic); %store the direct path length here
+
 for n = 1:nMic            % For each microphone signal
     
     % Load the signal
@@ -51,13 +54,15 @@ for n = 1:nMic            % For each microphone signal
     % Compute the impulse response using the function extractirnoise
     [ir] = extractirnoise(x, y, nfft);
     
-    % Find the first (and highest) impulse of the impulse response
-    [pks, locs] = findpeaks(ir, t , 'NPeaks', 1 , 'SortStr' , ...
+    % Find the first (and highest) impulse of the impulse response around
+    % the peak position (0.0077 s)
+    [pks, locs] = findpeaks(ir(0.005*fs:0.01*fs), t(0.005*fs:0.01*fs) , 'NPeaks', 1 , 'SortStr' , ...
         'descend' , 'MinPeakHeight' , 0);
     
     % Double check if we are finding back the correct direct path length
     
     directPathTimeOfArrival = locs; %[s]
+    
     directPathLength = directPathTimeOfArrival*c;
     
     % Plot the estimate impulse response
@@ -71,24 +76,31 @@ for n = 1:nMic            % For each microphone signal
     xlabel('Time (sec)');
     title(['Mic: ',num2str(n)]);
     
+    direct(n) = directPathLength;
+    
 end
 
 %% SPEAKER TO MIC DISTANCE (DIRECT PATH LENGTH)
 % Print on screen the estimated distance from the source
 
-fprintf(sprintf('Direct path length %f m\n', directPathLength));
+meanDirect = mean(direct); %the mean value of path length
+
+ figure(2);
+ stem(1:nMic, direct )
+ xlabel('Measurement'), ylabel('Distance highest peak')
+ 
+fprintf(sprintf('Direct path length %f m\n', meanDirect));
 
 %% MIC TO REFLECTORS DISTANCE COMPUTATION
 
 % Put here the difference between first reflection and direct sound time of
-% arrivals (TOA)
-
-% Inspecting the impulse responses determine the delay of the first
-% reflection
-  delay = 0.010983 - directPathTimeOfArrival; %[s]
+% arrivals (TOA). By visual inspection we find that the second peak in
+% the autocorrelation is around 0.010983 s
+ meanDirectTime = meanDirect/c;
+ delay = 0.010983 - meanDirectTime; %[s]
   
 % Compute the distance from the reflectors
   distance = delay*c; 
 
 % Print on screen the estimated distance from the reflectors
-fprintf(sprintf('Average distance between first path and reflector %f m\n', distance));
+ fprintf(sprintf('Average distance between first path and reflector %f m\n', distance));
