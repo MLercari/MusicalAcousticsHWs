@@ -1,0 +1,98 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{saitis}{article}{}
+      \name{author}{3}{}{%
+        {{hash=efad99c0d16dff0fb3cd38523ff1564e}{%
+           family={Saitis},
+           familyi={S\bibinitperiod},
+           given={Charalampos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b6fd7e340296697e21e26a4927022fbc}{%
+           family={Orr},
+           familyi={O\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod}}}%
+        {{hash=cc945470e5c2eb7e483bcd8df5c681c8}{%
+           family={Van\bibnamedelima Walstijn},
+           familyi={V\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={Maarten},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{82120494da432f340fe6d572185dda9d}
+      \strng{fullhash}{82120494da432f340fe6d572185dda9d}
+      \strng{bibnamehash}{82120494da432f340fe6d572185dda9d}
+      \strng{authorbibnamehash}{82120494da432f340fe6d572185dda9d}
+      \strng{authornamehash}{82120494da432f340fe6d572185dda9d}
+      \strng{authorfullhash}{82120494da432f340fe6d572185dda9d}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of the Acoustical Society of America}
+      \field{month}{05}
+      \field{title}{Physical modeling of the piano: An investigation into the effect of string stiffness on the hammer string interaction.}
+      \field{volume}{125}
+      \field{year}{2009}
+      \field{pages}{2684}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1121/1.4784255
+      \endverb
+    \endentry
+    \entry{chaigne}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6c83c59a8dcbb55c3462c05169f1096b}{%
+           family={Chaigne},
+           familyi={C\bibinitperiod},
+           given={Antoine},
+           giveni={A\bibinitperiod}}}%
+        {{hash=30a146764e11339f840a95f3c1a4ee82}{%
+           family={Askenfelt},
+           familyi={A\bibinitperiod},
+           given={Anders},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{2aa7aecef1e1284b48e2fde86571454b}
+      \strng{fullhash}{2aa7aecef1e1284b48e2fde86571454b}
+      \strng{bibnamehash}{2aa7aecef1e1284b48e2fde86571454b}
+      \strng{authorbibnamehash}{2aa7aecef1e1284b48e2fde86571454b}
+      \strng{authornamehash}{2aa7aecef1e1284b48e2fde86571454b}
+      \strng{authorfullhash}{2aa7aecef1e1284b48e2fde86571454b}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of The Acoustical Society of America - J ACOUST SOC AMER}
+      \field{month}{02}
+      \field{title}{Numerical simulations of piano strings. I. A physical model for a struck string using finite difference methods}
+      \field{volume}{95}
+      \field{year}{1994}
+      \field{pages}{1112\bibrangedash 1118}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1121/1.408459
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
