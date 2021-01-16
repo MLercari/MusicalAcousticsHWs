@@ -138,6 +138,20 @@ In \verb|exercise1.m| we label the signals with the angle at which they were rec
 \end{lstlisting}
 
 \section{Room reflection analysis using autocorrelation}
+\begin{table}[h!]
+	\centering
+	$\begin{array}{l|ccc}
+		\toprule
+		& \text{\textbf{sweep}} & \text{\textbf{noise}} & \text{\textbf{both}}\\
+		\hline
+		\text{TOA [ms]} & 3.00 \pm 0.05 & 3.20 \pm 0.06 & 3.1 \pm  0.1 \\
+		r\text{ [m]} & 1.03 \pm 0.02 & 1.10 \pm 0.02 & 1.07 \pm 0.03\\
+		\bottomrule
+	\end{array}$
+	\caption{Estimated time of arrival of the first reflection and microphone-reflector distance. From left to right, the averages over the sweep signals, the noise signals and over the entire set.}
+	\label{tab:refl}
+\end{table}
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\linewidth]{sweep_peaks.png}
@@ -155,19 +169,15 @@ In \verb|exercise1.m| we label the signals with the angle at which they were rec
 
 In \verb|exercise2.m| we estimate the first reflection time from the autocorrelation of the recorded signals. The autocorrelation is computed and then visualized in order to find the first reflection; a small portion ($\sim$ 2 ms) of the signal around the selected peak is then extracted and the library function \verb|findpeaks| is run on it in order to estimate the exact location of the peak (see Figs. \ref{fig:sweepcorr} and \ref{fig:noisecorr}).
 
-We then find an estimate of the time of arrival of the first reflection by taking the average and standard deviation of the locations of the peaks.  We can use this value to compute the distance of the microphone from the reflector by multiplying them for the speed of sound $c$.The results are reported in Tab. \ref{tab:refl}.
-\begin{table}[h!]
+We then find an estimate of the time of arrival of the first reflection by taking the average and standard deviation of the locations of the peaks.  We can use this value to compute the distance of the microphone from the reflector by multiplying them for the speed of sound $c$. The results are reported in Tab. \ref{tab:refl}. As we can see, both methods yield similar results with comparable precision. However, even if the noise signal appears to have an overall clearer autocorrelation (see Fig. \ref{fig:autocorr}), if we zoom in on the first reflection peaks, we can see that, comparing it to the  sweep autocorrelations, there is more high-frequency noise, which makes the estimation of the peak position slighlty less precise, especially close to 0°.
+
+
+\begin{figure}
 	\centering
-	$\begin{array}{l|ccc}
-		\toprule
-		 & \text{\textbf{sweep}} & \text{\textbf{noise}} & \text{\textbf{both}}\\
-		 \hline
-		 \text{TOA [ms]} & 3.00 \pm 0.05 & 3.20 \pm 0.06 & 3.1 \pm  0.1 \\
-		 r\text{ [m]} & 1.03 \pm 0.02 & 1.10 \pm 0.02 & 1.07 \pm 0.03\\
-		 \bottomrule
-	\end{array}$
-	\caption{Estimated time of arrival of the first reflection and microphone-reflector distance. From left to right, the averages over the sweep signals, the noise signals and over the entire set.}
-	\label{tab:refl}
-\end{table}
+	\includegraphics[width=0.75\linewidth]{autocorrelation.png}
+	\caption{Autocorrelation for two sweep signals and two noise signals fro 0 to 45 ms.}
+	\label{fig:autocorr}
+\end{figure}
+
 
 \end{document}
