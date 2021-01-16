@@ -86,7 +86,8 @@ end
 %in order to find the information for each signal, including the label,
 %look into the structure structMis. To access one measurement information
 %use:
-prompt = "Select the measurements (Sweep measurements are from 1 to 24 and and noise ones from 25 to 48";
+
+prompt = "Select the measurements (Sweep measurements are from 1 to 24 and and noise ones from 25 to 48 \n";
 MesNum = input(prompt); %Sweep measurements are from 1 to 24 and and noise ones from 25 to 48
 fn = structMis.fileName(MesNum);
 fa = structMis.angle(MesNum);
