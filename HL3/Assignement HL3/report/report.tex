@@ -7,6 +7,7 @@
 \usepackage{siunitx}
 \usepackage{graphicx} % per includere figure
 %\usepackage{subfigure}
+\usepackage{wrapfig}
 \usepackage{booktabs} % per le tabelle
 \usepackage{caption}
 \usepackage{fancyhdr}
@@ -258,7 +259,46 @@ audiowrite(filename, 100*yaudio,fs);
 	\label{fig:body}
 \end{figure}
 
-The simplest model of the body of a guitar is the two-mass model, which corresponds to the circuit in Fig. \ref{fig:body} when only the first of the many RLC series is present. This is a lumped parameter model which accounts well for the lowest modes of the guitar body. If we want to include higher modes in the model using theoretical arguments, we are going to need some kind of distibuted-parameter component, at least for the top plate. Alternatively, we can follow an empirical approach such as the one presented in \cite{leefrench}. Here, 20 additional resonances of the top plate are modelled as RLC series in parallel with the first one, expanding on the two-mass model. The components are then tuned to make the circuit reponse resemble that of an actual instrument (as measured by the authors). This approach allows us to use a representation based only on discrete, passive components, simplifying the implementation significantly and granting us the possibility of using one of the many available tools for the simulation of analog electrical networks. In particular, the implementation we present in this section has been done with Simscape.
+The simplest model of the body of a guitar is the two-mass model, which corresponds to the circuit in Fig. \ref{fig:body} when only the first of the many RLC series is present. This is a lumped parameter model which accounts well for the lowest modes of the guitar body. If we want to include higher modes in the model using theoretical arguments, we are going to need some kind of distibuted-parameter component, at least for the top plate. Alternatively, we can follow an empirical approach such as the one presented in \cite{leefrench}. Here, 20 additional resonances of the top plate are modelled as RLC series in parallel with the first one, expanding on the two-mass model. The components are then tuned to make the circuit response resemble that of an actual instrument (as measured by the authors). 
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\centering
+	\includegraphics[width=0.98\linewidth]{inputModel.png}
+	\caption{Simplified model for the input signal at the bridge.}
+	\label{fig:dampsquare}
+\end{wrapfigure}
+This approach allows us to use a representation based only on discrete, passive components, simplifying the implementation significantly and granting us the possibility of using one of the many available tools for the simulation of analog electrical networks. In particular, the implementation we present in this section has been done with Simscape.
+
+
+In the first part of the implementation we are concerned with designing the body circuit. Here we run a simulation ignoring, for the moment, the modeling of the string: to do so we use a rough approximation for the string signal, given by a damped square wave (Fig. \ref{fig:dampsquare}). The body network was constructed using the component values shown in Fig. \ref{fig:body} and it can be found in \texttt{exercise\_6a.slx}. The resulting signal can be seen in Fig. \ref{fig:nostring}, and it has been saved as an audio file in \texttt{simplifiedInput.wav}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{simpOut.png}
+	\end{subfigure}
+~
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{simpSpect.png}
+	\end{subfigure}
+	\caption{Time history and FFT of the (normalized) sound with the simplified input.}
+	\label{fig:nostring}
+\end{figure}
+
+
+\subsection{Circuit for the string (and the whole guitar)}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{guitar_string.jpg}
+	\caption{Electrical analog of a guitar string.}
+	\label{fig:guitarstring}
+\end{figure}
+
+The second part of the implementation involves instead the modeling of the string. The string itself can be represented by a transmission line, with the ideal reflections at the ends corresponding to short circuits. In parallel with the short circuits, we can see at both ends a generator with a load impedance, used to model the plucking of the string. The generators provide the initial conditions by feeding triangular inputs to the transmission line. After half a period of the fundamental, the generator switches open and the short-circuit switches close, leaving the signal to reflect back and forth on the transmission line.
+
+The string circuit is connected to the body circuit at the U2 switch (Fig. \ref{fig:guitarstring}. The sound is recovered by taking the time derivative (approximated with finite differences) of the current at this point, which can be shown to be proportional to the vertical force at the bridge.  The resulting signal can be seen in Fig. \ref{fff} and it has been saved as an audio file in \texttt{completeGuitar.wav}.
+
 
 
 
