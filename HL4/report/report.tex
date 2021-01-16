@@ -172,14 +172,74 @@ In \verb|exercise2.m| we estimate the first reflection time from the autocorrela
 We then find an estimate of the time of arrival of the first reflection by taking the average and standard deviation of the locations of the peaks.  We can use this value to compute the distance of the microphone from the reflector by multiplying them for the speed of sound $c$. The results are reported in Tab. \ref{tab:refl}. As we can see, both methods yield similar results with comparable precision. However, we can see that, comparing it to the  sweep autocorrelations, the noise autocorrelations exhibit more high-frequency noise, which makes the estimation of the peak position slighlty less precise, especially close to 0°. On the other hand, though, if we zoom out (Fig. \ref{fig:autocorr}), we can see that the sweep autocorrelations are far noisier overall, due to the periodicity of the input signal, and this makes locating the first peak by visual inspection significantly harder, to the point that, without having the TOA estimated from the noise signals as a reference, it would be hard to tell whether the peak we are choosing is the correct one or merely an artifact. Overall, this leads us to conclude that measurements with the noise source are more reliable.
 
 
-
-
 \begin{figure}
 	\centering
 	\includegraphics[width=0.75\linewidth]{autocorrelation.png}
 	\caption{Autocorrelation for two sweep signals and two noise signals fro 0 to 45 ms.}
 	\label{fig:autocorr}
 \end{figure}
+
+\section{Room reflection analysis using impulse responses}
+
+\begin{table}[h!]
+	\centering
+	$\begin{array}{l|cc}
+		\toprule
+		& \text{\textbf{sweep}} & \text{\textbf{noise}} \\
+		\hline
+		\text{TOA [ms]} & 8.0 \pm 0.2 & 8.0 \pm 0.2\\
+		\Delta t \text{[ms]} & 3.22 \pm 0.06  & 3.2 \pm 0.1\\
+		d \text{ [m]} & 1.12 \pm 0.02 & 1.11 \pm 0.04 \\
+		\bottomrule
+	\end{array}$
+	\caption{Average values of the time of arrival of the direct signal, of the delay of the first reflection and of the source-microphone distance. }
+	\label{tab:ir}
+\end{table}
+
+Here we wrote two scripts, one for the noise source (\verb|exercise_3a.m|) and one for the sine sweep (\verb|exercise_3b.m|). The aim is to compute the impulse responses from each measurement and use it to infer the TOAs of the direct signal and of the first reflection. The IRs can be obtained by dividing the FFT of the recorded signal by the FFT of the input and then taking the IFFT. We expect to find two major peaks at the beginning of the IRs, the first one corresponding to the direct signal and the second one corresponding to the first reflection. These peaks are first found visually like in the previous section, and then located with \verb|findpeaks| (see Figs. \ref{fig:noiseir} and \ref{fig:sweepir}).
+
+The values of the direct TOAs obtained in this way are multiplied by $c$ to obtain the distance of the microphone from the source. These values are reported in Fig. \ref{fig:distance}.  It can be seen how the values obtained with the two methods look very similar, and how the estimation of the distance increases as the speaker points further away from the microphone and it decreases again as the orientation circles back to the full 360° angle. In Tab. \ref{tab:ir} we report also the average values of the direct TOA, of the first reflection delay and of the distance between the source and the microphone.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{noise_distance.png}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.47\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{sweep_distance.png}
+	\end{subfigure}
+	\caption{Estimated distance from the source as a function of the angle. On the left the estimates obtained with the noise input, while on the right those obtained with the sine sweep input.}
+	\label{fig:distance}
+\end{figure}
+
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\linewidth]{noise_ir.png}
+	\caption{Impulse responses for the \textbf{noise signals}. The stems highlight the direct and first reflection TOAs.}
+	\label{fig:noiseir}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\linewidth]{sweep_ir.png}
+	\caption{Impulse responses for the \textbf{sweep signals}. The stems highlight the direct and first reflection TOAs.}
+	\label{fig:sweepir}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
