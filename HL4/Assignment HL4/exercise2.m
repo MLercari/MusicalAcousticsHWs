@@ -142,8 +142,8 @@ distance = mean(delay)*c; %[m]
 distance = mean(distance');
 
 mean_delay = mean(delay);
-variance_delay = var(delay);
+sd_delay = std(delay);
 
 fprintf(sprintf('Average distance between mic and first reflection %f m\n', distance));
 fprintf(sprintf('with a mean time of first reflection %f s\n', mean_delay));
-fprintf(sprintf('and relative variance %f s\n' , variance_delay ));
+fprintf(sprintf('and a standard deviation %d s\n' , sd_delay ));
