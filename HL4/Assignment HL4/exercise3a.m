@@ -89,8 +89,8 @@ for n = 1:nMic            % For each microphone signal
     xlabel('Time (sec)');
     title(['Mic: ',num2str(n)]);
     
-    direct(n) = directPathLength;
-    reflect(n) = firstReflectionPathLength;
+    direct(n) = directPathTimeOfArrival;
+    reflect(n) = firstReflectionTimeOfArrival;
 end
 
 %% SPEAKER TO MIC DISTANCE (DIRECT PATH LENGTH)
@@ -99,7 +99,7 @@ end
 meanDirect = mean(direct); %the mean value of path length
 
  figure(2);
- stem(1:nMic, direct )
+ stem(1:nMic, direct.*c )
  ylim([2.5 3])
  xlabel('Measurement'), ylabel('Distance highest peak')
  
@@ -112,7 +112,7 @@ fprintf(sprintf('Direct path length %f m\n', meanDirect));
 % the autocorrelation is around 0.010983 s
   
 % Compute the distance from the reflectors
-  distance = mean(reflect); 
+  distance = (mean(reflect) - mean(direct))*c; 
 
 % Print on screen the estimated distance from the reflectors
  fprintf(sprintf('Average distance between first path and reflector %f m\n', distance));
