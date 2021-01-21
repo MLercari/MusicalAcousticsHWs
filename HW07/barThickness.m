@@ -50,7 +50,7 @@ for i = 1:length(a)
 end
 eigfreqs = eigfreqs(1:5, :);
 
-%eigfreqs = normalize(eigfreqs, 'scale', 'first');
+eigfreqs = normalize(eigfreqs, 'scale', 'first');
 
 figure;
 tiledlayout("flow");
