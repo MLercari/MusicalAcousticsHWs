@@ -30,3 +30,32 @@ for m = 1:9
     grid on, grid minor;
     axis equal
 end
+
+
+%% HARMONICITY
+M = readmatrix('eigenfrequencies.txt');
+M = M(:, [1 2]);
+ind = M(:, 2) > 100;
+M = M(ind, :);
+
+eigfreqs = zeros(6, length(unique(M(:,1))));
+a = unique(M(:,1));
+for i = 1:length(a)
+    display(i);
+    eigfreqs(:, i) = M(M(:,1)==a(i), 2);
+end
+eigfreqs(6,:) = [];
+
+%eigfreqs = normalize(eigfreqs, 'scale', 'first');
+
+figure;
+tiledlayout("flow");
+hold on;
+for i = 1:5
+    plot(a*1e3, eigfreqs(i,:), 'Marker', 'd', 'LineStyle', '--');
+end
+xlabel('a [mm]');
+ylabel('f [Hz]');
+
+legend('f_1', 'f_2', 'f_3', 'f_4', 'f_5');
+
