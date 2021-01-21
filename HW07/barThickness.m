@@ -82,7 +82,7 @@ end
 
 display(I);
 figure
-bar(a*1e3, I);
+bar(a*1e3, I, 0.4, 'FaceColor', [0.8500 0.3250 0.0980]);
 xlabel('a [mm]');
 ylabel('I');
 
