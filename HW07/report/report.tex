@@ -159,7 +159,7 @@ As mentioned in the previous section, a parametric eigenfrequency study was perf
 	$\begin{array}{l|ccccccccc}
 		\toprule
 		 a~[\si{\centi\meter}] & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 & 0.7 & 0.8 & 0.9\\
-		 \midrule
+		 \hline
 		 f_1[\si{\kilo\hertz}]&5.9071  &  5.7717  &  5.6294  &  5.4788   & 5.3202 &   5.1534  &  4.9770  &  4.7969   & 4.6076\\
 		 f_2[\si{\kilo\hertz}]&8.1063   & 8.0827 &   7.8760  &  7.5803  &  7.2655 &   6.9319  &  6.5852  &  6.2287 &   5.8557\\
 		 f_3[\si{\kilo\hertz}]&8.4015  &  8.1523  &  8.0464  &  8.0000  &  7.9430 &   7.8755 &   7.7968  &  7.7086 &   7.6096\\
@@ -186,12 +186,12 @@ Lastly, we compute the inharmonicity of the sets of eigenfrequencies obtained be
 	I = \sum_{n=2}^{N} \left| \frac{f_n}{f_{n-1}} - m_n \right|, \\
 	m_n = \arg \underset{m}{\min} \left| f_n - m f_{n-1} \right|,~ m \in \mathbb{N}^+,
 \end{gather*}
-where $N=5$ in our case. The values of $I$ we computed are reported in Fig. \ref{fig:inharm}.
+where in our case we take all value of $N$ from 2 to 5. The values of $I$ we computed are reported in Fig. \ref{fig:inharm}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\linewidth]{inharmonicity.png}
-	\caption{Inharmonicity as a function of $a$.}
+	\caption{Inharmonicity $I_N$ as a function of $a$.}
 	\label{fig:inharm}
 \end{figure}
 
@@ -205,9 +205,24 @@ where $N=5$ in our case. The values of $I$ we computed are reported in Fig. \ref
 \end{figure}
 
 
-Looking at the values we obtained from the eigenfrequency study, a problem seems to arise. While we expect the values of the ratios between the frequencies of the first two bending modes is $\sim 4$, the actual ratio is much lower. We tried therefore to alter the shape of the bar to see if we could obtain better results. We ran a parametric eigenfrequency study like before, but with an height of 1.2 cm. The new shape of the bar can be seen in Fig. \ref{fig:thin}.
+Looking at the values we obtained from the eigenfrequency study, a problem seems to arise. While we expect the values of the ratios between the frequencies of the first two bending modes is $\sim 4$, the actual ratio is much lower. We tried therefore to alter the shape of the bar to see if we could obtain better results. We ran a parametric eigenfrequency study like before, but with an height of 1.2 cm. The new shape of the bar can be seen in Fig. \ref{fig:thin}, while the results are reported in Tab. \ref{tab:thin} and Fig. \ref{fig:threqz}.
 
-
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|ccccccccc}
+		\toprule
+		a~[\si{\centi\meter}] & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 & 0.7 & 0.8 & 0.9\\
+		\hline
+		f_1[\si{\kilo\hertz}]&4.9342   & 4.5558  &  4.1467  &  3.7147   & 3.2757  &  2.8217 &   2.3750 &   1.8859 &   1.3926\\
+		f_2[\si{\kilo\hertz}]&11.7320  & 11.3950  & 10.9690 &  10.4580 &   9.8794  &  9.2027  &  8.4219  &  7.5093  &  6.4632\\
+		f_3[\si{\kilo\hertz}]&19.2460  & 19.0400  & 18.7580 &  18.3670 &  17.8910  & 17.2240 &   1.6370 &  15.1960 &  13.7910\\
+		f_4[\si{\kilo\hertz}]&26.6820  & 26.5320  & 26.3570 &  26.1740  & 26.0210 &  25.8050 &  25.6420  & 24.4050 &  23.6590\\
+		f_5[\si{\kilo\hertz}]&34.0560 &  33.8520  & 33.5890  & 33.3040  & 33.0770  & 32.7960  & 32.4080 &  31.8430  & 31.0930\\
+		\bottomrule
+	\end{array}$
+	\caption{Frequencies of the first five \textbf{bending} modes of the thinner bar. Notice how, given the relatively high frequency of the fundamental, we are reaching way beyond the range of audible frequencies.}
+	\label{tab:thin}
+\end{table}
 
 
 

@@ -73,18 +73,28 @@ for j = 1:9
     end
 end
 
-I = zeros(1, 9);
-for j=1:9
-    for i = 2:5
-        I(1, j) = I(1, j) + abs( eigfreqs(i,j)/eigfreqs(i-1,j) - mn(i, j) );
+
+figure
+tiledlayout('flow');
+for N = 2:5
+    I = zeros(1, 9);
+    for j=1:9
+        for i = 2:N
+            I(1, j) = I(1, j) + abs( eigfreqs(i,j)/eigfreqs(i-1,j) - mn(i, j) );
+        end
     end
+    nexttile;
+    bar(a*1e3, I, 0.4, 'FaceColor', [0.8500 0.3250 0.0980]);
+    xlabel('a [mm]');
+    ylabel(strcat('I_', num2str(N)));
 end
 
 display(I);
-figure
+%{
 bar(a*1e3, I, 0.4, 'FaceColor', [0.8500 0.3250 0.0980]);
 xlabel('a [mm]');
-ylabel('I');
+ylabel(strcat('I_', num2str(N)));
+%}
 
 
         
