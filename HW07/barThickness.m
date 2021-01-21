@@ -28,23 +28,27 @@ for m = 1:9
     nexttile
     plot(x,z)
     grid on, grid minor;
-    axis equal
+    xlim([0 10]);
+    ylim([-4 0]);
+    xlabel('x [cm]');
+    ylabel('y [cm]');
 end
 
 
-%% HARMONICITY
+%% INHARMONICITY
 close all, clc;  % uncomment when running the section multiple times;
-M = readmatrix('eigenfrequencies.txt');
+M = readmatrix('eigenfrequencies.txt', 'Delimiter', ' ', 'ConsecutiveDelimitersRule', 'join');
 M = M(:, [1 2]);
-ind = M(:, 2) > 100;
+ind = abs(M(:, 2)) > 100;
 M = M(ind, :);
 
-eigfreqs = zeros(6, length(unique(M(:,1))));
 a = unique(M(:,1));
+eigfreqs = zeros(29, length(a));
+
 for i = 1:length(a)
     eigfreqs(:, i) = M(M(:,1)==a(i), 2);
 end
-eigfreqs(6,:) = [];
+eigfreqs = eigfreqs(1:5, :);
 
 %eigfreqs = normalize(eigfreqs, 'scale', 'first');
 
@@ -52,7 +56,7 @@ figure;
 tiledlayout("flow");
 hold on;
 for i = 1:5
-    plot(a*1e3, eigfreqs(i,:), 'Marker', 'd', 'LineStyle', '--');
+    plot(a*1e3, eigfreqs(i,:), 'Marker', 'd', 'LineStyle', '--', 'LineWidth', 1.0, 'MarkerFaceColor', 'auto');
 end
 xlabel('a [mm]');
 ylabel('f [Hz]');
@@ -69,18 +73,28 @@ for j = 1:9
     end
 end
 
-I = zeros(1, 9);
-for j=1:9
-    for i = 2:5
-        I(1, j) = I(1, j) + abs( eigfreqs(i,j)/eigfreqs(i-1,j) - mn(i, j) );
+
+figure
+tiledlayout('flow');
+for N = 2:5
+    I = zeros(1, 9);
+    for j=1:9
+        for i = 2:N
+            I(1, j) = I(1, j) + abs( eigfreqs(i,j)/eigfreqs(i-1,j) - mn(i, j) );
+        end
     end
+    nexttile;
+    bar(a*1e3, I, 0.4, 'FaceColor', [0.8500 0.3250 0.0980]);
+    xlabel('a [mm]');
+    ylabel(strcat('I_', num2str(N)));
 end
 
 display(I);
-figure
-bar(a*1e3, I);
+%{
+bar(a*1e3, I, 0.4, 'FaceColor', [0.8500 0.3250 0.0980]);
 xlabel('a [mm]');
-ylabel('I');
+ylabel(strcat('I_', num2str(N)));
+%}
 
 
         
