@@ -205,7 +205,14 @@ where in our case we take all value of $N$ from 2 to 5. The values of $I$ we com
 \end{figure}
 
 
-Looking at the values we obtained from the eigenfrequency study, a problem seems to arise. While we expect the values of the ratios between the frequencies of the first two bending modes is $\sim 4$, the actual ratio is much lower. We tried therefore to alter the shape of the bar to see if we could obtain better results. We ran a parametric eigenfrequency study like before, but with an height of 1.2 cm. The new shape of the bar can be seen in Fig. \ref{fig:thin}, while the results are reported in Tab. \ref{tab:thin} and Fig. \ref{fig:threqz}.
+Looking at the values we obtained from the eigenfrequency study, a problem seems to arise. While we expect the values of the ratios between the frequencies of the first two bending modes\footnote{Focusing on bending modes makes sense as they contribute the most to the radiation from the bar. Torsional modes might contribute too if the bar isn't struck on its symmetry axis, but this is usually avoided as they aren't tuned to the bending modes.} is $\sim 4$, the actual ratio is much lower. We tried therefore to alter the shape of the bar to see if we could obtain better results. We ran a parametric eigenfrequency study like before, but with an height of 1.2 cm. The new shape of the bar can be seen in Fig. \ref{fig:thin}, while the results are reported in Tab. \ref{tab:thin} and Fig. \ref{fig:threqz}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\linewidth]{freqz.png}
+	\caption{Frequencies of the five lowest \textbf{bending} modes of the thin bar plotted as functions of $a$.}
+	\label{fig:threqz}
+\end{figure}
 
 \begin{table}[h]
 	\centering
@@ -215,18 +222,39 @@ Looking at the values we obtained from the eigenfrequency study, a problem seems
 		\hline
 		f_1[\si{\kilo\hertz}]&4.9342   & 4.5558  &  4.1467  &  3.7147   & 3.2757  &  2.8217 &   2.3750 &   1.8859 &   1.3926\\
 		f_2[\si{\kilo\hertz}]&11.7320  & 11.3950  & 10.9690 &  10.4580 &   9.8794  &  9.2027  &  8.4219  &  7.5093  &  6.4632\\
-		f_3[\si{\kilo\hertz}]&19.2460  & 19.0400  & 18.7580 &  18.3670 &  17.8910  & 17.2240 &   1.6370 &  15.1960 &  13.7910\\
+		f_3[\si{\kilo\hertz}]&19.2460  & 19.0400  & 18.7580 &  18.3670 &  17.8910  & 17.2240 &   16.357 &  15.1960 &  13.7910\\
 		f_4[\si{\kilo\hertz}]&26.6820  & 26.5320  & 26.3570 &  26.1740  & 26.0210 &  25.8050 &  25.6420  & 24.4050 &  23.6590\\
 		f_5[\si{\kilo\hertz}]&34.0560 &  33.8520  & 33.5890  & 33.3040  & 33.0770  & 32.7960  & 32.4080 &  31.8430  & 31.0930\\
 		\bottomrule
 	\end{array}$
-	\caption{Frequencies of the first five \textbf{bending} modes of the thinner bar. Notice how, given the relatively high frequency of the fundamental, we are reaching way beyond the range of audible frequencies.}
+	\caption{Frequencies of the first five \textbf{bending} modes of the thinner bar. Notice how, given the relatively high frequency of the fundamental, we are reaching far beyond the range of audible frequencies.}
 	\label{tab:thin}
 \end{table}
 
+In Tab. \ref{tab:ratios} we report the ratios between the frequencies of the first two bending modes for both bars. Notice how, while for the original shape we never get much past 2, for the thinner bar we get the desired value at $a=8~\si{\milli\meter}$. 
 
+\begin{table}[h]
+	\centering
+	$\begin{array}{l|ccccccccc}
+		\toprule
+		a~[\si{\centi\meter}] & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 & 0.7 & 0.8 & 0.9\\
+		\hline
+		f_2/f_1 & 1.84 & 1.88 & 1.93 & 1.97 & 2.02 & 2.08 & 2.14 & 2.20 & 2.27 \\
+		f_2/f_1 \text{ - thin bar} & 2.38 & 2.50 & 2.66 & 2.82 & 3.02 & 3.26 & 3.55 & 3.98 & 4.64 \\
+		\bottomrule
+	\end{array}$
+	\caption{Ratios of the frequencies of the first two bending modes for both bars.}
+	\label{tab:ratios}
+\end{table}
 
+We can now compute the inharmonicities of the bending modes of the thin bar. The results can be seen in Fig. \ref{fig:thinharm}. It must be remarked, however, that only the first two graphs ($I_2$ and $I_3$) give us a measure of the perceived harmonicity of the sound, as the last two frequencies are well into ultrasound territory. Once again, $a=8~\si{\milli\meter}$ seems to be the sweet spot, with the related inharmonicities being the smallest.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\linewidth]{thinharm.png}
+	\caption{Inharmonicity $I_N$ as a function of $a$, for the thin bar.}
+	\label{fig:thinharm}
+\end{figure}
 
 
 
