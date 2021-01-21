@@ -33,6 +33,7 @@ end
 
 
 %% HARMONICITY
+close all, clc;  % uncomment when running the section multiple times;
 M = readmatrix('eigenfrequencies.txt');
 M = M(:, [1 2]);
 ind = M(:, 2) > 100;
@@ -41,7 +42,6 @@ M = M(ind, :);
 eigfreqs = zeros(6, length(unique(M(:,1))));
 a = unique(M(:,1));
 for i = 1:length(a)
-    display(i);
     eigfreqs(:, i) = M(M(:,1)==a(i), 2);
 end
 eigfreqs(6,:) = [];
@@ -59,3 +59,30 @@ ylabel('f [Hz]');
 
 legend('f_1', 'f_2', 'f_3', 'f_4', 'f_5');
 
+
+m = 1:1e4;
+mn = zeros(5, 9);
+for j = 1:9
+    for i = 2:5
+        [val, ind] = min(abs(eigfreqs(i, j) - m*eigfreqs(i-1, j)));
+        mn(i, j) = ind;
+    end
+end
+
+I = zeros(1, 9);
+for j=1:9
+    for i = 2:5
+        I(1, j) = I(1, j) + abs( eigfreqs(i,j)/eigfreqs(i-1,j) - mn(i, j) );
+    end
+end
+
+display(I);
+figure
+bar(a*1e3, I);
+xlabel('a [mm]');
+ylabel('I');
+
+
+        
+        
+        
